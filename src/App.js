@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "./components/Layout/Layout";
 import { Switch, Route } from "react-router-dom";
-import Home from "./components/HomePage/Home";
+import Home from "./pages/Home/Home";
 
 const App = () => {
   return (

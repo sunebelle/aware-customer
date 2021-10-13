@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Login from "../Login/Login";
+import Login from "../../pages/Register/Register";
 import Modal from "../UI/Modal";
 
 const Header = () => {
