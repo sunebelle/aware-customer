@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
 import useInput from "../../hooks/useInput";
@@ -53,7 +54,7 @@ const Login = ({ closeModalHandler }) => {
           Log In
         </h2>
         <Input
-          label="Email"
+          label="E-mail"
           type="email"
           placeholder="Enter your email"
           name="email"
@@ -92,18 +93,22 @@ const Login = ({ closeModalHandler }) => {
               Remember password
             </p>
           </div>
-          <p className="Montserrat-m font-semibold text-[#4d4d4d]">
-            Forgot your password?
-          </p>
+          <Link to="/forgot-password">
+            <p className="Montserrat-m font-semibold text-[#4d4d4d]">
+              Forgot your password?
+            </p>
+          </Link>
         </div>
 
         <Button type="submit" label="Log In" btnDisabled={!formIsValid} />
       </form>
       <p className="Montserrat-m text-[#4d4d4d] font-medium py-4">
         Do you have an account?{" "}
-        <span className="text-[#ff7413] font-bold pb-1 border-b border-[#ff7413]  ">
-          Register
-        </span>
+        <Link to="/register">
+          <span className="text-[#ff7413] font-bold border-b border-[#ff7413]  ">
+            Register
+          </span>
+        </Link>
       </p>
     </div>
   );

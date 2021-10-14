@@ -1,29 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import Layout from "./components/Layout/Layout";
 import { Switch, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
+import { useDispatch, useSelector } from "react-redux";
+import { uiActions } from "./store/ui";
+import Modal from "./components/UI/Modal";
+import Register from "./pages/Register/Register";
+import Login from "./pages/Login/Login";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 
 const App = () => {
-  const [isRegistered, setIsRegistered] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isForgotPassword, setIsForgotPassword] = useState(false);
-  const openRegisteredModal = () => {
-    setIsRegistered(true);
-  };
+  const dispatch = useDispatch();
+  const { isRegistered, isLoggedIn, isForgotPassword } = useSelector(
+    (state) => state.ui
+  );
   const closeRegisteredModal = () => {
-    setIsRegistered(false);
-  };
-  const openLoggedInModal = () => {
-    setIsLoggedIn(true);
+    dispatch(uiActions.hideRegisteredModal());
   };
   const closeLoggedInModal = () => {
-    setIsLoggedIn(false);
-  };
-  const openForgotPasswordModal = () => {
-    setIsForgotPassword(true);
+    dispatch(uiActions.hideLoggedInModal());
   };
   const closeForgotPasswordModal = () => {
-    setIsForgotPassword(false);
+    dispatch(uiActions.hideForgotPasswordModal());
   };
 
   return (
@@ -32,17 +30,29 @@ const App = () => {
         <Route path="/" exact>
           <Home />
         </Route>
-        <Route path="/register" exact>
-          <Home isRegistered={isRegistered} setIsRegistered={setIsRegistered} />
+        <Route path="/register">
+          {isRegistered && (
+            <Modal closeModalHandler={closeRegisteredModal}>
+              <Register closeModalHandler={closeRegisteredModal} />
+            </Modal>
+          )}
+          <Home />
         </Route>
-        <Route path="/login" exact>
-          <Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        <Route path="/login">
+          {isLoggedIn && (
+            <Modal closeModalHandler={closeLoggedInModal}>
+              <Login closeModalHandler={closeLoggedInModal} />
+            </Modal>
+          )}
+          <Home />
         </Route>
-        <Route path="/forgot-password" exact>
-          <Home
-            isForgotPassword={isForgotPassword}
-            setIsForgotPassword={setIsForgotPassword}
-          />
+        <Route path="/forgot-password">
+          {isForgotPassword && (
+            <Modal closeModalHandler={closeForgotPasswordModal}>
+              <ForgotPassword closeModalHandler={closeForgotPasswordModal} />
+            </Modal>
+          )}
+          <Home />
         </Route>
       </Switch>
     </Layout>

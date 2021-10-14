@@ -1,20 +1,34 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isModalOpened: false,
-  // notification: null,
+  isRegistered: true,
+  isLoggedIn: true,
+  isForgotPassword: true,
 };
 
 const uiSlice = createSlice({
   name: " show modal",
   initialState,
   reducers: {
-    showModal(state) {
-      state.isModalOpened = true;
+    showRegisteredModal(state) {
+      state.isRegistered = true;
     },
-    hideModal(state) {
-      state.isModalOpened = false;
+    hideRegisteredModal(state) {
+      state.isRegistered = false;
     },
+    showLoggedInModal(state) {
+      state.isLoggedIn = true;
+    },
+    hideLoggedInModal(state) {
+      state.isLoggedIn = false;
+    },
+    showForgotPasswordModal(state) {
+      state.isForgotPassword = false;
+    },
+    hideForgotPasswordModal(state) {
+      state.isForgotPassword = false;
+    },
+
     // showNotification(state, action) {
     //   state.notification = {
     //     status: action.payload.status,

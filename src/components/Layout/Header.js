@@ -1,36 +1,23 @@
-import React, { useState } from "react";
-import Login from "../../pages/Login/Login";
-import Register from "../../pages/Register/Register";
-import Modal from "../UI/Modal";
+import React from "react";
+import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import { uiActions } from "../../store/ui";
 
 const Header = () => {
-  const [isRegistered, setIsRegistered] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const history = useHistory();
+  const dispatch = useDispatch();
 
-  const openRegisteredModal = () => {
-    setIsRegistered(true);
+  const handleRegister = () => {
+    dispatch(uiActions.showRegisteredModal());
+    history.push("/register");
   };
-  const closeRegisteredModal = () => {
-    setIsRegistered(false);
+  const handleLoggedIn = () => {
+    dispatch(uiActions.showLoggedInModal());
+    history.push("/login");
   };
-  const openLoggedInModal = () => {
-    setIsLoggedIn(true);
-  };
-  const closeLoggedInModal = () => {
-    setIsLoggedIn(false);
-  };
+
   return (
     <>
-      {isRegistered && (
-        <Modal closeModalHandler={closeRegisteredModal}>
-          <Register closeModalHandler={closeRegisteredModal} />
-        </Modal>
-      )}
-      {isLoggedIn && (
-        <Modal closeModalHandler={closeLoggedInModal}>
-          <Login closeModalHandler={closeLoggedInModal} />
-        </Modal>
-      )}
       <div className="flex flex-rows pt-5 px-4 lg:px-10 xl:px-20 pb-2  justify-between items-center">
         <div className="border rounded-full border-[#b7b7b7] flex h-8 px-2 items-center">
           <input
@@ -42,11 +29,11 @@ const Header = () => {
         </div>
         <img src="/img/logo.svg" alt="logo" />
         <div className="flex flex-row justify-between Montserrat-m font-normal space-x-4">
-          <button onClick={openRegisteredModal} className=" text-[#4d4d4d]">
+          <button onClick={handleRegister} className=" text-[#4d4d4d]">
             Register
           </button>
           <button
-            onClick={openLoggedInModal}
+            onClick={handleLoggedIn}
             className="w-28 h-8 Montserrat-m font-normal rounded-full border text-[#ffa15f] border-[#ffa15f]"
           >
             Log in

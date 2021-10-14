@@ -1,8 +1,7 @@
 import React from "react";
-
 const Home = () => {
   return (
-    <div>
+    <>
       <div className="relative w-full h-[513px]">
         <img
           className="w-full object-cover h-[513px]"
@@ -58,7 +57,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

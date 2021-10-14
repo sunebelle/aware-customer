@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
 import useInput from "../../hooks/useInput";
@@ -72,7 +73,7 @@ const Register = ({ closeModalHandler }) => {
           errorMessage={userNameHasError && "Please enter a valid name!"}
         />
         <Input
-          label="Email"
+          label="E-mail"
           type="email"
           placeholder="Enter your email"
           name="email"
@@ -98,11 +99,11 @@ const Register = ({ closeModalHandler }) => {
         />
         <p className="Montserrat-m font-normal text-[#202124] text-center py-8">
           By creating an account you agree to the {""}
-          <span className="text-[#ff7413] font-bold pb-1 border-b border-[#ff7413]  ">
+          <span className="text-[#ff7413] font-bold  border-b border-[#ff7413]  ">
             Terms of Service
           </span>{" "}
           and {""}
-          <span className="text-[#ff7413] font-bold pb-1 border-b border-[#ff7413] ">
+          <span className="text-[#ff7413] font-bold border-b border-[#ff7413] ">
             Privacy Policy
           </span>
         </p>
@@ -110,9 +111,11 @@ const Register = ({ closeModalHandler }) => {
       </form>
       <p className="Montserrat-m text-[#4d4d4d] font-medium py-4">
         Do you have an account?{" "}
-        <span className="text-[#ff7413] font-bold pb-1 border-b border-[#ff7413]  ">
-          Log in
-        </span>
+        <Link to="/login">
+          <span className="text-[#ff7413] font-bold  border-b border-[#ff7413]  ">
+            Log in
+          </span>
+        </Link>
       </p>
     </div>
   );
