@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const api = axios.create({
+const instance = axios.create({
   baseURL: "http://localhost:5000",
 });
 
-// api.interceptors.request.use((req) => {
+// instance.interceptors.request.use((req) => {
 //   if (localStorage.getItem("profile")) {
 //     req.headers.Authorization = `Bearer ${
 //       JSON.parse(localStorage.getItem("profile")).token
@@ -14,4 +14,4 @@ const api = axios.create({
 //   return req;
 // });
 
-export default api;
+export default instance;

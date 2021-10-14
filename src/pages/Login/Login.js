@@ -4,8 +4,13 @@ import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
 import useInput from "../../hooks/useInput";
 import { isEmail, isPassword } from "../../utils/formValidation";
+import { login } from "../../actions/auth";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 
 const Login = ({ closeModalHandler }) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
   //   const [rememberPassword, setRememberPassword] = useState(false);
   const {
     value: userEmail,
@@ -34,11 +39,12 @@ const Login = ({ closeModalHandler }) => {
     if (!formIsValid) {
       return;
     }
-    console.log(userEmail, userPassword);
+    // console.log(userEmail, userPassword);
     // sent request to backend for creating new user account
-
+    dispatch(login({ email: userEmail, password: userPassword }));
     resetUserEmail();
     resetUserPassord();
+    history.push("/");
   };
 
   return (
@@ -85,7 +91,7 @@ const Login = ({ closeModalHandler }) => {
                 type="checkbox"
                 // value={rememberPassword}
                 // onChange={(e) => setRememberPassword(e.target.checked)}
-                checked
+                defaultChecked
               />
               <span className="checkmark"></span>
             </label>

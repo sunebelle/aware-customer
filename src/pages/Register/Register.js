@@ -4,8 +4,13 @@ import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
 import useInput from "../../hooks/useInput";
 import { isNotEmpty, isEmail, isPassword } from "../../utils/formValidation";
+import { register } from "../../actions/auth";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 
 const Register = ({ closeModalHandler }) => {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const {
     value: userName,
     isValid: userNameIsValid,
@@ -41,12 +46,15 @@ const Register = ({ closeModalHandler }) => {
     if (!formIsValid) {
       return;
     }
-    console.log(userName, userEmail, userPassword);
+    // console.log(userName, userEmail, userPassword);
     // sent request to backend for creating new user account
-
+    dispatch(
+      register({ name: userName, email: userEmail, password: userPassword })
+    );
     resetUserName();
     resetUserEmail();
     resetUserPassord();
+    history.push("/");
   };
 
   return (
