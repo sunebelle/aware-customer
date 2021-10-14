@@ -1,21 +1,34 @@
 import React, { useState } from "react";
-import Login from "../../pages/Register/Register";
+import Login from "../../pages/Login/Login";
+import Register from "../../pages/Register/Register";
 import Modal from "../UI/Modal";
 
 const Header = () => {
-  const [isModalOpened, setIsModalOpened] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const openModalHandler = () => {
-    setIsModalOpened(true);
+  const openRegisteredModal = () => {
+    setIsRegistered(true);
   };
-  const closeModalHandler = () => {
-    setIsModalOpened(false);
+  const closeRegisteredModal = () => {
+    setIsRegistered(false);
+  };
+  const openLoggedInModal = () => {
+    setIsLoggedIn(true);
+  };
+  const closeLoggedInModal = () => {
+    setIsLoggedIn(false);
   };
   return (
     <>
-      {isModalOpened && (
-        <Modal closeModalHandler={closeModalHandler}>
-          <Login closeModalHandler={closeModalHandler} />
+      {isRegistered && (
+        <Modal closeModalHandler={closeRegisteredModal}>
+          <Register closeModalHandler={closeRegisteredModal} />
+        </Modal>
+      )}
+      {isLoggedIn && (
+        <Modal closeModalHandler={closeLoggedInModal}>
+          <Login closeModalHandler={closeLoggedInModal} />
         </Modal>
       )}
       <div className="flex flex-rows pt-5 px-4 lg:px-10 xl:px-20 pb-2  justify-between items-center">
@@ -29,10 +42,13 @@ const Header = () => {
         </div>
         <img src="/img/logo.svg" alt="logo" />
         <div className="flex flex-row justify-between Montserrat-m font-normal space-x-4">
-          <button onClick={openModalHandler} className=" text-[#4d4d4d]">
+          <button onClick={openRegisteredModal} className=" text-[#4d4d4d]">
             Register
           </button>
-          <button className="w-28 h-8 Montserrat-m font-normal rounded-full border text-[#ffa15f] border-[#ffa15f]">
+          <button
+            onClick={openLoggedInModal}
+            className="w-28 h-8 Montserrat-m font-normal rounded-full border text-[#ffa15f] border-[#ffa15f]"
+          >
             Log in
           </button>
           <div className="relative">

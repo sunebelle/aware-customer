@@ -1,18 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
 import useInput from "../../hooks/useInput";
-import { isNotEmpty, isEmail, isPassword } from "../../utils/formValidation";
+import { isEmail, isPassword } from "../../utils/formValidation";
 
-const Register = ({ closeModalHandler }) => {
-  const {
-    value: userName,
-    isValid: userNameIsValid,
-    hasError: userNameHasError,
-    valueChangeHandler: userNameChangeHandler,
-    inputBlurHandler: userNameBlurHandler,
-    reset: resetUserName,
-  } = useInput(isNotEmpty);
+const Login = ({ closeModalHandler }) => {
+  //   const [rememberPassword, setRememberPassword] = useState(false);
   const {
     value: userEmail,
     isValid: userEmailIsValid,
@@ -31,7 +24,7 @@ const Register = ({ closeModalHandler }) => {
   } = useInput(isPassword);
 
   let formIsValid = false;
-  if (userNameIsValid && userEmailIsValid && userPasswordIsValid) {
+  if (userEmailIsValid && userPasswordIsValid) {
     formIsValid = true;
   }
 
@@ -40,10 +33,9 @@ const Register = ({ closeModalHandler }) => {
     if (!formIsValid) {
       return;
     }
-    console.log(userName, userEmail, userPassword);
+    console.log(userEmail, userPassword);
     // sent request to backend for creating new user account
 
-    resetUserName();
     resetUserEmail();
     resetUserPassord();
   };
@@ -58,19 +50,8 @@ const Register = ({ closeModalHandler }) => {
       />
       <form onSubmit={handleRegister} className="px-20 py-4 w-full border-b">
         <h2 className=" text-center Montserrat font-bold text-3xl leading-5 p-8 text-[#202124]">
-          Register
+          Log In
         </h2>
-        <Input
-          label="Name"
-          type="text"
-          placeholder="Enter your name"
-          name="name"
-          value={userName}
-          handleChange={userNameChangeHandler}
-          handleBlur={userNameBlurHandler}
-          isValid={userNameIsValid}
-          errorMessage={userNameHasError && "Please enter a valid name!"}
-        />
         <Input
           label="Email"
           type="email"
@@ -96,26 +77,36 @@ const Register = ({ closeModalHandler }) => {
             "Your passwords must be more than 6 characters!"
           }
         />
-        <p className="Montserrat-m font-normal text-[#202124] text-center py-8">
-          By creating an account you agree to the {""}
-          <span className="text-[#ff7413] font-bold pb-1 border-b border-[#ff7413]  ">
-            Terms of Service
-          </span>{" "}
-          and {""}
-          <span className="text-[#ff7413] font-bold pb-1 border-b border-[#ff7413] ">
-            Privacy Policy
-          </span>
-        </p>
-        <Button type="submit" label="Register" btnDisabled={!formIsValid} />
+        <div className="flex justify-between items-center mb-8">
+          <div className="inline-flex items-center space-x-2 ">
+            <label className="checkbox-container pl-4">
+              <input
+                type="checkbox"
+                // value={rememberPassword}
+                // onChange={(e) => setRememberPassword(e.target.checked)}
+                checked
+              />
+              <span className="checkmark"></span>
+            </label>
+            <p className="Montserrat-m font-normal text-[#4d4d4d]">
+              Remember password
+            </p>
+          </div>
+          <p className="Montserrat-m font-semibold text-[#4d4d4d]">
+            Forgot your password?
+          </p>
+        </div>
+
+        <Button type="submit" label="Log In" btnDisabled={!formIsValid} />
       </form>
       <p className="Montserrat-m text-[#4d4d4d] font-medium py-4">
         Do you have an account?{" "}
         <span className="text-[#ff7413] font-bold pb-1 border-b border-[#ff7413]  ">
-          Log in
+          Register
         </span>
       </p>
     </div>
   );
 };
 
-export default Register;
+export default Login;

@@ -23,14 +23,17 @@ const Input = ({
         onBlur={handleBlur}
         onChange={handleChange}
         className={`${
-          errorMessage && !isValid && "border-[#f63f45] border"
-        } w-full my-1 px-4 py-2 Montserrat-m text-[#4d4d4d] font-medium bg-[#f6f6f6] focus:outline-[#b7b7b7]`}
+          errorMessage && !isValid
+            ? "border-[#f63f45] border bg-[#f63f45] bg-opacity-5 "
+            : "bg-[#f6f6f6] border-none"
+        } w-full my-1 px-4 py-2 Montserrat-m text-[#4d4d4d] font-medium focus:outline-[#b7b7b7]`}
         placeholder={placeholder}
       />
+      {/* bg-[rgba(246, 63, 69, 0.04)]: https://simplecss.eu/rgbatohex.html */}
       <p
         className={`${
           errorMessage && !isValid ? "opacity-100" : "opacity-0"
-        } text-[#f63f45] Montserrat font-medium leading-5 text-xs h-full`}
+        } text-[#f63f45] Montserrat font-medium leading-5 text-xs`}
       >
         {errorMessage ? errorMessage : "Please enter a valid input"}
       </p>
