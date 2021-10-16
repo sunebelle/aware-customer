@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { uiActions } from "../../store/ui";
@@ -9,13 +9,13 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { isAuthenticated } = useSelector((state) => state.auth);
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const { user } = useSelector((state) => state.auth);
+  // const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [openUserSetting, setOpenUserSetting] = useState(false);
 
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("profile")));
-  }, [isAuthenticated]);
+  // useEffect(() => {
+  //   setUser(JSON.parse(localStorage.getItem("profile")));
+  // }, [isAuthenticated]);
 
   const handleRegister = () => {
     dispatch(uiActions.showRegisteredModal());

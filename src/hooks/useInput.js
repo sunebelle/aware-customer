@@ -1,7 +1,7 @@
-import { useState } from 'react';
-
+import { useState } from "react";
+// Compare password vs confirm password FE
 const useInput = (validateValue) => {
-  const [enteredValue, setEnteredValue] = useState('');
+  const [enteredValue, setEnteredValue] = useState("");
   const [isTouched, setIsTouched] = useState(false);
 
   const valueIsValid = validateValue(enteredValue);
@@ -16,7 +16,7 @@ const useInput = (validateValue) => {
   };
 
   const reset = () => {
-    setEnteredValue('');
+    setEnteredValue("");
     setIsTouched(false);
   };
 
@@ -26,7 +26,7 @@ const useInput = (validateValue) => {
     hasError,
     valueChangeHandler,
     inputBlurHandler,
-    reset
+    reset,
   };
 };
 

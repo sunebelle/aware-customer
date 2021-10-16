@@ -5,7 +5,7 @@ import Input from "../../components/UI/Input";
 import useInput from "../../hooks/useInput";
 import { isPassword } from "../../utils/formValidation";
 
-const ChangePassword = () => {
+const ChangePassword = ({ setIsEdited }) => {
   const history = useHistory();
   const {
     value: currentPassword,
@@ -37,6 +37,7 @@ const ChangePassword = () => {
   }
   const handleChangeUserPassword = (event) => {
     event.preventDefault();
+
     if (!formIsValid) {
       return;
     }
@@ -46,7 +47,8 @@ const ChangePassword = () => {
     resetCurrentPassword();
     resetnewPassword();
     resetConfirmPassword();
-    history.push("/user/account-setting");
+    history.push("/");
+    // history.push("/user/account-setting");
   };
   return (
     <form onSubmit={handleChangeUserPassword}>

@@ -46,6 +46,7 @@ const EditUserInfo = ({ setIsEdited }) => {
     //   );
     resetUserName();
     resetUserEmail();
+    setIsEdited(false);
     history.push("/user/account-setting");
   };
   return (
