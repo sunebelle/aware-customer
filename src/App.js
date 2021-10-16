@@ -8,6 +8,8 @@ import Modal from "./components/UI/Modal";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import Error from "./pages/NotFound/Error";
+import Profile from "./pages/Profile/Profile";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -53,6 +55,12 @@ const App = () => {
             </Modal>
           )}
           <Home />
+        </Route>
+        <Route path="/user/account-setting">
+          <Profile />
+        </Route>
+        <Route path="*">
+          <Error />
         </Route>
       </Switch>
     </Layout>

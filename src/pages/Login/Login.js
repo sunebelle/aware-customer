@@ -108,7 +108,7 @@ const Login = ({ closeModalHandler }) => {
 
         <Button type="submit" label="Log In" btnDisabled={!formIsValid} />
       </form>
-      <p className="Montserrat-m text-[#4d4d4d] font-medium py-4">
+      <p className="Montserrat-m text-[#4d4d4d] font-medium py-4 mt-8">
         Do you have an account?{" "}
         <Link to="/register">
           <span className="text-[#ff7413] font-bold border-b border-[#ff7413]  ">

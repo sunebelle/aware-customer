@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { uiActions } from "../../store/ui";
 import { useSelector } from "react-redux";
 import { authActions } from "../../store/auth";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const history = useHistory();
@@ -30,6 +31,11 @@ const Header = () => {
     history.push("/");
   };
 
+  const handleAccountSetting = () => {
+    history.push("/user/account-setting");
+    setOpenUserSetting(false);
+  };
+
   return (
     <>
       <div className="grid grid-cols-3 pt-5 px-4 lg:px-10 xl:px-20 pb-2  justify-between items-center">
@@ -41,9 +47,11 @@ const Header = () => {
           />
           <img className="opacity-60" src="/img/search.svg" alt="search" />
         </div>
-        <div className="flex items-center justify-center">
-          <img src="/img/logo.svg" alt="logo" />
-        </div>
+        <Link to="/">
+          <div className="flex items-center justify-center cursor-pointer">
+            <img src="/img/logo.svg" alt="logo" />
+          </div>
+        </Link>
         <div className="flex flex-row items-center justify-end Montserrat-m font-normal space-x-4">
           {!user && (
             <button onClick={handleRegister} className=" text-[#4d4d4d]">
@@ -53,7 +61,7 @@ const Header = () => {
           {user ? (
             <img
               onClick={() => setOpenUserSetting((state) => !state)}
-              className="h-7 w-7 rounded-full "
+              className="h-7 w-7 rounded-full cursor-pointer"
               alt="avatar"
               src="https://tse1.mm.bing.net/th?id=OIP.v6pO-sfFocVZMFaKp64EGwHaEo&pid=Api&P=0&w=289&h=181"
             />
@@ -65,7 +73,7 @@ const Header = () => {
               Log in
             </button>
           )}
-          <div className="relative">
+          <div className="relative cursor-pointer">
             <img className="w-full h-full" src="/img/cart.svg" alt="cart" />
             <span className="absolute right-0 top-0 w-4 h-4 Montserrat-s text-center text-white font-medium  rounded-full bg-[#ffa15f]">
               7
@@ -75,19 +83,27 @@ const Header = () => {
       </div>
 
       <div className="flex relative whitespace-nowrap border-t border-b border-[#ececec] space-x-2 py-2 justify-center items-center">
-        {openUserSetting && (
-          <div className="absolute z-10 top-0 right-28 w-44 flex-start shadow-2xl bg-[#fbfbfb] border border-[#eaeaea] flex flex-col p-2 space-y-2">
-            <p className="Montserrat-s font-medium text-[#4d4d4d]">
-              Account setting
-            </p>
-            <p
-              onClick={handleLogout}
-              className="Montserrat-s text-left font-medium text-[#4d4d4d]"
-            >
-              Log out
-            </p>
-          </div>
-        )}
+        {/* {openUserSetting && ( */}
+        <div
+          className={` ${
+            openUserSetting ? "opacity-100" : "opacity-0"
+          } absolute z-10 top-0 right-28 w-44 flex-start shadow-2xl bg-[#fbfbfb] border border-[#eaeaea] flex flex-col p-2 space-y-2`}
+        >
+          {/* <div className="absolute z-10 top-0 right-28 w-44 flex-start shadow-2xl bg-[#fbfbfb] border border-[#eaeaea] flex flex-col p-2 space-y-2"> */}
+          <p
+            onClick={handleAccountSetting}
+            className="Montserrat-s font-medium text-[#4d4d4d] cursor-pointer"
+          >
+            Account setting
+          </p>
+          <p
+            onClick={handleLogout}
+            className="Montserrat-s text-left font-medium text-[#4d4d4d] cursor-pointer"
+          >
+            Log out
+          </p>
+        </div>
+        {/* )} */}
         {/* {openUserSetting && (
           <div className="absolute z-10 top-20 right-1/2 w-44 flex-start shadow-2xl bg-[#fbfbfb] border border-[#eaeaea] flex flex-col p-2 space-y-2">
             <p className="Montserrat-s font-medium text-[#4d4d4d]">

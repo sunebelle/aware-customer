@@ -60,7 +60,7 @@ const ForgotPassword = ({ closeModalHandler }) => {
 
         <Button type="submit" label="Submit" btnDisabled={!formIsValid} />
       </form>
-      <p className="Montserrat-m text-[#4d4d4d] font-medium py-4">
+      <p className="Montserrat-m text-[#4d4d4d] font-medium py-4 mt-8">
         I remember my password now. {""}
         <Link to="/login">
           <span className="text-[#ff7413] font-bold border-b border-[#ff7413]  ">
