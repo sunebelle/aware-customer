@@ -4,6 +4,7 @@ const initialState = {
   isRegistered: true,
   isLoggedIn: true,
   isForgotPassword: true,
+  notification: null,
 };
 
 const uiSlice = createSlice({
@@ -28,7 +29,12 @@ const uiSlice = createSlice({
     hideForgotPasswordModal(state) {
       state.isForgotPassword = false;
     },
-
+    showError(state, action) {
+      state.notification = action.payload;
+    },
+    showSuccess(state, action) {
+      state.notification = action.payload;
+    },
     // showNotification(state, action) {
     //   state.notification = {
     //     status: action.payload.status,

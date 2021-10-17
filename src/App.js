@@ -25,7 +25,6 @@ const App = () => {
   const closeForgotPasswordModal = () => {
     dispatch(uiActions.hideForgotPasswordModal());
   };
-
   return (
     <Layout>
       <Switch>

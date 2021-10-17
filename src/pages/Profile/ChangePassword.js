@@ -1,19 +1,24 @@
 import React from "react";
-import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+// import { useHistory } from "react-router";
+import api from "../../axios";
 import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
 import useInput from "../../hooks/useInput";
+import { authActions } from "../../store/auth";
 import { isPassword } from "../../utils/formValidation";
+import { ToastContainer, toast } from "react-toastify";
 
-const ChangePassword = ({ setIsEdited }) => {
-  const history = useHistory();
+const ChangePassword = () => {
+  const dispatch = useDispatch();
+  // const history = useHistory();
   const {
     value: currentPassword,
     isValid: currentPasswordIsValid,
     hasError: currentPasswordHasError,
     valueChangeHandler: currentPasswordChangeHandler,
     inputBlurHandler: currentPasswordBlurHandler,
-    reset: resetCurrentPassword,
+    // reset: resetCurrentPassword,
   } = useInput(isPassword);
   const {
     value: newPassword,
@@ -21,7 +26,7 @@ const ChangePassword = ({ setIsEdited }) => {
     hasError: newPasswordHasError,
     valueChangeHandler: newPasswordChangeHandler,
     inputBlurHandler: newPasswordBlurHandler,
-    reset: resetnewPassword,
+    // reset: resetnewPassword,
   } = useInput(isPassword);
   const {
     value: confirmPassword,
@@ -29,29 +34,39 @@ const ChangePassword = ({ setIsEdited }) => {
     hasError: confirmPasswordHasError,
     valueChangeHandler: confirmPasswordChangeHandler,
     inputBlurHandler: confirmPasswordBlurHandler,
-    reset: resetConfirmPassword,
+    // reset: resetConfirmPassword,
   } = useInput(isPassword);
   let formIsValid = false;
   if (currentPasswordIsValid && confirmPasswordIsValid && newPasswordIsValid) {
     formIsValid = true;
   }
+
+  const updatePassword = async (formData) => {
+    try {
+      const { data } = await api.patch("/user/update-password", formData, {
+        withCredentials: true,
+        credentials: "include",
+      });
+      dispatch(authActions.auth(data));
+      // history.push("/user/account-setting");
+      toast.success("Successfully update your password!");
+    } catch (error) {
+      // console.log("error", error.response.data.message);
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
   const handleChangeUserPassword = (event) => {
     event.preventDefault();
-
     if (!formIsValid) {
       return;
     }
-    // dispatch(
-    //     register({ name: userName, email: userEmail, password: userPassword })
-    //   );
-    resetCurrentPassword();
-    resetnewPassword();
-    resetConfirmPassword();
-    history.push("/");
-    // history.push("/user/account-setting");
+    updatePassword({ currentPassword, newPassword, confirmPassword });
   };
   return (
     <form onSubmit={handleChangeUserPassword}>
+      <ToastContainer autoClose={3000} position="top-right" />
+
       <Input
         label="current password"
         bgColor

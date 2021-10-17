@@ -1,24 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
 import useInput from "../../hooks/useInput";
 import { isEmail, isPassword } from "../../utils/formValidation";
-import { login } from "../../actions/auth";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
+import api from "../../axios";
+import { authActions } from "../../store/auth";
 
 const Login = ({ closeModalHandler }) => {
+  //   const [rememberPassword, setRememberPassword] = useState(false);
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const history = useHistory();
-  //   const [rememberPassword, setRememberPassword] = useState(false);
+
   const {
     value: userEmail,
     isValid: userEmailIsValid,
     hasError: userEmailHasError,
     valueChangeHandler: userEmailChangeHandler,
     inputBlurHandler: userEmailBlurHandler,
-    reset: resetUserEmail,
+    // reset: resetUserEmail,
   } = useInput(isEmail);
   const {
     value: userPassword,
@@ -26,7 +29,7 @@ const Login = ({ closeModalHandler }) => {
     hasError: userPasswordHasError,
     valueChangeHandler: userPasswordChangeHandler,
     inputBlurHandler: userPasswordBlurHandler,
-    reset: resetUserPassord,
+    // reset: resetUserPassord,
   } = useInput(isPassword);
 
   let formIsValid = false;
@@ -34,17 +37,26 @@ const Login = ({ closeModalHandler }) => {
     formIsValid = true;
   }
 
-  const handleRegister = (event) => {
+  const login = async (formData) => {
+    try {
+      const { data } = await api.post("/user/login", formData, {
+        withCredentials: true,
+        credentials: "include",
+      });
+      dispatch(authActions.auth(data));
+      history.push("/");
+    } catch (error) {
+      setError(error?.response?.data?.message);
+    }
+  };
+
+  const handleLogin = (event) => {
     event.preventDefault();
     if (!formIsValid) {
       return;
     }
-    // console.log(userEmail, userPassword);
     // sent request to backend for creating new user account
-    dispatch(login({ email: userEmail, password: userPassword }));
-    resetUserEmail();
-    resetUserPassord();
-    history.push("/");
+    login({ email: userEmail, password: userPassword });
   };
 
   return (
@@ -55,10 +67,17 @@ const Login = ({ closeModalHandler }) => {
         src="/img/cross.svg"
         alt="cross"
       />
-      <form onSubmit={handleRegister} className="px-20 py-4 w-full border-b">
-        <h2 className=" text-center Montserrat font-bold text-3xl leading-5 p-8 text-[#202124]">
+      <form onSubmit={handleLogin} className="px-20 py-4 w-full">
+        <h2 className=" text-center Montserrat font-bold text-3xl leading-5 pt-8 text-[#202124]">
           Log In
         </h2>
+        <p
+          className={`${
+            error ? "opacity-100" : "opacity-0"
+          } p-2 Montserrat-m text-[#f63f45] font-medium text-center`}
+        >
+          {error ? error : "Something went wrong"}
+        </p>
         <Input
           label="E-mail"
           type="email"
@@ -84,7 +103,7 @@ const Login = ({ closeModalHandler }) => {
             "Your passwords must be more than 6 characters!"
           }
         />
-        <div className="flex justify-between items-center mb-8">
+        <div className="flex justify-between items-center mb-9">
           <div className="inline-flex items-center space-x-2 ">
             <label className="checkbox-container pl-4">
               <input
@@ -108,14 +127,16 @@ const Login = ({ closeModalHandler }) => {
 
         <Button type="submit" label="Log In" btnDisabled={!formIsValid} />
       </form>
-      <p className="Montserrat-m text-[#4d4d4d] font-medium py-4 mt-8">
-        Do you have an account?{" "}
-        <Link to="/register">
-          <span className="text-[#ff7413] font-bold border-b border-[#ff7413]  ">
-            Register
-          </span>
-        </Link>
-      </p>
+      <div className="border-t w-full mt-10 items-center flex justify-center border-[#ededed]">
+        <p className="Montserrat-m text-[#4d4d4d] font-medium py-4">
+          Do you have an account?{" "}
+          <Link to="/register">
+            <span className="text-[#ff7413] font-bold border-b border-[#ff7413]  ">
+              Register
+            </span>
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };

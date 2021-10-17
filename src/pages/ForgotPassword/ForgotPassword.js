@@ -39,7 +39,7 @@ const ForgotPassword = ({ closeModalHandler }) => {
         src="/img/cross.svg"
         alt="cross"
       />
-      <form onSubmit={handleRegister} className="px-20 py-4 w-full border-b">
+      <form onSubmit={handleRegister} className="px-20 py-4 w-full">
         <h2 className=" text-center Montserrat font-bold text-3xl leading-5 pt-8 pb-3 text-[#202124]">
           Forgot Password
         </h2>
@@ -60,14 +60,16 @@ const ForgotPassword = ({ closeModalHandler }) => {
 
         <Button type="submit" label="Submit" btnDisabled={!formIsValid} />
       </form>
-      <p className="Montserrat-m text-[#4d4d4d] font-medium py-4 mt-8">
-        I remember my password now. {""}
-        <Link to="/login">
-          <span className="text-[#ff7413] font-bold border-b border-[#ff7413]  ">
-            Log in
-          </span>
-        </Link>
-      </p>
+      <div className="border-t w-full mt-10 items-center flex justify-center border-[#ededed]">
+        <p className="Montserrat-m text-[#4d4d4d] font-medium py-4">
+          I remember my password now. {""}
+          <Link to="/login">
+            <span className="text-[#ff7413] font-bold border-b border-[#ff7413]  ">
+              Log in
+            </span>
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };

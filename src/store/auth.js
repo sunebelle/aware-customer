@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const authInitial = {
   isAuthenticated: false,
-  // userData: null,
   user: JSON.parse(localStorage.getItem("profile")),
+  // error: null,
 };
 const authSlice = createSlice({
   name: "authentication",
@@ -19,6 +19,20 @@ const authSlice = createSlice({
       localStorage.clear();
       state.user = null;
     },
+    // updateUser(state, action) {
+    //   state.isAuthenticated = true;
+    //   localStorage.setItem("profile", JSON.stringify({ ...action?.payload }));
+    //   state.user = action.payload;
+    //
+    // },
+    // updatePassword(state, action) {
+    //   state.isAuthenticated = true;
+    //   localStorage.setItem("profile", JSON.stringify({ ...action?.payload }));
+    //   state.user = action.payload;
+    // },
+    // showError(state, action) {
+    //   state.error = action.payload;
+    // },
   },
 });
 export const authActions = authSlice.actions;

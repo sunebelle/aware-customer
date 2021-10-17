@@ -3,19 +3,14 @@ import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { uiActions } from "../../store/ui";
 import { useSelector } from "react-redux";
-import { authActions } from "../../store/auth";
 import { Link } from "react-router-dom";
+import { logUserOut } from "../../actions/auth";
 
 const Header = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  // const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const [openUserSetting, setOpenUserSetting] = useState(false);
-
-  // useEffect(() => {
-  //   setUser(JSON.parse(localStorage.getItem("profile")));
-  // }, [isAuthenticated]);
 
   const handleRegister = () => {
     dispatch(uiActions.showRegisteredModal());
@@ -26,7 +21,7 @@ const Header = () => {
     history.push("/login");
   };
   const handleLogout = () => {
-    dispatch(authActions.logOut());
+    dispatch(logUserOut());
     setOpenUserSetting(false);
     history.push("/");
   };

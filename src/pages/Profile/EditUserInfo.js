@@ -1,66 +1,72 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import api from "../../axios";
 import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
-import useInput from "../../hooks/useInput";
-import { isEmail, isNotEmpty } from "../../utils/formValidation";
+import { authActions } from "../../store/auth";
+import { ToastContainer, toast } from "react-toastify";
 
 const EditUserInfo = ({ setIsEdited }) => {
+  const { user } = useSelector((state) => state.auth);
+  const [name, setName] = useState(user?.data?.user?.name);
+  const [email, setEmail] = useState(user?.data?.user?.email);
+  const [nameTouched, setNameTouched] = useState(false);
+  const [emailTouched, setEmailTouched] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
-  const {
-    value: userName,
-    isValid: userNameIsValid,
-    hasError: userNameHasError,
-    valueChangeHandler: userNameChangeHandler,
-    inputBlurHandler: userNameBlurHandler,
-    reset: resetUserName,
-  } = useInput(isNotEmpty);
 
-  const {
-    value: userEmail,
-    isValid: userEmailIsValid,
-    hasError: userEmailHasError,
-    valueChangeHandler: userEmailChangeHandler,
-    inputBlurHandler: userEmailBlurHandler,
-    reset: resetUserEmail,
-  } = useInput(isEmail);
+  const validName = name.trim() !== "";
+  const validEmail =
+    email.includes("@") && email.length >= 6 && email.includes(".");
+  const invalidName = !validName && nameTouched; //true
+  const invalidEmail = !validEmail && emailTouched; //true
 
-  let formIsValid = false;
-  if (userNameIsValid && userEmailIsValid) {
-    formIsValid = true;
+  let formIsvalid = false;
+  if (validName && validEmail) {
+    formIsvalid = true;
   }
 
   const handleCancelChangeUserInfo = () => {
     setIsEdited(false);
     history.push("/user/account-setting");
   };
+
+  const updateUser = async (formData) => {
+    try {
+      const { data } = await api.patch("/user/update-user", formData, {
+        withCredentials: true,
+        credentials: "include",
+      });
+      dispatch(authActions.auth(data));
+      setIsEdited(false);
+      history.push("/user/account-setting");
+      toast.success("Successfully update your information!");
+    } catch (error) {
+      // console.log("error", error.response.data.message);
+      toast.error(error?.response?.data?.message);
+    }
+  };
   const handleChangeUserInfo = (event) => {
     event.preventDefault();
-    if (!formIsValid) {
+    if (!formIsvalid) {
       return;
     }
-    // dispatch(
-    //     register({ name: userName, email: userEmail, password: userPassword })
-    //   );
-    resetUserName();
-    resetUserEmail();
-    setIsEdited(false);
-    history.push("/user/account-setting");
+    updateUser({ name, email });
   };
   return (
     <form onSubmit={handleChangeUserInfo}>
+      <ToastContainer autoClose={3000} position="top-right" />
       <Input
         label="Name"
         type="text"
         placeholder="Enter your name..."
         name="name"
-        value={userName}
-        handleChange={userNameChangeHandler}
-        handleBlur={userNameBlurHandler}
-        isValid={userNameIsValid}
-        errorMessage={userNameHasError && "Please enter a valid name!"}
+        value={name}
+        handleChange={(e) => setName(e.target.value)}
+        handleBlur={() => setNameTouched(true)}
+        isValid={validName}
+        errorMessage={invalidName && "Please enter a valid name!"}
         bgColor
       />
       <Input
@@ -68,11 +74,11 @@ const EditUserInfo = ({ setIsEdited }) => {
         type="email"
         placeholder="Enter your email..."
         name="email"
-        value={userEmail}
-        handleChange={userEmailChangeHandler}
-        handleBlur={userEmailBlurHandler}
-        isValid={userEmailIsValid}
-        errorMessage={userEmailHasError && "Please enter a valid e-mail!"}
+        value={email}
+        handleChange={(e) => setEmail(e.target.value)}
+        handleBlur={() => setEmailTouched(true)}
+        isValid={validEmail}
+        errorMessage={invalidEmail && "Please enter a valid e-mail!"}
         bgColor
       />
       <div className="flex justify-end ">
@@ -84,7 +90,7 @@ const EditUserInfo = ({ setIsEdited }) => {
           >
             Cancel
           </button>
-          <Button type="submit" label="Save" btnDisabled={!formIsValid} />
+          <Button type="submit" label="Save" btnDisabled={!formIsvalid} />
         </div>
       </div>
     </form>
