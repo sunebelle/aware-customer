@@ -10,6 +10,7 @@ import Login from "./pages/Login/Login";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import Error from "./pages/NotFound/Error";
 import Profile from "./pages/Profile/Profile";
+import Product from "./pages/Product/Product";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -55,8 +56,12 @@ const App = () => {
           )}
           <Home />
         </Route>
+
         <Route path="/user/account-setting">
           <Profile />
+        </Route>
+        <Route path="/product">
+          <Product />
         </Route>
         <Route path="*">
           <Error />
@@ -66,4 +71,12 @@ const App = () => {
   );
 };
 
+// {/* <Route path="/reset-password/:token">
+//   {isForgotPassword && (
+//     <Modal closeModalHandler={closeForgotPasswordModal}>
+//       <ForgotPassword closeModalHandler={closeForgotPasswordModal} />
+//     </Modal>
+//   )}
+//   <Home />
+// </Route>; */}
 export default App;

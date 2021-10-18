@@ -11,6 +11,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const [openUserSetting, setOpenUserSetting] = useState(false);
+  const [openCategories, setOpenCategories] = useState(false);
 
   const handleRegister = () => {
     dispatch(uiActions.showRegisteredModal());
@@ -32,7 +33,7 @@ const Header = () => {
   };
 
   return (
-    <>
+    <div className="relative">
       <div className="grid grid-cols-3 pt-5 px-4 lg:px-10 xl:px-20 pb-2  justify-between items-center">
         <div className="border rounded-full w-56 border-[#b7b7b7] flex h-8 px-2 items-center">
           <input
@@ -77,14 +78,13 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="flex relative whitespace-nowrap border-t border-b border-[#ececec] space-x-2 py-2 justify-center items-center">
-        {/* {openUserSetting && ( */}
+      <div className="flex relative border-t border-b border-[#ececec] space-x-2 py-2 justify-center items-center">
+        {/* show account setting on click */}
         <div
           className={` ${
             openUserSetting ? "opacity-100" : "opacity-0"
           } absolute z-10 top-0 right-28 w-44 flex-start shadow-2xl bg-[#fbfbfb] border border-[#eaeaea] flex flex-col p-2 space-y-2`}
         >
-          {/* <div className="absolute z-10 top-0 right-28 w-44 flex-start shadow-2xl bg-[#fbfbfb] border border-[#eaeaea] flex flex-col p-2 space-y-2"> */}
           <p
             onClick={handleAccountSetting}
             className="Montserrat-s font-medium text-[#4d4d4d] cursor-pointer"
@@ -98,37 +98,71 @@ const Header = () => {
             Log out
           </p>
         </div>
-        {/* )} */}
-        {/* {openUserSetting && (
-          <div className="absolute z-10 top-20 right-1/2 w-44 flex-start shadow-2xl bg-[#fbfbfb] border border-[#eaeaea] flex flex-col p-2 space-y-2">
-            <p className="Montserrat-s font-medium text-[#4d4d4d]">
-              Account setting
-            </p>
-            <p className="Montserrat-s text-left font-medium text-[#4d4d4d]">
-              Log out
-            </p>
+
+        <div
+          onClick={() => setOpenCategories((state) => !state)}
+          className="categories whitespace-nowrap flex"
+        >
+          <div className=" flex ">
+            <span className="Montserrat-m font-medium text-[#202124]">Men</span>
+            <img src="/img/arrow.svg" alt="arrow" />
           </div>
-        )} */}
-        <div className="flex">
-          <span className="Montserrat-m font-medium text-[#202124]">Men</span>
-          <img src="/img/arrow.svg" alt="arrow" />
+          <div className="flex ladies">
+            <span className="Montserrat-m font-medium text-[#202124]">
+              Ladies
+            </span>
+            <img src="/img/arrow.svg" alt="arrow" />
+          </div>
+          <div className="flex">
+            <span className="Montserrat-m font-medium text-[#202124]">
+              Girls
+            </span>
+            <img src="/img/arrow.svg" alt="arrow" />
+          </div>
+          <div className="flex">
+            <span className="Montserrat-m font-medium text-[#202124]">
+              Boys
+            </span>
+            <img src="/img/arrow.svg" alt="arrow" />
+          </div>
         </div>
-        <div className="flex">
-          <span className="Montserrat-m font-medium text-[#202124]">
-            Ladies
-          </span>
-          <img src="/img/arrow.svg" alt="arrow" />
-        </div>
-        <div className="flex">
-          <span className="Montserrat-m font-medium text-[#202124]">Girls</span>
-          <img src="/img/arrow.svg" alt="arrow" />
-        </div>
-        <div className="flex">
-          <span className="Montserrat-m font-medium text-[#202124]">Boys</span>
-          <img src="/img/arrow.svg" alt="arrow" />
-        </div>
+
+        {/* show element on hover || Click*/}
+        {openCategories && (
+          <div className="categories-container absolute z-10 top-12  flex items-center justify-center">
+            <div className=" flex flex-row whitespace-nowrap shadow-2xl bg-[#fbfbfb] border border-[#eaeaea] p-4 space-x-8 items-center justify-center">
+              <span className="Montserrat-m font-normal text-[#202124]">
+                Tops
+              </span>
+              <span className="Montserrat-m font-normal text-[#202124]">
+                Bottoms
+              </span>
+              <Link
+                onClick={() => setOpenCategories((state) => !state)}
+                to="/product?Ladies/Address"
+              >
+                <span className="Montserrat-m font-normal text-[#202124]">
+                  Dresses
+                </span>
+              </Link>
+
+              <span className="Montserrat-m font-normal text-[#202124]">
+                Jackets
+              </span>
+              <span className="Montserrat-m font-normal text-[#202124]">
+                Shoes
+              </span>
+              <span className="Montserrat-m font-normal text-[#202124]">
+                Accesories
+              </span>
+              <span className="Montserrat-m font-normal text-[#202124]">
+                Sale
+              </span>
+            </div>
+          </div>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 

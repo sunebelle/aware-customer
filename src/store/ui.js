@@ -29,11 +29,11 @@ const uiSlice = createSlice({
     hideForgotPasswordModal(state) {
       state.isForgotPassword = false;
     },
-    showError(state, action) {
-      state.notification = action.payload;
-    },
-    showSuccess(state, action) {
-      state.notification = action.payload;
+    showNotification(state, action) {
+      state.notification = {
+        status: action.payload.status,
+        message: action.payload.message,
+      };
     },
     // showNotification(state, action) {
     //   state.notification = {

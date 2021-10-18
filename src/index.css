@@ -134,3 +134,12 @@ font-family: 'Montserrat', sans-serif; */
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
+/* show categories on hover */
+/* .categories-container {
+  display: none;
+}
+
+.categories:hover + .categories-container {
+  display: block;
+} */
