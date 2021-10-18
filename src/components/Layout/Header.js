@@ -83,7 +83,7 @@ const Header = () => {
         <div
           className={` ${
             openUserSetting ? "opacity-100" : "opacity-0"
-          } absolute z-10 top-0 right-28 w-44 flex-start shadow-2xl bg-[#fbfbfb] border border-[#eaeaea] flex flex-col p-2 space-y-2`}
+          } absolute z-10 top-0 right-28 w-44 flex-start shadow-lg bg-[#fbfbfb] border border-[#eaeaea] flex flex-col p-2 space-y-2`}
         >
           <p
             onClick={handleAccountSetting}
@@ -130,7 +130,7 @@ const Header = () => {
         {/* show element on hover || Click*/}
         {openCategories && (
           <div className="categories-container absolute z-10 top-12  flex items-center justify-center">
-            <div className=" flex flex-row whitespace-nowrap shadow-2xl bg-[#fbfbfb] border border-[#eaeaea] p-4 space-x-8 items-center justify-center">
+            <div className=" flex flex-row whitespace-nowrap shadow-xl bg-[#fbfbfb] border border-[#eaeaea] p-4 space-x-8 items-center justify-center">
               <span className="Montserrat-m font-normal text-[#202124]">
                 Tops
               </span>
