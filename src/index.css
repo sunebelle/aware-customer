@@ -144,13 +144,21 @@ font-family: 'Montserrat', sans-serif; */
 }
 
 /* show categories on hover */
-/* .categories-container {
+.type-container {
   display: none;
 }
-
-.categories:hover + .categories-container {
+.ladies:hover + .type-container {
   display: block;
-} */
+}
+
+/*  Show quick shop on hover the product */
+.quick-shop {
+  transform: rotateX(90deg);
+  transition: transform 0.3s ease-in;
+}
+.quick-shop-container:hover .quick-shop {
+  transform: rotateX(0);
+}
 
 /* Styling range slider input */
 /* https://css-tricks.com/sliding-nightmare-understanding-range-input/ */

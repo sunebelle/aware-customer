@@ -10,6 +10,12 @@ const Dropdown = () => {
     { title: "Price: lowest to highest" },
     { title: "Price: highest to lowest" },
   ];
+
+  const handleSelect = (option) => {
+    setSelected(option);
+    setShowDropdownMenu(false);
+  };
+
   return (
     <div className="relative">
       <div
@@ -29,12 +35,12 @@ const Dropdown = () => {
         />
       </div>
       {showDropdownMenu && (
-        <ul className="absolute top-9 w-60 shadow-lg bg-[#fbfbfb] border border-[#eaeaea] border-opacity-50">
+        <ul className="absolute  z-50 top-9 w-60 shadow-lg bg-[#fbfbfb] border border-[#eaeaea] border-opacity-50">
           {/* w-44 */}
           {listOptions?.map((option, i) => {
             const active = option.title === selected.title;
             return (
-              <div key={i} onClick={() => setSelected(option)}>
+              <div key={i} onClick={() => handleSelect(option)}>
                 <li
                   className={`${
                     active && "bg-[#FFE699]"

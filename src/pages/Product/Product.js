@@ -21,11 +21,11 @@ const Product = () => {
   return (
     <div className="">
       <h2 className=" pb-8 text-center Montserrat-m font-normal text-[#202124]">
-        {searchTitle}
-        {/* Ladies / Address */}
+        {/* {searchTitle} */}
+        Ladies / Dresses
       </h2>
       <div className="grid grid-cols-6 gap-4">
-        <div className="flex flex-col space-y-12">
+        <div className="flex flex-col space-y-11">
           <Category />
           <hr className="text-[#979797] w-1/2" />
           <Filter />

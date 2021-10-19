@@ -13,7 +13,7 @@ const Items = () => {
       </div>
       {/* Many items display here */}
       {/* <div className="flex flex-row flex-wrap justify-start space-y-4 first:space-y-0 mt-4 w-full"> */}
-      <div className="grid grid-cols-5 place-content-stretch gap-2 mt-3 w-full">
+      <div className="grid grid-cols-5 place-content-stretch  gap-2 mt-3 w-full">
         {products?.map((product, i) => (
           <CardItem key={i} product={product} />
         ))}

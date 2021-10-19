@@ -7,7 +7,7 @@ import Input from "../../components/UI/Input";
 import useInput from "../../hooks/useInput";
 import { authActions } from "../../store/auth";
 import { isPassword } from "../../utils/formValidation";
-import { ToastContainer, toast } from "react-toastify";
+import { uiActions } from "../../store/ui";
 
 const ChangePassword = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const ChangePassword = () => {
     hasError: currentPasswordHasError,
     valueChangeHandler: currentPasswordChangeHandler,
     inputBlurHandler: currentPasswordBlurHandler,
-    // reset: resetCurrentPassword,
+    reset: resetCurrentPassword,
   } = useInput(isPassword);
   const {
     value: newPassword,
@@ -26,7 +26,7 @@ const ChangePassword = () => {
     hasError: newPasswordHasError,
     valueChangeHandler: newPasswordChangeHandler,
     inputBlurHandler: newPasswordBlurHandler,
-    // reset: resetnewPassword,
+    reset: resetnewPassword,
   } = useInput(isPassword);
   const {
     value: confirmPassword,
@@ -34,9 +34,10 @@ const ChangePassword = () => {
     hasError: confirmPasswordHasError,
     valueChangeHandler: confirmPasswordChangeHandler,
     inputBlurHandler: confirmPasswordBlurHandler,
-    // reset: resetConfirmPassword,
+    reset: resetConfirmPassword,
   } = useInput(isPassword);
   let formIsValid = false;
+
   if (currentPasswordIsValid && confirmPasswordIsValid && newPasswordIsValid) {
     formIsValid = true;
   }
@@ -49,10 +50,19 @@ const ChangePassword = () => {
       });
       dispatch(authActions.auth(data));
       // history.push("/user/account-setting");
-      toast.success("Successfully update your password!");
+      dispatch(
+        uiActions.showNotification({
+          status: "success",
+          message: "Successfully update your password!",
+        })
+      );
     } catch (error) {
-      // console.log("error", error.response.data.message);
-      toast.error(error?.response?.data?.message);
+      dispatch(
+        uiActions.showNotification({
+          status: "error",
+          message: error?.response?.data?.message,
+        })
+      );
     }
   };
 
@@ -62,11 +72,12 @@ const ChangePassword = () => {
       return;
     }
     updatePassword({ currentPassword, newPassword, confirmPassword });
+    resetCurrentPassword();
+    resetnewPassword();
+    resetConfirmPassword();
   };
   return (
     <form onSubmit={handleChangeUserPassword}>
-      <ToastContainer autoClose={3000} position="top-right" />
-
       <Input
         label="current password"
         bgColor

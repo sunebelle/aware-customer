@@ -5,8 +5,7 @@ import api from "../../axios";
 import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
 import { authActions } from "../../store/auth";
-import { ToastContainer, toast } from "react-toastify";
-// import { uiActions } from "../../store/ui";
+import { uiActions } from "../../store/ui";
 
 const EditUserInfo = ({ setIsEdited }) => {
   const { user } = useSelector((state) => state.auth);
@@ -42,22 +41,19 @@ const EditUserInfo = ({ setIsEdited }) => {
       dispatch(authActions.auth(data));
       setIsEdited(false);
       history.push("/user/account-setting");
-      toast.success("Successfully update your information!");
-      // dispatch(
-      //   uiActions.showNotification({
-      //     status: "success",
-      //     message: "Successfully update your information!",
-      //   })
-      // );
+      dispatch(
+        uiActions.showNotification({
+          status: "success",
+          message: "Successfully update your information!",
+        })
+      );
     } catch (error) {
-      // console.log("error", error.response.data.message);
-      toast.error(error?.response?.data?.message);
-      // dispatch(
-      //   uiActions.showNotification({
-      //     status: "error",
-      //     message: error?.response?.data?.message,
-      //   })
-      // );
+      dispatch(
+        uiActions.showNotification({
+          status: "error",
+          message: error?.response?.data?.message,
+        })
+      );
     }
   };
   const handleChangeUserInfo = (event) => {
@@ -69,7 +65,6 @@ const EditUserInfo = ({ setIsEdited }) => {
   };
   return (
     <form onSubmit={handleChangeUserInfo}>
-      <ToastContainer autoClose={3000} position="top-right" />
       <Input
         label="Name"
         type="text"

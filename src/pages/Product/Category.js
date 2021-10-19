@@ -25,7 +25,7 @@ const Category = () => {
                 onClick={() => setClickItem(item)}
                 className={`${
                   active ? "text-[#ff6900]" : "text-[#4d4d4d]"
-                } Montserrat-m font-normal  py-2`}
+                } Montserrat-m font-normal  py-2 cursor-pointer`}
               >
                 {item.category}
               </li>
