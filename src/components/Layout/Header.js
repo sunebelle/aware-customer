@@ -37,9 +37,9 @@ const Header = () => {
       <div className="grid grid-cols-3 pt-5 px-4 lg:px-10 xl:px-20 pb-2  justify-between items-center">
         <div className="border rounded-full w-56 border-[#b7b7b7] flex h-8 px-2 items-center">
           <input
-            className="focus:outline-none Montserrat-m font-normal border-none flex-grow placeholder-[#cccccc]"
+            className="focus:outline-none pl-2 Montserrat-m font-normal border-none flex-grow placeholder-[#cccccc]"
             type="text"
-            placeholder="search"
+            placeholder="Search"
           />
           <img className="opacity-60" src="/img/search.svg" alt="search" />
         </div>
@@ -101,7 +101,7 @@ const Header = () => {
 
         <div
           onClick={() => setOpenCategories((state) => !state)}
-          className="categories whitespace-nowrap flex"
+          className="categories whitespace-nowrap flex space-x-4"
         >
           <div className=" flex ">
             <span className="Montserrat-m font-medium text-[#202124]">Men</span>

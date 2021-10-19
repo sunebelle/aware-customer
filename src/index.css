@@ -9,6 +9,12 @@ font-family: 'Montserrat', sans-serif; */
   .btn-shop-small {
     @apply font-semibold text-white text-center py-2 px-10 bg-[#ffa15f];
   }
+  .filter-border-dashed {
+    @apply flex  pt-3 pb-4 border-t border-dashed border-[#cccccc] border-opacity-50;
+  }
+  .filter-size {
+    @apply cursor-pointer flex items-center justify-center text-center box-border p-4 h-10 w-10 border transition duration-500 ease-in-out transform;
+  }
 }
 .Montserrat {
   font-family: "Montserrat", sans-serif;
@@ -102,10 +108,12 @@ font-family: 'Montserrat', sans-serif; */
 
 /* When the checkbox is checked, add a background */
 .checkbox-container input:checked ~ .checkmark {
-  background-color: #ff7413;
+  /* background-color: #ff7413; */
+  background-color: #ffa15f;
   box-sizing: border-box;
   border-radius: 2px;
-  border: 1.5px solid #ff7413;
+  /* border: 1.5px solid #ff7413; */
+  border: 1.5px solid #ffa15f;
   height: 16px;
   width: 16px;
 }
@@ -142,4 +150,16 @@ font-family: 'Montserrat', sans-serif; */
 
 .categories:hover + .categories-container {
   display: block;
+} */
+
+/* Styling range slider input */
+/* https://css-tricks.com/sliding-nightmare-understanding-range-input/ */
+/* input[type="range"] {
+  ::-webkit-slider-runnable-track, ;
+} */
+/* input::-moz-range-track, 
+input::-ms-track, */
+
+/* .MuiSlider-root .css-14pt78w-MuiSlider-rail {
+  background-color: #eaeaea !important;
 } */
