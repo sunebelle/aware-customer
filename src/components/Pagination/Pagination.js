@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 
-const Pagination = () => {
-  const [page, setPage] = useState(1);
+const Pagination = ({ page, setPage }) => {
+  const {
+    products: { numberOfPages },
+  } = useSelector((state) => state.product);
+  // const [page, setPage] = useState(1);
   const nextPage = () => {
-    setPage(page + 1);
+    if (page < numberOfPages) {
+      setPage(page + 1);
+    }
   };
 
   const previousPage = () => {
@@ -22,7 +28,7 @@ const Pagination = () => {
         alt="arrow"
       />
       <p className="Montserrat-m w-14 font-medium text-center text-[#202124]">
-        {page}/100
+        {page}/{numberOfPages}
       </p>
       <img
         onClick={nextPage}

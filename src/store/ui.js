@@ -5,6 +5,7 @@ const initialState = {
   isLoggedIn: true,
   isForgotPassword: true,
   notification: null,
+  isLoading: false,
 };
 
 const uiSlice = createSlice({
@@ -34,6 +35,12 @@ const uiSlice = createSlice({
         status: action.payload.status,
         message: action.payload.message,
       };
+    },
+    showLoader(state) {
+      state.isLoading = true;
+    },
+    hideLoader(state) {
+      state.isLoading = false;
     },
     // showNotification(state, action) {
     //   state.notification = {

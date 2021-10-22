@@ -1,18 +1,22 @@
 import React, { useState } from "react";
 
-const Dropdown = () => {
+const Dropdown = ({ setSort }) => {
   const [showDropdownMenu, setShowDropdownMenu] = useState(false);
   const [selected, setSelected] = useState({ title: "Popularity" });
+  // const [sort, setSort] = useState("popularity");
+
+  // console.log(sort);
 
   const listOptions = [
-    { title: "Popularity" },
-    { title: "Name: A - Z" },
-    { title: "Price: lowest to highest" },
-    { title: "Price: highest to lowest" },
+    { title: "Popularity", sort: "popularity" },
+    { title: "Name: A - Z", sort: "name" },
+    { title: "Price: lowest to highest", sort: "price" },
+    { title: "Price: highest to lowest", sort: "-price" },
   ];
 
   const handleSelect = (option) => {
     setSelected(option);
+    setSort(option.sort);
     setShowDropdownMenu(false);
   };
 

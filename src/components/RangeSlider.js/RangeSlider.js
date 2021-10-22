@@ -16,28 +16,21 @@ const theme = createTheme({
     },
   },
 });
-const App = () => {
-  const [value, setValue] = React.useState([0, 300]);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  // console.log(value);
+const App = ({ price, setPrice, min, max }) => {
   return (
     <div className="filter-border-dashed flex-col w-full">
       <ThemeProvider theme={theme}>
         <Slider
-          value={value}
-          min={0}
-          max={300}
-          onChange={handleChange}
+          value={price}
+          min={min * 1}
+          max={max * 1}
+          onChange={(event, newValue) => setPrice(newValue)}
           // valueLabelDisplay="auto"
         />
       </ThemeProvider>
       <div className="flex justify-between items-center">
-        <p className="Montserrat-s font-normal text-[#4d4d4d]">${value[0]}</p>
-        <p className="Montserrat-s font-normal text-[#4d4d4d]">${value[1]}</p>
+        <p className="Montserrat-s font-normal text-[#4d4d4d]">${price[0]}</p>
+        <p className="Montserrat-s font-normal text-[#4d4d4d]">${price[1]}</p>
       </div>
     </div>
   );

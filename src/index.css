@@ -144,11 +144,32 @@ font-family: 'Montserrat', sans-serif; */
 }
 
 /* show categories on hover */
-.type-container {
+.ladies-menu {
   display: none;
+  top: 30px;
+  position: absolute;
+  padding-top: 16px;
+  justify-content: center;
+  align-content: center;
+  z-index: 1;
 }
-.ladies:hover + .type-container {
-  display: block;
+.ladies-content {
+  background-color: #fbfbfb;
+  z-index: 100;
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 16px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+  border: solid 0.5px #eaeaea;
+}
+/* Show the ladies menu on hover */
+.ladies-container:hover + .ladies-menu {
+  display: flex;
+}
+.ladies-menu:hover {
+  display: flex;
 }
 
 /*  Show quick shop on hover the product */

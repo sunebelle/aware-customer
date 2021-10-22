@@ -60,7 +60,7 @@ const App = () => {
         <Route path="/user/account-setting">
           <Profile />
         </Route>
-        <Route path="/product">
+        <Route path="/products">
           <Product />
         </Route>
         <Route path="*">

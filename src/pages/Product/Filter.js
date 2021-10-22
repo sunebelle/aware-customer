@@ -2,37 +2,55 @@ import React, { useState } from "react";
 import FilterCheckbox from "../../components/Checkbox/FilterCheckbox";
 import RangeSlider from "../../components/RangeSlider.js/RangeSlider";
 
-const Filter = () => {
-  const [size, setSize] = useState(false);
-  const [color, setColor] = useState(false);
-  const [brand, setBrand] = useState(false);
-  const [price, setPrice] = useState(false);
-  const [available, setAvailable] = useState(false);
+const Filter = (props) => {
+  const {
+    price,
+    setPrice,
+    setSize,
+    setColor,
+    setBrand,
+    setAvailable,
+  } = props;
+  const [sizeState, setSizeState] = useState(false);
+  const [colorState, setColorState] = useState(false);
+  const [brandState, setBrandState] = useState(false);
+  const [priceState, setPriceState] = useState(false);
+  const [availableState, setAvailableState] = useState(false);
+
   return (
     <div>
       <h1 className="Montserrat-b mb-6 text-[#202124]">Filter</h1>
       <div>
         {/* Size */}
         <div
-          onClick={() => setSize((state) => !state)}
+          onClick={() => setSizeState((state) => !state)}
           className="flex justify-between items-center"
         >
           <p className="Montserrat-m font-normal py-2">Size</p>
           <img
-            className={`${size && "transform rotate-180"} opacity-60 `}
+            className={`${sizeState && "transform rotate-180"} opacity-60 `}
             src="/img/arrow.svg"
             alt="arrow"
           />
         </div>
-        {size && (
+        {sizeState && (
           <div className="filter-border-dashed space-x-4 flex-row text-center">
-            <div className="text-white font-bold filter-size Montserrat-m bg-[#ffa15f] hover:bg-[#ec6c11]">
+            <div
+              onClick={() => setSize("S")}
+              className="text-white font-bold filter-size Montserrat-m bg-[#ffa15f] hover:bg-[#ec6c11]"
+            >
               S
             </div>
-            <div className="text-[#202124] font-normal filter-size Montserrat-m border-[#808080] hover:bg-[#808080]">
+            <div
+              onClick={() => setSize("M")}
+              className="text-[#202124] font-normal filter-size Montserrat-m border-[#808080] hover:bg-[#808080]"
+            >
               M
             </div>
-            <div className="text-[#4d4d4d] font-bold  filter-size Montserrat-m border-[#d4d3d3] hover:bg-[#d4d3d3]">
+            <div
+              onClick={() => setSize("L")}
+              className="text-[#4d4d4d] font-bold  filter-size Montserrat-m border-[#d4d3d3] hover:bg-[#d4d3d3]"
+            >
               L
             </div>
           </div>
@@ -41,41 +59,59 @@ const Filter = () => {
 
         {/* Color */}
         <div
-          onClick={() => setColor((state) => !state)}
+          onClick={() => setColorState((state) => !state)}
           className="flex justify-between items-center"
         >
           <p className="Montserrat-m font-normal py-2">Color</p>
           <img
-            className={`${color && "transform rotate-180"} opacity-60 `}
+            className={`${colorState && "transform rotate-180"} opacity-60 `}
             src="/img/arrow.svg"
             alt="arrow"
           />
         </div>
-        {color && (
+        {colorState && (
           <div className="filter-border-dashed flex-wrap flex-row">
-            <div className="bg-[#ff5f6d] h-[30px] w-[30px] hover:scale-150 cursor-pointer rounded-full mr-4 mb-4" />
-            <div className="bg-[#ffd543] bg-opacity-40 h-[30px] w-[30px]  hover:scale-150 cursor-pointer rounded-full mr-4 mb-4" />
-            <div className="bg-[#5f6dff]  bg-opacity-40 h-[30px] w-[30px] hover:scale-150  cursor-pointer rounded-full mr-4 mb-4" />
-            <div className="bg-[#ffa15f] bg-opacity-40  h-[30px] w-[30px] hover:scale-150 cursor-pointer rounded-full mr-4 mb-4" />
-            <div className="bg-[#3d3d3f] bg-opacity-40  h-[30px] w-[30px] hover:scale-150 cursor-pointer rounded-full mr-4 " />
-            <div className="bg-[#ededed]  bg-opacity-40 h-[30px] w-[30px]  hover:scale-150 cursor-pointer rounded-full " />
+            <div
+              onClick={() => setColor("red")}
+              className="bg-[#ff5f6d] h-[30px] w-[30px] hover:scale-150 cursor-pointer rounded-full mr-4 mb-4"
+            />
+            <div
+              onClick={() => setColor("light-gold")}
+              className="bg-[#ffd543] bg-opacity-40 h-[30px] w-[30px]  hover:scale-150 cursor-pointer rounded-full mr-4 mb-4"
+            />
+            <div
+              onClick={() => setColor("cornflower")}
+              className="bg-[#5f6dff]  bg-opacity-40 h-[30px] w-[30px] hover:scale-150  cursor-pointer rounded-full mr-4 mb-4"
+            />
+            <div
+              onClick={() => setColor("orange")}
+              className="bg-[#ffa15f] bg-opacity-40  h-[30px] w-[30px] hover:scale-150 cursor-pointer rounded-full mr-4 mb-4"
+            />
+            <div
+              onClick={() => setColor("charcoal-grey")}
+              className="bg-[#3d3d3f] bg-opacity-40  h-[30px] w-[30px] hover:scale-150 cursor-pointer rounded-full mr-4 "
+            />
+            <div
+              onClick={() => setColor("white")}
+              className="bg-[#ededed]  bg-opacity-40 h-[30px] w-[30px]  hover:scale-150 cursor-pointer rounded-full "
+            />
           </div>
         )}
         <hr className="text-[#979797]" />
 
         {/* Brand */}
         <div
-          onClick={() => setBrand((state) => !state)}
+          onClick={() => setBrandState((state) => !state)}
           className="flex justify-between items-center"
         >
           <p className="Montserrat-m font-normal py-2">Brand</p>
           <img
-            className={`${brand && "transform rotate-180"} opacity-60 `}
+            className={`${brandState && "transform rotate-180"} opacity-60 `}
             src="/img/arrow.svg"
             alt="arrow"
           />
         </div>
-        {brand && (
+        {brandState && (
           <div className="filter-border-dashed flex-col space-y-1">
             <FilterCheckbox title="Zara" defaultChecked />
             <FilterCheckbox title="H&M" />
@@ -88,37 +124,44 @@ const Filter = () => {
 
         {/* Price */}
         <div
-          onClick={() => setPrice((state) => !state)}
+          onClick={() => setPriceState((state) => !state)}
           className="flex justify-between items-center"
         >
           <p className="Montserrat-m font-normal py-2">Price</p>
           <img
-            className={`${price && "transform rotate-180"} opacity-60 `}
+            className={`${priceState && "transform rotate-180"} opacity-60 `}
             src="/img/arrow.svg"
             alt="arrow"
           />
         </div>
-        {/* <div className="w-full pr-2"> */}
-        {price && (
+
+        {priceState && (
           <div className="w-11/12">
-            <RangeSlider min="69" max="300" label="Price" value="80" />
+            <RangeSlider
+              price={price}
+              setPrice={setPrice}
+              min="0"
+              max="300"
+            />
           </div>
         )}
         <hr className="text-[#979797]" />
 
         {/* Available */}
         <div
-          onClick={() => setAvailable((state) => !state)}
+          onClick={() => setAvailableState((state) => !state)}
           className="flex justify-between items-center"
         >
           <p className="Montserrat-m font-normal py-2">Available</p>
           <img
-            className={`${available && "transform rotate-180"} opacity-60 `}
+            className={`${
+              availableState && "transform rotate-180"
+            } opacity-60 `}
             src="/img/arrow.svg"
             alt="arrow"
           />
         </div>
-        {available && (
+        {availableState && (
           <div className="filter-border-dashed flex-col space-y-1">
             <FilterCheckbox title="In-store" defaultChecked />
             <FilterCheckbox title="Out of stock" />

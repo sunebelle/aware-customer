@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { uiActions } from "../../store/ui";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logUserOut } from "../../actions/auth";
+import { getAllCategories, getAllPatterns } from "../../actions/product";
 
 const Header = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  const { patterns } = useSelector((state) => state.product);
   const [openUserSetting, setOpenUserSetting] = useState(false);
-  const [openCategories, setOpenCategories] = useState(false);
 
   const handleRegister = () => {
     dispatch(uiActions.showRegisteredModal());
@@ -31,9 +32,13 @@ const Header = () => {
     history.push("/user/account-setting");
     setOpenUserSetting(false);
   };
+  useEffect(() => {
+    dispatch(getAllPatterns());
+    dispatch(getAllCategories());
+  }, [dispatch]);
 
   return (
-    <div className="relative">
+    <div>
       <div className="grid grid-cols-3 pt-5 px-4 lg:px-10 xl:px-20 pb-2  justify-between items-center">
         <div className="border rounded-full w-56 border-[#b7b7b7] flex h-8 px-2 items-center">
           <input
@@ -78,7 +83,7 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="flex relative border-t border-b border-[#ececec] space-x-2 py-2 justify-center items-center">
+      <div className=" whitespace-nowrap flex relative border-t border-b border-[#ececec] space-x-3  justify-center items-center">
         {/* show account setting on click */}
         <div
           className={` ${
@@ -99,68 +104,47 @@ const Header = () => {
           </p>
         </div>
 
-        <div
-          onClick={() => setOpenCategories((state) => !state)}
-          className="categories whitespace-nowrap flex space-x-4"
-        >
-          <div className=" flex ">
-            <span className="Montserrat-m font-medium text-[#202124]">Men</span>
-            <img src="/img/arrow.svg" alt="arrow" />
-          </div>
-          <div className="flex ladies">
-            <span className="Montserrat-m font-medium text-[#202124]">
-              Ladies
-            </span>
-            <img src="/img/arrow.svg" alt="arrow" />
-          </div>
-          <div className="flex">
-            <span className="Montserrat-m font-medium text-[#202124]">
-              Girls
-            </span>
-            <img src="/img/arrow.svg" alt="arrow" />
-          </div>
-          <div className="flex">
-            <span className="Montserrat-m font-medium text-[#202124]">
-              Boys
-            </span>
-            <img src="/img/arrow.svg" alt="arrow" />
+        {/* Men && show menu */}
+        <div className=" py-2 flex">
+          <span className="Montserrat-m font-medium text-[#202124]">Men</span>
+          <img src="/img/arrow.svg" alt="arrow" />
+        </div>
+
+        {/* Ladies && show menu */}
+        <div className=" ladies-container py-2 relative flex z-10">
+          <span className="Montserrat-m font-medium text-[#202124]">
+            Ladies
+          </span>
+          <img src="/img/arrow.svg" alt="arrow" />
+        </div>
+
+        {/* show ladies menu */}
+        <div className="ladies-menu  ">
+          <div className=" ladies-content space-x-8 ">
+            {patterns?.data?.map((type) => (
+              <Link
+                key={type._id}
+                to={`/products?for=Ladies&type=${type.name}`}
+              >
+                <span className="Montserrat-m font-normal text-[#202124]">
+                  {type.name}
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
 
-        {/* show element on hover || Click*/}
-        {openCategories && (
-          <div className="categories-container absolute z-10 top-12  flex items-center justify-center">
-            <div className=" flex flex-row whitespace-nowrap shadow-xl bg-[#fbfbfb] border border-[#eaeaea] p-4 space-x-8 items-center justify-center">
-              <span className="Montserrat-m font-normal text-[#202124]">
-                Tops
-              </span>
-              <span className="Montserrat-m font-normal text-[#202124]">
-                Bottoms
-              </span>
-              <Link
-                onClick={() => setOpenCategories((state) => !state)}
-                to="/product?Ladies/Address"
-              >
-                <span className="Montserrat-m font-normal text-[#202124]">
-                  Dresses
-                </span>
-              </Link>
+        {/* Girls && show menu */}
+        <div className="flex py-2">
+          <span className="Montserrat-m font-medium text-[#202124]">Girls</span>
+          <img src="/img/arrow.svg" alt="arrow" />
+        </div>
 
-              <span className="Montserrat-m font-normal text-[#202124]">
-                Jackets
-              </span>
-              <span className="Montserrat-m font-normal text-[#202124]">
-                Shoes
-              </span>
-              <span className="Montserrat-m font-normal text-[#202124]">
-                Accesories
-              </span>
-              <span className="Montserrat-m font-normal text-[#202124]">
-                Sale
-              </span>
-            </div>
-          </div>
-        )}
+        {/* Boys && show menu */}
+        <div className="flex py-2">
+          <span className="Montserrat-m font-medium text-[#202124]">Boys</span>
+          <img src="/img/arrow.svg" alt="arrow" />
+        </div>
       </div>
     </div>
   );

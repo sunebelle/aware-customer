@@ -3,7 +3,7 @@ const randomCode = Math.floor(Math.random() * 6);
 export const products = [
   {
     code: randomCode,
-    title: "Collete Stretch Linen ",
+    title: "Collete Stretch Linen Stretch Linen Stretch Linen ",
     category: "Minidress",
     price: 69,
     quantity: 10,

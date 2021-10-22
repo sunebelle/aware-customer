@@ -1,33 +1,52 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 
-const Category = () => {
-  const [clickItem, setClickItem] = useState({ category: "All dresses" });
-  const listCategories = [
-    { category: "All dresses" },
-    { category: "Rompers / Jumpsuits" },
-    { category: "Casual dresses" },
-    { category: "Going out dresses" },
-    { category: "Party / Ocassion dresses" },
-    { category: "Mini dresses" },
-    { category: "Maxi / Midi dresses" },
-    { category: "Sets" },
-  ];
-  //   #ff6900
+const Category = ({ setCategory, category }) => {
+  // const [category, setCategory] = useState("");
+  const { categories } = useSelector((state) => state.product);
+
+  // const listCategories = [
+  //   { category: "All dresses" },
+  //   { category: "Rompers / Jumpsuits" },
+  //   { category: "Casual dresses" },
+  //   { category: "Going out dresses" },
+  //   { category: "Party / Ocassion dresses" },
+  //   { category: "Mini dresses" },
+  //   { category: "Maxi / Midi dresses" },
+  //   { category: "Sets" },
+  // ];
+
   return (
     <div className="mt-2">
       <h1 className="Montserrat-b mb-6 text-[#202124]">Category</h1>
       <ul>
-        {listCategories.map((item, i) => {
-          const active = clickItem.category === item.category;
+        <div>
+          <li
+            onClick={() => setCategory("")}
+            className={`${
+              category === "" ? "text-[#ff6900]" : "text-[#4d4d4d]"
+            } Montserrat-m font-normal  py-2 cursor-pointer`}
+          >
+            All dresses
+          </li>
+          <hr
+            className={`${
+              category === "" ? "opacity-100" : "opacity-0"
+            } text-[#979797] w-5`}
+          />
+        </div>
+
+        {categories?.data?.map((item) => {
+          const active = category === item.name;
           return (
-            <div key={i}>
+            <div key={item._id}>
               <li
-                onClick={() => setClickItem(item)}
+                onClick={() => setCategory(item.name)}
                 className={`${
                   active ? "text-[#ff6900]" : "text-[#4d4d4d]"
                 } Montserrat-m font-normal  py-2 cursor-pointer`}
               >
-                {item.category}
+                {item.name}
               </li>
               <hr
                 className={`${
