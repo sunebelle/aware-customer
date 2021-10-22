@@ -1,12 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 
-const FilterCheckbox = ({ title, defaultChecked }) => {
-  const [checked, setChecked] = useState(false);
+const FilterCheckbox = ({
+  brand,
+  setBrand,
+  available,
+  setAvailable,
+  value,
+  name,
+  title,
+}) => {
+  //https://www.pluralsight.com/guides/how-to-use-radio-buttons-in-reactjs
+
+  const handleCheck = (event) => {
+    if (name === "brand") {
+      setBrand(event.target.value);
+    } else if (name === "available") {
+      setAvailable(event.target.value);
+    }
+  };
+
   return (
     <div className="flex justify-between w-full box-border items-center bg-[#fafafa] p-2">
       <p
         className={`${
-          checked || defaultChecked
+          // brand === value || defaultChecked
+          brand === value || available === value
             ? "font-semibold text-[#ffa15f]"
             : "font-normal text-[#4d4d4d]"
         } Montserrat-m `}
@@ -15,10 +33,12 @@ const FilterCheckbox = ({ title, defaultChecked }) => {
       </p>
       <label className="checkbox-container pr-4">
         <input
-          type="checkbox"
-          value={checked}
-          onChange={(e) => setChecked(e.target.checked)}
-          defaultChecked={defaultChecked}
+          type="radio"
+          onChange={handleCheck}
+          // onChange={(e) => setBrand(e.target.value)}
+          checked={brand === value || available === value}
+          name={name}
+          value={value}
         />
         <span className="checkmark"></span>
       </label>

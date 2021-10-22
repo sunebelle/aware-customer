@@ -120,7 +120,9 @@ font-family: 'Montserrat', sans-serif; */
 
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
-  content: "";
+  top: -5px;
+  left: 1px;
+  content: url(assets/checked.svg);
   position: absolute;
   display: none;
 }
@@ -128,19 +130,6 @@ font-family: 'Montserrat', sans-serif; */
 /* Show the checkmark when checked */
 .checkbox-container input:checked ~ .checkmark:after {
   display: block;
-}
-
-/* Style the checkmark/indicator */
-.checkbox-container .checkmark:after {
-  top: -2px;
-  left: 4px;
-  width: 6px;
-  height: 12px;
-  border: solid white;
-  border-width: 0 2px 2px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
 }
 
 /* show categories on hover */

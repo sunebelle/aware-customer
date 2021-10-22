@@ -10,9 +10,9 @@ const Product = () => {
   const [category, setCategory] = useState(""); //all
   const [size, setSize] = useState("");
   const [color, setColor] = useState("");
-  const [brand, setBrand] = useState("");
+  const [brand, setBrand] = useState("Zara");
   const [price, setPrice] = useState([0, 300]);
-  const [available, setAvailable] = useState("");
+  const [available, setAvailable] = useState("In-store");
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState("popularity");
   const history = useHistory();
@@ -63,8 +63,10 @@ const Product = () => {
           <Filter
             setColor={setColor}
             setBrand={setBrand}
+            brand={brand}
             setSize={setSize}
             setPrice={setPrice}
+            available={available}
             setAvailable={setAvailable}
             price={price}
           />

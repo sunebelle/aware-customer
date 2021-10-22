@@ -8,7 +8,9 @@ const Filter = (props) => {
     setPrice,
     setSize,
     setColor,
+    brand,
     setBrand,
+    available,
     setAvailable,
   } = props;
   const [sizeState, setSizeState] = useState(false);
@@ -113,11 +115,41 @@ const Filter = (props) => {
         </div>
         {brandState && (
           <div className="filter-border-dashed flex-col space-y-1">
-            <FilterCheckbox title="Zara" defaultChecked />
-            <FilterCheckbox title="H&M" />
-            <FilterCheckbox title="Pull&Bear" />
-            <FilterCheckbox title="Dior" />
-            <FilterCheckbox title="Chanel" />
+            <FilterCheckbox
+              brand={brand}
+              setBrand={setBrand}
+              value="Zara"
+              name="brand"
+              title="Zara"
+            />
+            <FilterCheckbox
+              brand={brand}
+              setBrand={setBrand}
+              value="H&M"
+              name="brand"
+              title="H&M"
+            />
+            <FilterCheckbox
+              brand={brand}
+              setBrand={setBrand}
+              value="Pull&Bear"
+              name="brand"
+              title="Pull&Bear"
+            />
+            <FilterCheckbox
+              brand={brand}
+              setBrand={setBrand}
+              value="Dior"
+              name="brand"
+              title="Dior"
+            />
+            <FilterCheckbox
+              brand={brand}
+              setBrand={setBrand}
+              value="Chanel"
+              name="brand"
+              title="Chanel"
+            />
           </div>
         )}
         <hr className="text-[#979797]" />
@@ -137,12 +169,7 @@ const Filter = (props) => {
 
         {priceState && (
           <div className="w-11/12">
-            <RangeSlider
-              price={price}
-              setPrice={setPrice}
-              min="0"
-              max="300"
-            />
+            <RangeSlider price={price} setPrice={setPrice} min="0" max="300" />
           </div>
         )}
         <hr className="text-[#979797]" />
@@ -163,8 +190,22 @@ const Filter = (props) => {
         </div>
         {availableState && (
           <div className="filter-border-dashed flex-col space-y-1">
-            <FilterCheckbox title="In-store" defaultChecked />
-            <FilterCheckbox title="Out of stock" />
+            {/* <FilterCheckbox title="In-store" defaultChecked />
+            <FilterCheckbox title="Out of stock" /> */}
+            <FilterCheckbox
+              available={available}
+              setAvailable={setAvailable}
+              value="In-store"
+              title="In-store"
+              name="available"
+            />
+            <FilterCheckbox
+              available={available}
+              setAvailable={setAvailable}
+              value="Out-of-stock"
+              title="Out of stock"
+              name="available"
+            />
           </div>
         )}
 

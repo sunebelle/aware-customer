@@ -42,13 +42,6 @@ const uiSlice = createSlice({
     hideLoader(state) {
       state.isLoading = false;
     },
-    // showNotification(state, action) {
-    //   state.notification = {
-    //     status: action.payload.status,
-    //     title: action.payload.title,
-    //     message: action.payload.message,
-    //   };
-    // },
   },
 });
 
