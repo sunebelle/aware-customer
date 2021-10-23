@@ -26,7 +26,7 @@ const Filter = (props) => {
         {/* Size */}
         <div
           onClick={() => setSizeState((state) => !state)}
-          className="flex justify-between items-center"
+          className="flex justify-between items-center cursor-pointer"
         >
           <p className="Montserrat-m font-normal py-2">Size</p>
           <img
@@ -62,7 +62,7 @@ const Filter = (props) => {
         {/* Color */}
         <div
           onClick={() => setColorState((state) => !state)}
-          className="flex justify-between items-center"
+          className="flex justify-between items-center cursor-pointer"
         >
           <p className="Montserrat-m font-normal py-2">Color</p>
           <img
@@ -104,7 +104,7 @@ const Filter = (props) => {
         {/* Brand */}
         <div
           onClick={() => setBrandState((state) => !state)}
-          className="flex justify-between items-center"
+          className="flex justify-between items-center cursor-pointer"
         >
           <p className="Montserrat-m font-normal py-2">Brand</p>
           <img
@@ -125,14 +125,14 @@ const Filter = (props) => {
             <FilterCheckbox
               brand={brand}
               setBrand={setBrand}
-              value="H&M"
+              value="H-M"
               name="brand"
               title="H&M"
             />
             <FilterCheckbox
               brand={brand}
               setBrand={setBrand}
-              value="Pull&Bear"
+              value="Pull-Bear"
               name="brand"
               title="Pull&Bear"
             />
@@ -157,7 +157,7 @@ const Filter = (props) => {
         {/* Price */}
         <div
           onClick={() => setPriceState((state) => !state)}
-          className="flex justify-between items-center"
+          className="flex justify-between items-center cursor-pointer"
         >
           <p className="Montserrat-m font-normal py-2">Price</p>
           <img
@@ -177,7 +177,7 @@ const Filter = (props) => {
         {/* Available */}
         <div
           onClick={() => setAvailableState((state) => !state)}
-          className="flex justify-between items-center"
+          className="flex justify-between items-center cursor-pointer"
         >
           <p className="Montserrat-m font-normal py-2">Available</p>
           <img

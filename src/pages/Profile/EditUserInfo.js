@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import api from "../../axios";
+import { updateUser } from "../../actions/user";
 import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
-import { authActions } from "../../store/auth";
-import { uiActions } from "../../store/ui";
 
 const EditUserInfo = ({ setIsEdited }) => {
   const { user } = useSelector((state) => state.auth);
@@ -32,37 +30,15 @@ const EditUserInfo = ({ setIsEdited }) => {
     history.push("/user/account-setting");
   };
 
-  const updateUser = async (formData) => {
-    try {
-      const { data } = await api.patch("/user/update-user", formData, {
-        withCredentials: true,
-        credentials: "include",
-      });
-      dispatch(authActions.auth(data));
-      setIsEdited(false);
-      history.push("/user/account-setting");
-      dispatch(
-        uiActions.showNotification({
-          status: "success",
-          message: "Successfully update your information!",
-        })
-      );
-    } catch (error) {
-      dispatch(
-        uiActions.showNotification({
-          status: "error",
-          message: error?.response?.data?.message,
-        })
-      );
-    }
-  };
   const handleChangeUserInfo = (event) => {
     event.preventDefault();
     if (!formIsvalid) {
       return;
     }
-    updateUser({ name, email });
+    dispatch(updateUser({ name, email }), history);
+    setIsEdited(false);
   };
+
   return (
     <form onSubmit={handleChangeUserInfo}>
       <Input

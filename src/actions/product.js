@@ -7,13 +7,13 @@ export const getAllPatterns = () => async (dispatch) => {
     const { data } = await api.get("/products/ladies/patterns");
     dispatch(productActions.getPatterns(data));
   } catch (error) {
-    // console.log(error);
-    dispatch(
-      uiActions.showNotification({
-        status: "error",
-        message: error?.response?.data?.message,
-      })
-    );
+    console.log(error);
+    // dispatch(
+    //   uiActions.showNotification({
+    //     status: "error",
+    //     message: error?.response?.data?.message,
+    //   })
+    // );
   }
 };
 export const getAllCategories = () => async (dispatch) => {
@@ -21,13 +21,13 @@ export const getAllCategories = () => async (dispatch) => {
     const { data } = await api.get("/products/ladies/dresses/categories");
     dispatch(productActions.getCategories(data));
   } catch (error) {
-    // console.log(error);
-    dispatch(
-      uiActions.showNotification({
-        status: "error",
-        message: error?.response?.data?.message,
-      })
-    );
+    console.log(error);
+    // dispatch(
+    //   uiActions.showNotification({
+    //     status: "error",
+    //     message: error?.response?.data?.message,
+    //   })
+    // );
   }
 };
 export const getAllProducts =
@@ -48,12 +48,12 @@ export const getAllProducts =
       dispatch(productActions.getProducts(data));
       dispatch(uiActions.hideLoader());
     } catch (error) {
-      dispatch(
-        uiActions.showNotification({
-          status: "error",
-          message: error?.response?.data?.message,
-        })
-      );
-      dispatch(uiActions.hideLoader());
+      console.log(error);
+      // dispatch(
+      //   uiActions.showNotification({
+      //     status: "error",
+      //     message: error?.response?.data?.message,
+      //   })
+      // );
     }
   };

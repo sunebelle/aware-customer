@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation, useHistory } from "react-router";
+import { useHistory } from "react-router";
 import { getAllProducts } from "../../actions/product";
 import Category from "./Category";
 import Filter from "./Filter";
@@ -15,14 +15,54 @@ const Product = () => {
   const [available, setAvailable] = useState("In-store");
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState("popularity");
-  const history = useHistory();
-
-  // console.log(products);
-
   const dispatch = useDispatch();
-  const location = useLocation();
-  const searchTitle = location?.search.replace("?", "");
-  //   console.log(searchTitle);
+  const history = useHistory();
+  // const location = useLocation();
+
+  // useEffect(() => {
+  //   const searchURL = location?.search?.replace("?", "");
+  //   const searchArray = searchURL.split("&");
+  //   const search = searchArray.map((query) => {
+  //     const strLength = query.length;
+  //     const index = query.indexOf("=");
+  //     const searchKey = query.substr(0, index);
+  //     const searchValue = query.substr(index + 1, strLength);
+
+  //     // console.log(searchKey, searchValue);
+
+  //     switch (searchKey) {
+  //       case "brand":
+  //         setBrand(searchValue);
+  //         break;
+  //       case "size":
+  //         setSize(searchValue);
+  //         break;
+  //       case "color":
+  //         setColor(searchValue);
+  //         break;
+  //       case "category":
+  //         setCategory(searchValue);
+  //         break;
+  //       case "available":
+  //         setAvailable(searchValue);
+  //         break;
+  //       case "sort":
+  //         setSort(searchValue);
+  //         break;
+  //       case "page":
+  //         setPage(searchValue);
+  //         break;
+  //       case "price":
+  //         setPrice(searchValue);
+  //         break;
+  //       default:
+  //         break;
+  //     }
+
+  //     return { searchKey: searchValue };
+  //   });
+  //   console.log(search);
+  // }, [location]);
 
   useEffect(() => {
     const url = `/products?for=Ladies&type=Dresses${
@@ -53,7 +93,6 @@ const Product = () => {
   return (
     <div className="">
       <h2 className=" pb-8 text-center Montserrat-m font-normal text-[#202124]">
-        {/* {searchTitle} */}
         Ladies / Dresses
       </h2>
       <div className="grid grid-cols-6 gap-4">

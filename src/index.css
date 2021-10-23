@@ -164,20 +164,15 @@ font-family: 'Montserrat', sans-serif; */
 /*  Show quick shop on hover the product */
 .quick-shop {
   transform: rotateX(90deg);
+  /* transform: translateY(180deg); */
   transition: transform 0.3s ease-in;
 }
 .quick-shop-container:hover .quick-shop {
   transform: rotateX(0);
+  /* transform: translateY(0); */
 }
 
 /* Styling range slider input */
-/* https://css-tricks.com/sliding-nightmare-understanding-range-input/ */
-/* input[type="range"] {
-  ::-webkit-slider-runnable-track, ;
-} */
-/* input::-moz-range-track, 
-input::-ms-track, */
-
 /* .MuiSlider-root .css-14pt78w-MuiSlider-rail {
   background-color: #eaeaea !important;
 } */
