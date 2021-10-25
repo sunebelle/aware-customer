@@ -2,6 +2,7 @@
 
 - Forgot password (part 1)
 - Styling for Product image search/filter/sort/page (part 2)
+- Found no token (part 2)
 
 # Getting Started with Create React App
 

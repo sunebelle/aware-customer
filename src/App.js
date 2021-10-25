@@ -11,6 +11,7 @@ import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import Error from "./pages/NotFound/Error";
 import Profile from "./pages/Profile/Profile";
 import Product from "./pages/Product/Product";
+import ProductDetail from "./pages/ProductDetail/ProductDetail";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -60,8 +61,11 @@ const App = () => {
         <Route path="/user/account-setting">
           <Profile />
         </Route>
-        <Route path="/products">
+        <Route path="/products" exact>
           <Product />
+        </Route>
+        <Route path="/products/:productId">
+          <ProductDetail />
         </Route>
         <Route path="*">
           <Error />

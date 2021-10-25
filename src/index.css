@@ -176,3 +176,9 @@ font-family: 'Montserrat', sans-serif; */
 /* .MuiSlider-root .css-14pt78w-MuiSlider-rail {
   background-color: #eaeaea !important;
 } */
+
+/* Review */
+
+.border-review:not(:last-child) {
+  border-bottom: 1px dashed #cccccc;
+}

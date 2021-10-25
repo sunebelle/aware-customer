@@ -4,6 +4,7 @@ import Pagination from "../../components/Pagination/Pagination";
 import CardItem from "./CardItem";
 // import { products } from "./dummyData";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Items = ({ setSort, page, setPage }) => {
   const {
@@ -14,9 +15,9 @@ const Items = ({ setSort, page, setPage }) => {
     <div className="w-full">
       <div className="flex justify-between">
         <Dropdown setSort={setSort} />
-        {/* {data?.length > 0 && <Pagination page={page} setPage={setPage} />} */}
+        {data?.length === 20 && <Pagination page={page} setPage={setPage} />}
 
-        <Pagination page={page} setPage={setPage} />
+        {/* <Pagination page={page} setPage={setPage} /> */}
       </div>
 
       {data?.length > 0 ? (
@@ -25,11 +26,16 @@ const Items = ({ setSort, page, setPage }) => {
           {/* <div className="flex flex-row flex-wrap justify-start space-y-4 first:space-y-0 mt-4 w-full"> */}
           <div className="grid grid-cols-5 place-content-stretch gap-2 mt-3 w-full">
             {data?.map((product) => (
-              <CardItem key={product._id} product={product} />
+              <Link key={product._id} to={`/products/${product._id}`}>
+                <CardItem product={product} />
+              </Link>
             ))}
           </div>
           <div className="flex justify-end mt-4">
-            <Pagination page={page} setPage={setPage} />
+            {/* <Pagination page={page} setPage={setPage} /> */}
+            {data?.length === 20 && (
+              <Pagination page={page} setPage={setPage} />
+            )}
           </div>
         </>
       ) : (

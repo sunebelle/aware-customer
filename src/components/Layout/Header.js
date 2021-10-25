@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logUserOut } from "../../actions/auth";
 import { getAllCategories, getAllPatterns } from "../../actions/product";
+import Baskets from "../Layout/Baskets";
 
 const Header = () => {
   const history = useHistory();
@@ -13,6 +14,7 @@ const Header = () => {
   const { user } = useSelector((state) => state.auth);
   const { patterns } = useSelector((state) => state.product);
   const [openUserSetting, setOpenUserSetting] = useState(false);
+  const [openBasket, setOpenBasket] = useState(false);
 
   const handleRegister = () => {
     dispatch(uiActions.showRegisteredModal());
@@ -39,7 +41,7 @@ const Header = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-3 pt-5 px-4 lg:px-10 xl:px-20 pb-2  justify-between items-center">
+      <div className="grid relative grid-cols-3 pt-5 px-4 lg:px-10 xl:px-20 pb-2  justify-between items-center">
         <div className="border rounded-full w-56 border-[#b7b7b7] flex h-8 px-2 items-center">
           <input
             className="focus:outline-none pl-2 Montserrat-m font-normal border-none flex-grow placeholder-[#cccccc]"
@@ -74,13 +76,21 @@ const Header = () => {
               Log in
             </button>
           )}
-          <div className="relative cursor-pointer">
+          <div
+            onClick={() => setOpenBasket((state) => !state)}
+            className="relative cursor-pointer"
+          >
             <img className="w-full h-full" src="/img/cart.svg" alt="cart" />
             <span className="absolute right-0 top-0 w-4 h-4 Montserrat-s text-center text-white font-medium  rounded-full bg-[#ffa15f]">
               7
             </span>
           </div>
         </div>
+        {openBasket && (
+          <div className="absolute top-16 z-50 right-0 px-4 lg:px-10 xl:px-20">
+            <Baskets />
+          </div>
+        )}
       </div>
 
       <div className=" whitespace-nowrap flex relative border-t border-b border-[#ececec] space-x-3  justify-center items-center">
