@@ -6,6 +6,7 @@
   "dependencies": {
     "@craco/craco": "^6.3.0",
     "@emotion/styled": "^11.3.0",
+    "@mui/icons-material": "^5.0.4",
     "@mui/material": "^5.0.4",
     "@reduxjs/toolkit": "^1.6.2",
     "@testing-library/jest-dom": "^5.14.1",

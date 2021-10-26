@@ -12,6 +12,7 @@ import Error from "./pages/NotFound/Error";
 import Profile from "./pages/Profile/Profile";
 import Product from "./pages/Product/Product";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
+import Cart from "./pages/ShoppingCart/Cart";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -63,6 +64,9 @@ const App = () => {
         </Route>
         <Route path="/products" exact>
           <Product />
+        </Route>
+        <Route path="/products/cart" exact>
+          <Cart />
         </Route>
         <Route path="/products/:productId">
           <ProductDetail />

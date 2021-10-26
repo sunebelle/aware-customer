@@ -1,7 +1,13 @@
 import React from "react";
 import numeral from "numeral";
+import { useHistory } from "react-router";
 
-const Baskets = () => {
+const Baskets = ({ setOpenBasket }) => {
+  const history = useHistory();
+  const handleBasket = () => {
+    history.push("/products/cart");
+    setOpenBasket(false);
+  };
   return (
     <div className=" shadow-2xl w-[270px] bg-[#fbfbfb] border border-[#eaeaea] border-opacity-50">
       <div className="flex flex-col">
@@ -40,7 +46,10 @@ const Baskets = () => {
           </div>
         </div>
       </div>
-      <div className="flex items-center w-full justify-center py-6 text-center">
+      <div
+        onClick={handleBasket}
+        className="flex items-center w-full justify-center py-6 text-center cursor-pointer"
+      >
         <span className="Montserrat-m text-[#ffa15f] font-bold ">
           View cart
         </span>

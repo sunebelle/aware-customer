@@ -25,14 +25,14 @@ const Header = () => {
     history.push("/login");
   };
   const handleLogout = () => {
-    dispatch(logUserOut());
     setOpenUserSetting(false);
+    dispatch(logUserOut());
     history.push("/");
   };
 
   const handleAccountSetting = () => {
-    history.push("/user/account-setting");
     setOpenUserSetting(false);
+    history.push("/user/account-setting");
   };
   useEffect(() => {
     dispatch(getAllPatterns());
@@ -88,7 +88,7 @@ const Header = () => {
         </div>
         {openBasket && (
           <div className="absolute top-16 z-50 right-0 px-4 lg:px-10 xl:px-20">
-            <Baskets />
+            <Baskets setOpenBasket={setOpenBasket} />
           </div>
         )}
       </div>

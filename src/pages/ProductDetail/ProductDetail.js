@@ -136,10 +136,10 @@ const ProductDetail = () => {
                 <p className="Montserrat-m text-[#202124] font-medium py-2  mr-5">
                   Quantity
                 </p>
-                <div className="flex justify-center align-center border border-[#d4d3d3] px-4 py-2 space-x-5  Montserrat-m text-[#202124] font-medium">
-                  <button className="scale-150">-</button>
+                <div className="flex justify-center align-center border border-[#d4d3d3] px-4 py-2 space-x-4  Montserrat-m text-[#202124] font-medium">
+                  <img src="/img/minus.svg" alt="minus" />
                   <span>3</span>
-                  <button className="scale-150">+</button>
+                  <img src="/img/plus.svg" alt="minus" />
                 </div>
               </div>
               {/* btnDisabled={!formIsValid} */}
