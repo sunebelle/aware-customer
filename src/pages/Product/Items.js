@@ -6,10 +6,10 @@ import CardItem from "./CardItem";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const Items = ({ setSort, page, setPage }) => {
+const Items = ({ setSort, page, setPage, category }) => {
   const { products } = useSelector((state) => state.product);
 
-  console.log(products);
+  // console.log(products);
 
   return (
     <div className="w-full">
@@ -29,7 +29,7 @@ const Items = ({ setSort, page, setPage }) => {
           <div className="grid grid-cols-5 place-content-stretch gap-2 mt-3 w-full">
             {products?.map((product) => (
               <Link key={product._id} to={`/products/${product._id}`}>
-                <CardItem product={product} />
+                <CardItem product={product} category={category} />
               </Link>
             ))}
           </div>

@@ -48,7 +48,7 @@ const Header = () => {
         pathname: `/${name}/${category}`,
       })
     );
-    history.push(`/${name}/${category}`);
+    history.push(`/${name}/${category}/products`);
   };
 
   return (
@@ -131,7 +131,7 @@ const Header = () => {
             key={item._id}
             className=" relative flex justify-center items-center"
           >
-            <div className=" category-container py-2 flex z-10  ">
+            <div className=" category-container py-2 flex z-10 cursor-pointer ">
               <span className="Montserrat-m font-medium text-[#202124]">
                 {item.name}
               </span>
@@ -146,7 +146,7 @@ const Header = () => {
                     onClick={() =>
                       handleCategoryId(item.name, category._id, category.name)
                     }
-                    className="Montserrat-m font-normal text-[#202124]"
+                    className="Montserrat-m font-normal text-[#202124] cursor-pointer"
                   >
                     {category.name}
                   </span>

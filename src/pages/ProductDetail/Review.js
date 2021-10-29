@@ -1,38 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import api from "../../axios";
 import Pagination from "../../components/Pagination/Pagination";
 import RatingStar from "../../components/RatingStar/RatingStar";
 import Button from "../../components/UI/Button";
-const Review = () => {
+const Review = ({ product }) => {
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
-  const [editReview, setEditReview] = useState(false)
+  const [title, setTitle] = useState("");
+  const [review, setReview] = useState("");
+  const [reviews, setReviews] = useState([]);
+  const [editReview, setEditReview] = useState(false);
   const { user } = useSelector((state) => state.auth);
 
-
-  
+  useEffect(() => {
+    const getReviews = async () => {
+      const {
+        data: { data },
+      } = await api.get(`products/${product._id}/reviews`);
+      // console.log(data);
+      setReviews(data);
+    };
+    getReviews();
+  }, [product]);
 
   console.log(user);
   // get reviews from backend.
   // if user's review Id === user's loggin => you and edit/delete, otherwise show form to submit review
-  const review = true;
 
-
-  const handleReview = (e) => {
+  const handleReview = async (e) => {
     e.preventDefault();
     // send review to backend
-    setEditReview(true)
+    await api.post(`products/${product._id}/reviews`, {
+      title,
+      rating,
+      review,
+    });
+    setEditReview(true);
   };
   return (
     <div className="w-full">
-      {!review ? (
+      {reviews.length === 0 ? (
         <div className="Montserrat-m font-normal text-[#b7b7b7] text-center py-20">
           No reviews
         </div>
       ) : (
         <div className="px-24 ">
           {/* border-b border-dashed border-[#cccccc] */}
-          {/*   login and show this */}
+          
           <form
             onSubmit={handleReview}
             className="grid grid-cols-6 py-4 border-b border-solid border-[#cccccc] border-opacity-50 "
@@ -44,12 +59,14 @@ const Review = () => {
             <div className=" flex col-span-5 flex-col bg-[#f9f9f9] py-4 px-8 space-y-2">
               <div className="w-full ">
                 <input
+                  onChange={(e) => setTitle(e.target.value)}
                   type="text"
                   placeholder="TITLE"
                   className="w-full py-2 px-5 Montserrat-b text-[#b7b7b7] border-none focus:outline-none "
                 />
               </div>
               <textarea
+                onChange={(e) => setReview(e.target.value)}
                 rows="5"
                 placeholder="Add your comment here…"
                 className="focus:outline-none resize-none p-4 Montserrat-m font-normal text-[#b7b7b7]"

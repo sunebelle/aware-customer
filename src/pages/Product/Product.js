@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory} from "react-router";
+import { useHistory } from "react-router";
 import { getAllProducts, getAllSubCategories } from "../../actions/product";
 import Category from "./Category";
 import Filter from "./Filter";
@@ -8,6 +8,7 @@ import Items from "./Items";
 
 const Product = () => {
   const [category, setCategory] = useState(""); //all
+  const [subCategoryId, setSubCategoryId] = useState("");
   const [size, setSize] = useState("");
   const [color, setColor] = useState("");
   const [brand, setBrand] = useState("Zara");
@@ -18,33 +19,30 @@ const Product = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   // const location = useLocation();
-  // console.log(location);
+  // console.log(location?.state.categoryId);
   const {
     categoryLocation: { categoryId, pathname, title },
   } = useSelector((state) => state.product);
-  // console.log(categoryLocation);
-  // console.log(title);
 
-  // const categoryId = location?.state.categoryId;
   useEffect(() => {
     dispatch(getAllSubCategories(categoryId));
   }, [categoryId, dispatch]);
 
-  //category/categoryId?product
   useEffect(() => {
-    const url = `${pathname}/products?${category && `category=${category.name}&`}${
-      brand && `brand=${brand}&`
-    }${size && `size=${size}&`}${color && `color=${color}&`}${
-      price && `price=${price[0]}-${price[1]}&`
-    }${available && `available=${available}&`}${page && `page=${page}&`}${
-      sort && `sort=${sort}`
-    } `;
+    const url = `${pathname}/products?${
+      // Object.entries(category).length > 0 && `category=${category.name}&`
+      category && `category=${category}&`
+    }${brand && `brand=${brand}&`}${size && `size=${size}&`}${
+      color && `color=${color}&`
+    }${price && `price=${price[0]}-${price[1]}&`}${
+      available && `available=${available}&`
+    }${page && `page=${page}&`}${sort && `sort=${sort}`} `;
 
     history.push(url);
     dispatch(
       getAllProducts(
         categoryId,
-        category,
+        subCategoryId,
         size,
         color,
         brand,
@@ -57,6 +55,7 @@ const Product = () => {
   }, [
     dispatch,
     pathname,
+    subCategoryId,
     categoryId,
     history,
     category,
@@ -76,7 +75,11 @@ const Product = () => {
       </h2>
       <div className="grid grid-cols-6 gap-4">
         <div className="flex flex-col space-y-11">
-          <Category category={category} setCategory={setCategory} />
+          <Category
+            category={category}
+            setCategory={setCategory}
+            setSubCategoryId={setSubCategoryId}
+          />
           <hr className="text-[#979797] w-1/2" />
           <Filter
             setColor={setColor}
@@ -90,7 +93,12 @@ const Product = () => {
           />
         </div>
         <div className="col-span-5">
-          <Items setSort={setSort} page={page} setPage={setPage} />
+          <Items
+            setSort={setSort}
+            page={page}
+            setPage={setPage}
+            category={category}
+          />
         </div>
       </div>
     </div>

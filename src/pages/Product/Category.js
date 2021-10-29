@@ -1,20 +1,19 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-const Category = ({ setCategory, category }) => {
+const Category = ({ setCategory, category, setSubCategoryId }) => {
   // const [category, setCategory] = useState("");
   const { subCategories } = useSelector((state) => state.product);
 
-  // const listCategories = [
-  //   { category: "All dresses" },
-  //   { category: "Rompers / Jumpsuits" },
-  //   { category: "Casual dresses" },
-  //   { category: "Going out dresses" },
-  //   { category: "Party / Ocassion dresses" },
-  //   { category: "Mini dresses" },
-  //   { category: "Maxi / Midi dresses" },
-  //   { category: "Sets" },
-  // ];
+  const handleCategory = (id, name) => {
+    setCategory(name);
+    setSubCategoryId(id);
+  };
+
+  const handleAllCategory = () => {
+    setCategory("");
+    setSubCategoryId("");
+  };
 
   return (
     <div className="mt-2">
@@ -22,7 +21,7 @@ const Category = ({ setCategory, category }) => {
       <ul>
         <div>
           <li
-            onClick={() => setCategory("")}
+            onClick={handleAllCategory}
             className={`${
               category === "" ? "text-[#ff6900]" : "text-[#4d4d4d]"
             } Montserrat-m font-normal  py-2 cursor-pointer`}
@@ -41,7 +40,8 @@ const Category = ({ setCategory, category }) => {
           return (
             <div key={item._id}>
               <li
-                onClick={() => setCategory(item)}
+                onClick={() => handleCategory(item._id, item.name)}
+                // onClick={() => setCategory(item.name)}
                 className={`${
                   active ? "text-[#ff6900]" : "text-[#4d4d4d]"
                 } Montserrat-m font-normal  py-2 cursor-pointer`}

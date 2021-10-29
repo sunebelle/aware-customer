@@ -30,16 +30,27 @@ export const getAllCategories = () => async (dispatch) => {
   }
 };
 export const getAllProducts =
-  (categoryId, category, size, color, brand, price, available, page, sort) =>
+  (
+    categoryId,
+    subCategoryId,
+    size,
+    color,
+    brand,
+    price,
+    available,
+    page,
+    sort
+  ) =>
   async (dispatch) => {
     const url = `/categories/${categoryId}/products?${
-      category && `category=${category._id}&`
+      subCategoryId && `category=${subCategoryId}&`
     }${brand && `brand=${brand}&`}${size && `size=${size}&`}${
       color && `color=${color}&`
     }${price && `price=${price[0]}-${price[1]}&`}${
       available && `available=${available}&`
     }${page && `page=${page}&`}${sort && `sort=${sort}`} `;
-    console.log(url);
+
+    console.log("product action", url);
 
     try {
       dispatch(uiActions.showLoader());

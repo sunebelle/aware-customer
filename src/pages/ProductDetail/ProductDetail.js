@@ -1,23 +1,31 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams, useRouteMatch } from "react-router";
 import numeral from "numeral";
 import { uiActions } from "../../store/ui";
 import api from "../../axios";
 import Review from "./Review";
 import SimilarItem from "./SimilarItem";
+import RatingStar from "../../components/RatingStar/RatingStar";
 
 // import StarRateIcon from "@material-ui/icons/StarRate";
 
 const ProductDetail = () => {
+  const { products } = useSelector((state) => state.product);
+
+  const [showImage, setShowImage] = useState("");
   const [amount, setAmount] = useState(3);
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
 
   const [product, setProduct] = useState();
+  const [similarBrand, setSimilarBrand] = useState([]);
   const params = useParams();
   const match = useRouteMatch();
   const dispatch = useDispatch();
+  const {
+    categoryLocation: { title, categoryId },
+  } = useSelector((state) => state.product);
 
   useEffect(() => {
     const getProduct = async (id) => {
@@ -37,8 +45,25 @@ const ProductDetail = () => {
     getProduct(params.productId);
   }, [params.productId, dispatch]);
 
+  useEffect(() => {
+    const getSimilarBrandProducts = async () => {
+      const {
+        data: { data },
+      } = await api.get(
+        `/categories/${categoryId}/products??${
+          product && `category=${product.brand}`
+        }`
+      );
+      // console.log(data);
+      setSimilarBrand(data);
+    };
+    getSimilarBrandProducts();
+  }, [product, categoryId]);
+
+  const similarProducts = products?.filter(
+    (product) => product._id !== params.productId
+  );
   //   console.log(match);
-  console.log(product);
 
   const handleMinus = () => {
     if (amount > 1) {
@@ -58,36 +83,25 @@ const ProductDetail = () => {
     return (
       <div>
         <h2 className=" pb-8 text-center Montserrat-m font-normal text-[#202124]">
-          Ladies / Dresses / {product.name}
+          {`${title} / ${product.name}`}
         </h2>
         <div className="flex flex-row space-x-8">
           <div className=" flex flex-row space-x-5">
             <div className="flex flex-col space-y-6">
-              <img
-                className="w-20 h-[116px]"
-                src={product.imageCover}
-                alt="product cover"
-              />
-              <img
-                className="w-20 h-[116px]"
-                src={product.imageCover}
-                alt="product cover"
-              />
-              <img
-                className="w-20 h-[116px]"
-                src={product.imageCover}
-                alt="product cover"
-              />
-              <img
-                className="w-20 h-[116px]"
-                src={product.imageCover}
-                alt="product cover"
-              />
+              {product.images?.map((img, i) => (
+                <img
+                  onClick={() => setShowImage(img)}
+                  key={i}
+                  className="w-20 h-[116px]"
+                  src={img}
+                  alt="product cover"
+                />
+              ))}
             </div>
             <div className="flex-grow">
               <img
                 className="w-[379px] h-[537px]"
-                src={product.imageCover}
+                src={showImage ? showImage : product.imageCover}
                 alt="product cover"
               />
             </div>
@@ -101,22 +115,16 @@ const ProductDetail = () => {
                 {numeral(product.price).format("$0,0.00")}
               </p>
               <div className="pt-3 py-3 flex items-center">
-                <div className="flex flex-row">
-                  <img
-                    className="text-red-500"
-                    src="/img/star.svg"
-                    alt="star"
-                  />
-                  <img
-                    className="text-red-500"
-                    src="/img/star.svg"
-                    alt="star"
-                  />
-                </div>
+                <RatingStar
+                  rating={product?.ratingsAverage}
+                  setRating={() => {}}
+                  setHover={() => {}}
+                />
+
                 <span className="text-[#979797] px-2">|</span>
                 {/* <div className=" px-2 opacity-50 w-[2px] h-[18px] border border-[#979797]" /> */}
                 <span className="Montserrat-s font-normal text-[#202124]">
-                  0 Review
+                  {product?.ratingsQuantity} Review
                 </span>
               </div>
               <div>
@@ -219,29 +227,21 @@ const ProductDetail = () => {
               <h2 className="Montserrat-m font-medium text-[#202124]">
                 More from
               </h2>
-              <p className="Montserrat-m font-normal text-[#4d4d4d]">Zara</p>
+              <p className="Montserrat-m font-normal text-[#4d4d4d]">
+                {product.brand}
+              </p>
               <div className="flex  items-end h-full">
-                <div className="flex flex-col space-y-2">
-                  <img
-                    className="w-20 h-[114px]"
-                    src={product.imageCover}
-                    alt="product cover"
-                  />
-                  <img
-                    className="w-20 h-[114px]"
-                    src={product.imageCover}
-                    alt="product cover"
-                  />
-                  <img
-                    className="w-20 h-[114px]"
-                    src={product.imageCover}
-                    alt="product cover"
-                  />
-                  <img
-                    className="w-20 h-[114px]"
-                    src={product.imageCover}
-                    alt="product cover"
-                  />
+                <div className="flex flex-col space-y-2 ">
+                  {similarBrand.length > 0 &&
+                    similarBrand
+                      .slice(0, 4)
+                      .map((product) => (
+                        <img
+                          className="w-20 h-[114px]"
+                          src={product.imageCover}
+                          alt={product.name}
+                        />
+                      ))}
                 </div>
               </div>
             </div>
@@ -253,7 +253,7 @@ const ProductDetail = () => {
           <h2 className="px-4"> Reviews </h2>
           <div className=" flex-grow h-[2px] border border-[#979797] opacity-50" />
         </div>
-        <Review />
+        <Review product={product} />
 
         {/* you may also like component */}
         <div className="flex w-full items-center flex-nowrap">
@@ -261,7 +261,7 @@ const ProductDetail = () => {
           <h2 className="px-4"> You may also like </h2>
           <div className=" flex-grow h-[2px] border border-[#979797] opacity-50" />
         </div>
-        <SimilarItem />
+        <SimilarItem similarProducts={similarProducts} />
       </div>
     );
   }
