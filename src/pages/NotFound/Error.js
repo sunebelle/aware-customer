@@ -1,9 +1,9 @@
 import React from "react";
 
 const Error = () => {
-  // h-screen
+  // h-[344px]
   return (
-    <div className="h-[344px] grid place-items-center">
+    <div className="h-screen grid place-items-center">
       <h1 className="text-red-500 text-lg font-bold">404 || Page not found</h1>
     </div>
   );

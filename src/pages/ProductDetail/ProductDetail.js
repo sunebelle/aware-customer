@@ -10,6 +10,10 @@ import SimilarItem from "./SimilarItem";
 // import StarRateIcon from "@material-ui/icons/StarRate";
 
 const ProductDetail = () => {
+  const [amount, setAmount] = useState(3);
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");
+
   const [product, setProduct] = useState();
   const params = useParams();
   const match = useRouteMatch();
@@ -35,6 +39,18 @@ const ProductDetail = () => {
 
   //   console.log(match);
   console.log(product);
+
+  const handleMinus = () => {
+    if (amount > 1) {
+      setAmount(amount - 1);
+    }
+  };
+  const handleAdd = () => {
+    // amount < quantity in stock
+    if (amount < 5) {
+      setAmount(amount + 1);
+    }
+  };
 
   if (!product) {
     return <div> Found no product</div>;
@@ -108,13 +124,22 @@ const ProductDetail = () => {
                   Size
                 </p>
                 <div className="flex flex-row space-x-4 ">
-                  <div className="text-white font-bold filter-size Montserrat-m bg-[#ffa15f] hover:bg-[#ec6c11]">
+                  <div
+                    onClick={() => setSize("S")}
+                    className="text-white font-bold filter-size Montserrat-m bg-[#ffa15f] hover:bg-[#ec6c11]"
+                  >
                     S
                   </div>
-                  <div className="text-[#202124] font-normal filter-size Montserrat-m border-[#808080] hover:bg-[#808080]">
+                  <div
+                    onClick={() => setSize("M")}
+                    className="text-[#202124] font-normal filter-size Montserrat-m border-[#808080] hover:bg-[#808080]"
+                  >
                     M
                   </div>
-                  <div className="text-[#4d4d4d] font-bold  filter-size Montserrat-m border-[#d4d3d3] hover:bg-[#d4d3d3]">
+                  <div
+                    onClick={() => setSize("L")}
+                    className="text-[#4d4d4d] font-bold  filter-size Montserrat-m border-[#d4d3d3] hover:bg-[#d4d3d3]"
+                  >
                     L
                   </div>
                 </div>
@@ -123,23 +148,52 @@ const ProductDetail = () => {
                 <p className="Montserrat-m text-[#202124] font-medium py-2">
                   Color
                 </p>
-                <div className=" flex flex-nowrap">
-                  <div className="bg-[#ff5f6d] h-[30px] w-[30px] hover:scale-150 cursor-pointer rounded-full mr-4 mb-4" />
-                  <div className="bg-[#ffd543] bg-opacity-40 h-[30px] w-[30px]  hover:scale-150 cursor-pointer rounded-full mr-4 mb-4" />
-                  <div className="bg-[#5f6dff]  bg-opacity-40 h-[30px] w-[30px] hover:scale-150  cursor-pointer rounded-full mr-4 mb-4" />
-                  <div className="bg-[#ffa15f] bg-opacity-40  h-[30px] w-[30px] hover:scale-150 cursor-pointer rounded-full mr-4 mb-4" />
-                  <div className="bg-[#3d3d3f] bg-opacity-40  h-[30px] w-[30px] hover:scale-150 cursor-pointer rounded-full mr-4 " />
-                  <div className="bg-[#ededed]  bg-opacity-40 h-[30px] w-[30px]  hover:scale-150 cursor-pointer rounded-full " />
+                <div className=" flex flex-nowrap mb-4">
+                  <div
+                    onClick={() => setColor("red")}
+                    className="bg-[#ff5f6d] filter-color "
+                  />
+                  <div
+                    onClick={() => setColor("light-gold")}
+                    className="bg-[#ffd543] filter-color"
+                  />
+                  <div
+                    onClick={() => setColor("cornflower")}
+                    className="bg-[#5f6dff]  filter-color "
+                  />
+                  <div
+                    onClick={() => setColor("orange")}
+                    className="bg-[#ffa15f] filter-color "
+                  />
+                  <div
+                    onClick={() => setColor("charcoal-grey")}
+                    className="bg-[#3d3d3f] filter-color "
+                  />
+                  <div
+                    onClick={() => setColor("white")}
+                    className="bg-[#ededed]  filter-color "
+                  />
                 </div>
               </div>
               <div className="flex flex-row mt-3">
                 <p className="Montserrat-m text-[#202124] font-medium py-2  mr-5">
                   Quantity
                 </p>
-                <div className="flex justify-center align-center border border-[#d4d3d3] px-4 py-2 space-x-4  Montserrat-m text-[#202124] font-medium">
-                  <img src="/img/minus.svg" alt="minus" />
-                  <span>3</span>
-                  <img src="/img/plus.svg" alt="minus" />
+                <div className="flex justify-center items-center border border-[#d4d3d3] px-4 py-2 space-x-4  Montserrat-m text-[#202124] font-medium">
+                  {/* <button className="scale-x-150">-</button> */}
+                  <img
+                    className={`${amount <= 1 && "opacity-50"}`}
+                    onClick={handleMinus}
+                    src="/img/minus.svg"
+                    alt="minus"
+                  />
+                  <span>{amount}</span>
+                  <img
+                    className={`${amount >= 5 && "opacity-50"}`}
+                    onClick={handleAdd}
+                    src="/img/plus.svg"
+                    alt="minus"
+                  />
                 </div>
               </div>
               {/* btnDisabled={!formIsValid} */}

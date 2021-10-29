@@ -11,16 +11,16 @@ const Cart = () => {
       </h1>
       <div className="grid grid-cols-7 gap-x-16">
         <div className="col-span-5">
-          <table className="table-fixed w-full">
+          <table className="table-fixed w-full ">
             <thead>
               <tr>
-                <th className="w-4/10 Montserrat-m font-bold  py-2 text-left">
+                <th className="w-4/12 Montserrat-m font-bold  py-2 text-left ">
                   Product
                 </th>
-                <th className="w-1/9 Montserrat-m font-bold ">Color</th>
-                <th className="w-1/9 Montserrat-m font-bold ">Size</th>
-                <th className="w-3/10 Montserrat-m font-bold ">Quantity</th>
-                <th className="w-1/9 Montserrat-m font-bold  text-right">
+                <th className="w-2/12 Montserrat-m font-bold ">Color</th>
+                <th className="w-2/12 Montserrat-m font-bold ">Size</th>
+                <th className="w-2/12 Montserrat-m font-bold ">Quantity</th>
+                <th className="w-2/12 Montserrat-m font-bold  text-right">
                   Amount
                 </th>
               </tr>

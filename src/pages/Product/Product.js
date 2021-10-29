@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
-import { getAllProducts } from "../../actions/product";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory} from "react-router";
+import { getAllProducts, getAllSubCategories } from "../../actions/product";
 import Category from "./Category";
 import Filter from "./Filter";
 import Items from "./Items";
@@ -18,67 +18,46 @@ const Product = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   // const location = useLocation();
+  // console.log(location);
+  const {
+    categoryLocation: { categoryId, pathname, title },
+  } = useSelector((state) => state.product);
+  // console.log(categoryLocation);
+  // console.log(title);
 
-  // useEffect(() => {
-  //   const searchURL = location?.search?.replace("?", "");
-  //   const searchArray = searchURL.split("&");
-  //   const search = searchArray.map((query) => {
-  //     const strLength = query.length;
-  //     const index = query.indexOf("=");
-  //     const searchKey = query.substr(0, index);
-  //     const searchValue = query.substr(index + 1, strLength);
-
-  //     // console.log(searchKey, searchValue);
-
-  //     switch (searchKey) {
-  //       case "brand":
-  //         setBrand(searchValue);
-  //         break;
-  //       case "size":
-  //         setSize(searchValue);
-  //         break;
-  //       case "color":
-  //         setColor(searchValue);
-  //         break;
-  //       case "category":
-  //         setCategory(searchValue);
-  //         break;
-  //       case "available":
-  //         setAvailable(searchValue);
-  //         break;
-  //       case "sort":
-  //         setSort(searchValue);
-  //         break;
-  //       case "page":
-  //         setPage(searchValue);
-  //         break;
-  //       case "price":
-  //         setPrice(searchValue);
-  //         break;
-  //       default:
-  //         break;
-  //     }
-
-  //     return { searchKey: searchValue };
-  //   });
-  //   console.log(search);
-  // }, [location]);
-
+  // const categoryId = location?.state.categoryId;
   useEffect(() => {
-    const url = `/products?for=Ladies&type=Dresses${
-      category && `&category=${category}`
-    }${brand && `&brand=${brand}`}${size && `&size=${size}`}${
-      color && `&color=${color}`
-    }${price && `&price=${price[0]}-${price[1]}`}${
-      available && `&available=${available}`
-    }${page && `&page=${page}`}${sort && `&sort=${sort}`} `;
+    dispatch(getAllSubCategories(categoryId));
+  }, [categoryId, dispatch]);
+
+  //category/categoryId?product
+  useEffect(() => {
+    const url = `${pathname}/products?${category && `category=${category.name}&`}${
+      brand && `brand=${brand}&`
+    }${size && `size=${size}&`}${color && `color=${color}&`}${
+      price && `price=${price[0]}-${price[1]}&`
+    }${available && `available=${available}&`}${page && `page=${page}&`}${
+      sort && `sort=${sort}`
+    } `;
 
     history.push(url);
     dispatch(
-      getAllProducts(category, size, color, brand, price, available, page, sort)
+      getAllProducts(
+        categoryId,
+        category,
+        size,
+        color,
+        brand,
+        price,
+        available,
+        page,
+        sort
+      )
     );
   }, [
     dispatch,
+    pathname,
+    categoryId,
     history,
     category,
     size,
@@ -93,7 +72,7 @@ const Product = () => {
   return (
     <div className="">
       <h2 className=" pb-8 text-center Montserrat-m font-normal text-[#202124]">
-        Ladies / Dresses
+        {`${title} ${category && `/ ${category}`}`}
       </h2>
       <div className="grid grid-cols-6 gap-4">
         <div className="flex flex-col space-y-11">

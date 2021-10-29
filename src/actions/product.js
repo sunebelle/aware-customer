@@ -2,23 +2,22 @@ import api from "../axios";
 import { productActions } from "../store/product";
 import { uiActions } from "../store/ui";
 
-export const getAllPatterns = () => async (dispatch) => {
+export const getAllSubCategories = (categoryId) => async (dispatch) => {
   try {
-    const { data } = await api.get("/products/ladies/patterns");
-    dispatch(productActions.getPatterns(data));
+    const {
+      data: { data },
+    } = await api.get(`categories/${categoryId}`);
+    dispatch(productActions.getSubCategories(data));
   } catch (error) {
     console.log(error);
-    // dispatch(
-    //   uiActions.showNotification({
-    //     status: "error",
-    //     message: error?.response?.data?.message,
-    //   })
-    // );
   }
 };
+
 export const getAllCategories = () => async (dispatch) => {
   try {
-    const { data } = await api.get("/products/ladies/dresses/categories");
+    const {
+      data: { data },
+    } = await api.get("/categories");
     dispatch(productActions.getCategories(data));
   } catch (error) {
     console.log(error);
@@ -31,29 +30,25 @@ export const getAllCategories = () => async (dispatch) => {
   }
 };
 export const getAllProducts =
-  (category, size, color, brand, price, available, page, sort) =>
+  (categoryId, category, size, color, brand, price, available, page, sort) =>
   async (dispatch) => {
-    const url = `/products?for=Ladies&type=Dresses${
-      category && `&category=${category}`
-    }${brand && `&brand=${brand}`}${size && `&size=${size}`}${
-      color && `&color=${color}`
-    }${price && `&price=${price[0]}-${price[1]}`}${
-      available && `&available=${available}`
-    }${page && `&page=${page}`}${sort && `&sort=${sort}`} `;
+    const url = `/categories/${categoryId}/products?${
+      category && `category=${category._id}&`
+    }${brand && `brand=${brand}&`}${size && `size=${size}&`}${
+      color && `color=${color}&`
+    }${price && `price=${price[0]}-${price[1]}&`}${
+      available && `available=${available}&`
+    }${page && `page=${page}&`}${sort && `sort=${sort}`} `;
+    console.log(url);
 
     try {
       dispatch(uiActions.showLoader());
-
-      const { data } = await api.get(url);
+      const {
+        data: { data },
+      } = await api.get(url);
       dispatch(productActions.getProducts(data));
       dispatch(uiActions.hideLoader());
     } catch (error) {
       console.log(error);
-      // dispatch(
-      //   uiActions.showNotification({
-      //     status: "error",
-      //     message: error?.response?.data?.message,
-      //   })
-      // );
     }
   };

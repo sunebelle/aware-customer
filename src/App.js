@@ -62,9 +62,21 @@ const App = () => {
         <Route path="/user/account-setting">
           <Profile />
         </Route>
-        <Route path="/products" exact>
+        <Route path="/Ladies/*" exact>
           <Product />
         </Route>
+        <Route path="/Men/*" exact>
+          <Product />
+        </Route>
+        <Route path="/Girls/*" exact>
+          <Product />
+        </Route>
+        <Route path="/Boys/*" exact>
+          <Product />
+        </Route>
+        {/* <Route path="/category/:categoryId">
+          <Product />
+        </Route> */}
         <Route path="/products/cart" exact>
           <Cart />
         </Route>

@@ -1,45 +1,52 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   items: [],
-  totalQuantity: 0,
-  isChanged: false,
+  totalAmount: 0, // reducer
 };
 //newItem = {id, title, price, description}   added: quantity, totalPrice
 const cartSlice = createSlice({
   name: " cart_slice",
   initialState,
   reducers: {
-    replaceCart(state, action) {
-      state.items = action.payload.items;
-      state.totalQuantity = action.payload.totalQuantity;
-    },
     add(state, action) {
       const newItem = action.payload;
-      const existingItem = state.items.find((item) => item.id === newItem.id);
-      if (!existingItem) {
-        state.items.push({
-          ...newItem,
-          quantity: 1,
-          totalPrice: newItem.price,
-        });
+      const existItemIndex = state.items.findIndex(
+        (item) => item.id === newItem._id
+      );
+      if (existItemIndex !== -1) {
+        const existItem = state.items[existItemIndex];
+        existItem.amount += newItem.amount;
       } else {
-        existingItem.quantity++;
-        existingItem.totalPrice += newItem.price;
+        state.items.push(newItem);
       }
-      state.totalQuantity++;
-      state.isChanged = true;
+      // state.totalAmount = state.totalAmount + newItem.price*newItem.amount
     },
     remove(state, action) {
-      const id = action.payload;
-      const removedItem = state.items.find((item) => item.id === id);
-      if (removedItem.quantity > 1) {
-        removedItem.quantity--;
-        removedItem.totalPrice -= removedItem.price;
+      const itemId = action.payload;
+      // const updatedAmount =
+      //   state.totalAmount - action.item.price * action.item.amount;
+
+      const itemIndexFound = state.items.findIndex(
+        (item) => item.id === itemId
+      );
+      const itemFound = state.basket[itemIndexFound];
+      if (itemFound.amount === action.item.amount) {
+        state.items = state.items.filter(
+          (item) => item.id !== itemId
+        );
+        // updatedItems = [...filtedItems];
       } else {
-        state.items = state.items.filter((item) => item.id !== id);
+        itemFound.amount -= action.item.amount;
+        // updatedItems = [...state.basket];
       }
-      state.totalQuantity--;
-      state.isChanged = true;
+      // return {
+      //   basket: updatedItems,
+      //   totalAmount: updatedAmount,
+      // };
+    },
+    checkout(state) {
+      state.items = [];
+      state.totalAmount = 0;
     },
   },
 });

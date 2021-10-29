@@ -75,31 +75,31 @@ const Filter = (props) => {
           <div className="filter-border-dashed flex-wrap flex-row">
             <div
               onClick={() => setColor("red")}
-              className="bg-[#ff5f6d] h-[30px] w-[30px] hover:scale-150 cursor-pointer rounded-full mr-4 mb-4"
+              className="bg-[#ff5f6d] filter-color mb-4"
             />
             <div
               onClick={() => setColor("light-gold")}
-              className="bg-[#ffd543] bg-opacity-40 h-[30px] w-[30px]  hover:scale-150 cursor-pointer rounded-full mr-4 mb-4"
+              className="bg-[#ffd543] filter-color mb-4"
             />
             <div
               onClick={() => setColor("cornflower")}
-              className="bg-[#5f6dff]  bg-opacity-40 h-[30px] w-[30px] hover:scale-150  cursor-pointer rounded-full mr-4 mb-4"
+              className="bg-[#5f6dff]  filter-color mb-4"
             />
             <div
               onClick={() => setColor("orange")}
-              className="bg-[#ffa15f] bg-opacity-40  h-[30px] w-[30px] hover:scale-150 cursor-pointer rounded-full mr-4 mb-4"
+              className="bg-[#ffa15f] filter-color mb-4"
             />
             <div
               onClick={() => setColor("charcoal-grey")}
-              className="bg-[#3d3d3f] bg-opacity-40  h-[30px] w-[30px] hover:scale-150 cursor-pointer rounded-full mr-4 "
+              className="bg-[#3d3d3f] filter-color "
             />
             <div
               onClick={() => setColor("white")}
-              className="bg-[#ededed]  bg-opacity-40 h-[30px] w-[30px]  hover:scale-150 cursor-pointer rounded-full "
+              className="bg-[#ededed]  filter-color"
             />
           </div>
         )}
-        <hr className="text-[#979797]" />
+        <hr className="bg-[#979797]" />
 
         {/* Brand */}
         <div

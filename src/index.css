@@ -15,6 +15,9 @@ font-family: 'Montserrat', sans-serif; */
   .filter-size {
     @apply cursor-pointer flex items-center justify-center text-center box-border p-4 h-10 w-10 border transition duration-500 ease-in-out transform;
   }
+  .filter-color {
+    @apply bg-opacity-40 h-[30px] w-[30px] hover:scale-150 cursor-pointer rounded-full mr-4;
+  }
 }
 .Montserrat {
   font-family: "Montserrat", sans-serif;
@@ -133,31 +136,32 @@ font-family: 'Montserrat', sans-serif; */
 }
 
 /* show categories on hover */
-.ladies-menu {
+.categories {
   display: none;
   top: 30px;
   position: absolute;
   padding-top: 16px;
+  width: 100%;
   justify-content: center;
-  align-content: center;
+  align-items: center;
   z-index: 1;
 }
-.ladies-content {
+.category-content {
   background-color: #fbfbfb;
   z-index: 100;
   display: flex;
   flex-wrap: nowrap;
   padding: 16px;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center;
+  justify-content: center; */
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
   border: solid 0.5px #eaeaea;
 }
 /* Show the ladies menu on hover */
-.ladies-container:hover + .ladies-menu {
+.category-container:hover + .categories {
   display: flex;
 }
-.ladies-menu:hover {
+.categories:hover {
   display: flex;
 }
 

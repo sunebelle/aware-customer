@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 const Category = ({ setCategory, category }) => {
   // const [category, setCategory] = useState("");
-  const { categories } = useSelector((state) => state.product);
+  const { subCategories } = useSelector((state) => state.product);
 
   // const listCategories = [
   //   { category: "All dresses" },
@@ -36,12 +36,12 @@ const Category = ({ setCategory, category }) => {
           />
         </div>
 
-        {categories?.data?.map((item) => {
+        {subCategories?.map((item) => {
           const active = category === item.name;
           return (
             <div key={item._id}>
               <li
-                onClick={() => setCategory(item.name)}
+                onClick={() => setCategory(item)}
                 className={`${
                   active ? "text-[#ff6900]" : "text-[#4d4d4d]"
                 } Montserrat-m font-normal  py-2 cursor-pointer`}

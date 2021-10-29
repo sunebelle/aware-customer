@@ -7,25 +7,27 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Items = ({ setSort, page, setPage }) => {
-  const {
-    products: { data },
-  } = useSelector((state) => state.product);
+  const { products } = useSelector((state) => state.product);
+
+  console.log(products);
 
   return (
     <div className="w-full">
       <div className="flex justify-between">
         <Dropdown setSort={setSort} />
-        {data?.length === 20 && <Pagination page={page} setPage={setPage} />}
+        {products?.length === 20 && (
+          <Pagination page={page} setPage={setPage} />
+        )}
 
         {/* <Pagination page={page} setPage={setPage} /> */}
       </div>
 
-      {data?.length > 0 ? (
+      {products?.length > 0 ? (
         <>
           {/* Many items display here */}
           {/* <div className="flex flex-row flex-wrap justify-start space-y-4 first:space-y-0 mt-4 w-full"> */}
           <div className="grid grid-cols-5 place-content-stretch gap-2 mt-3 w-full">
-            {data?.map((product) => (
+            {products?.map((product) => (
               <Link key={product._id} to={`/products/${product._id}`}>
                 <CardItem product={product} />
               </Link>
@@ -33,7 +35,7 @@ const Items = ({ setSort, page, setPage }) => {
           </div>
           <div className="flex justify-end mt-4">
             {/* <Pagination page={page} setPage={setPage} /> */}
-            {data?.length === 20 && (
+            {products?.length === 20 && (
               <Pagination page={page} setPage={setPage} />
             )}
           </div>
