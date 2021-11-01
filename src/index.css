@@ -186,3 +186,18 @@ font-family: 'Montserrat', sans-serif; */
 .border-review:not(:last-child) {
   border-bottom: 1px dashed #cccccc;
 }
+
+.scrollbar-w-1::-webkit-scrollbar {
+  height: 6px;
+}
+
+.grid-container--fill {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px;
+}
+/* .grid-container--fit {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  display: grid;
+  gap: 8px;
+} */

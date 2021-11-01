@@ -13,6 +13,7 @@ import Profile from "./pages/Profile/Profile";
 import Product from "./pages/Product/Product";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import Cart from "./pages/ShoppingCart/Cart";
+import SearchProduct from "./pages/SearchProduct/SearchProduct";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -77,10 +78,16 @@ const App = () => {
         {/* <Route path="/category/:categoryId">
           <Product />
         </Route> */}
-        <Route path="/products/cart" exact>
+        <Route path="/cart" exact>
           <Cart />
         </Route>
-        <Route path="/products/:productId">
+        <Route path="/products/search">
+          <SearchProduct />
+        </Route>
+        {/* <Route path="/product/:productId">
+          <ProductDetail />
+        </Route> */}
+        <Route path="/product">
           <ProductDetail />
         </Route>
         <Route path="*">

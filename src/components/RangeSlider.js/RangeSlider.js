@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Slider from "@mui/material/Slider";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
@@ -17,20 +17,25 @@ const theme = createTheme({
   },
 });
 const App = ({ price, setPrice, min, max }) => {
+  const [value, setValue] = useState([0, 300]);
+  const handleChangeValue = (event, newValue) => {
+    setPrice(newValue);
+    setValue(newValue);
+  };
   return (
     <div className="filter-border-dashed flex-col w-full">
       <ThemeProvider theme={theme}>
         <Slider
-          value={price}
+          value={value}
           min={min * 1}
           max={max * 1}
-          onChange={(event, newValue) => setPrice(newValue)}
+          onChange={handleChangeValue}
           // valueLabelDisplay="auto"
         />
       </ThemeProvider>
       <div className="flex justify-between items-center">
-        <p className="Montserrat-s font-normal text-[#4d4d4d]">${price[0]}</p>
-        <p className="Montserrat-s font-normal text-[#4d4d4d]">${price[1]}</p>
+        <p className="Montserrat-s font-normal text-[#4d4d4d]">${value[0]}</p>
+        <p className="Montserrat-s font-normal text-[#4d4d4d]">${value[1]}</p>
       </div>
     </div>
   );

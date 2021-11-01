@@ -22,7 +22,7 @@ const Button = ({
   return (
     <button
       type={type}
-      onChange={handleChange}
+      onClick={handleChange}
       disabled={btnDisabled}
       className={`${isActive} ${fontWeight} ${addCSS} w-full px-4 py-2 Montserrat-m  text-white`}
     >

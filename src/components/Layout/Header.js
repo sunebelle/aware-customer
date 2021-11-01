@@ -14,10 +14,12 @@ const Header = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { categories } = useSelector((state) => state.product);
+  const { items } = useSelector((state) => state.cart);
   const [openUserSetting, setOpenUserSetting] = useState(false);
   const [openBasket, setOpenBasket] = useState(false);
 
   // console.log(categories);
+  console.log(JSON.parse(localStorage.getItem("profile")));
   const handleRegister = () => {
     dispatch(uiActions.showRegisteredModal());
     history.push("/register");
@@ -93,12 +95,14 @@ const Header = () => {
             className="relative cursor-pointer"
           >
             <img className="w-full h-full" src="/img/cart.svg" alt="cart" />
-            <span className="absolute right-0 top-0 w-4 h-4 Montserrat-s text-center text-white font-medium  rounded-full bg-[#ffa15f]">
-              7
-            </span>
+            {items.length > 0 && (
+              <span className="absolute right-0 top-0 w-4 h-4 Montserrat-s text-center text-white font-medium  rounded-full bg-[#ffa15f]">
+                {items?.length}
+              </span>
+            )}
           </div>
         </div>
-        {openBasket && (
+        {items.length > 0 && openBasket && (
           <div className="absolute top-16 z-50 right-0 px-4 lg:px-10 xl:px-20">
             <Baskets setOpenBasket={setOpenBasket} />
           </div>
@@ -107,9 +111,10 @@ const Header = () => {
 
       <div className="relative  border-t border-b border-[#ececec] flex space-x-3 justify-center items-center">
         {/* show account setting on click */}
+
         <div
           className={` ${
-            openUserSetting ? "opacity-100" : "opacity-0"
+            openUserSetting ? "visible" : "invisible"
           } absolute z-10 top-0 right-28 w-44 flex-start shadow-lg bg-[#fbfbfb] border border-[#eaeaea] flex flex-col p-2 space-y-2`}
         >
           <p

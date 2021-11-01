@@ -11,11 +11,11 @@ const Product = () => {
   const [subCategoryId, setSubCategoryId] = useState("");
   const [size, setSize] = useState("");
   const [color, setColor] = useState("");
-  const [brand, setBrand] = useState("Zara");
-  const [price, setPrice] = useState([0, 300]);
-  const [available, setAvailable] = useState("In-store");
-  const [page, setPage] = useState(1);
-  const [sort, setSort] = useState("popularity");
+  const [brand, setBrand] = useState(""); //Zara
+  const [price, setPrice] = useState(""); //[0, 300]
+  const [available, setAvailable] = useState(""); //In-store
+  const [page, setPage] = useState(""); //1
+  const [sort, setSort] = useState(""); //popularity
   const dispatch = useDispatch();
   const history = useHistory();
   // const location = useLocation();
@@ -23,6 +23,18 @@ const Product = () => {
   const {
     categoryLocation: { categoryId, pathname, title },
   } = useSelector((state) => state.product);
+
+  useEffect(() => {
+    setCategory("");
+    setSubCategoryId("");
+    setSize("");
+    setColor("");
+    setBrand("");
+    setPrice("");
+    setAvailable("");
+    setSort("");
+    setPage("");
+  }, [pathname]);
 
   useEffect(() => {
     dispatch(getAllSubCategories(categoryId));

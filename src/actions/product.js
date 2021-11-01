@@ -6,7 +6,7 @@ export const getAllSubCategories = (categoryId) => async (dispatch) => {
   try {
     const {
       data: { data },
-    } = await api.get(`categories/${categoryId}`);
+    } = await api.get(`/categories/${categoryId}`);
     dispatch(productActions.getSubCategories(data));
   } catch (error) {
     console.log(error);
@@ -42,23 +42,52 @@ export const getAllProducts =
     sort
   ) =>
   async (dispatch) => {
-    const url = `/categories/${categoryId}/products?${
-      subCategoryId && `category=${subCategoryId}&`
-    }${brand && `brand=${brand}&`}${size && `size=${size}&`}${
-      color && `color=${color}&`
-    }${price && `price=${price[0]}-${price[1]}&`}${
-      available && `available=${available}&`
-    }${page && `page=${page}&`}${sort && `sort=${sort}`} `;
-
-    console.log("product action", url);
-
     try {
       dispatch(uiActions.showLoader());
+      const url = `/categories/${categoryId}/products?${
+        subCategoryId && `category=${subCategoryId}&`
+      }${brand && `brand=${brand}&`}${size && `size=${size}&`}${
+        color && `color=${color}&`
+      }${price && `price=${price[0]}-${price[1]}&`}${
+        available && `available=${available}&`
+      }${page && `page=${page}&`}${sort && `sort=${sort}`} `;
+
+      // console.log("product action", url);
+
       const {
         data: { data },
       } = await api.get(url);
       dispatch(productActions.getProducts(data));
       dispatch(uiActions.hideLoader());
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+export const getAProduct = (id) => async (dispatch) => {
+  dispatch(uiActions.showLoader());
+  try {
+    const {
+      data: { data },
+    } = await api.get(`/products/${id}`);
+    dispatch(uiActions.hideLoader());
+    dispatch(productActions.getProduct(data));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getSimilarBrandProducts =
+  (categoryId, product) => async (dispatch) => {
+    try {
+      const {
+        data: { data },
+      } = await api.get(
+        `/categories/${categoryId}/products?${
+          product && `brand=${product.brand}`
+        }`
+      );
+      dispatch(productActions.getBrandProducts(data));
     } catch (error) {
       console.log(error);
     }

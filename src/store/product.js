@@ -5,6 +5,8 @@ const initialState = {
   subCategories: [],
   categories: [],
   products: [],
+  product: "",
+  similarBrandProducts: [],
 };
 
 const productSlice = createSlice({
@@ -26,6 +28,12 @@ const productSlice = createSlice({
     },
     getProducts(state, action) {
       state.products = action.payload;
+    },
+    getProduct(state, action) {
+      state.product = action.payload;
+    },
+    getBrandProducts(state, action) {
+      state.similarBrandProducts = action.payload;
     },
   },
 });

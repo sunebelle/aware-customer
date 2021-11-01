@@ -2,8 +2,16 @@ import React from "react";
 import numeral from "numeral";
 import Button from "../../components/UI/Button";
 import Item from "./Item";
+import { useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
 const Cart = () => {
+  const { items } = useSelector((state) => state.cart);
+
+  const totalAmount = items.reduce(
+    (accumulator, product) => accumulator + product.amount * product.price,
+    0
+  );
   return (
     <div className="text-[#202124]">
       <h1 className=" mb-8 Montserrat font-medium text-2xl leading-5  ">
@@ -26,9 +34,10 @@ const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              <Item />
-              <Item />
-              <Item />
+              {items.length > 0 &&
+                items.map((item, i) => <Item key={uuidv4()} product={item} />)}
+              {/* <Item />
+              <Item /> */}
             </tbody>
           </table>
         </div>
@@ -44,14 +53,14 @@ const Cart = () => {
             <div className="flex justify-between">
               <span className="Montserrat-m font-medium ">Total product:</span>
               <span className="Montserrat-m font-medium ">
-                {numeral(6900).format("$0,0")}
+                {numeral(totalAmount).format("$0,0")}
               </span>
             </div>
             <hr className="bg-[#979797] h-0.5 mt-4 mb-2 bg-opacity-50 " />
             <div className="flex justify-between">
               <span className="Montserrat-b ">Subtotal</span>
               <span className="Montserrat-b ">
-                {numeral(6900).format("$0,0")}
+                {numeral(totalAmount).format("$0,0")}
               </span>
             </div>
           </div>

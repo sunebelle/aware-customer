@@ -5,9 +5,11 @@ import CardItem from "./CardItem";
 // import { products } from "./dummyData";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
 
 const Items = ({ setSort, page, setPage, category }) => {
   const { products } = useSelector((state) => state.product);
+  const { isLoading } = useSelector((state) => state.ui);
 
   // console.log(products);
 
@@ -22,13 +24,18 @@ const Items = ({ setSort, page, setPage, category }) => {
         {/* <Pagination page={page} setPage={setPage} /> */}
       </div>
 
-      {products?.length > 0 ? (
+      {isLoading ? (
+        <div className="flex justify-center py-10 mt-8 items-center">
+          <Loader />
+        </div>
+      ) : products?.length > 0 ? (
         <>
           {/* Many items display here */}
           {/* <div className="flex flex-row flex-wrap justify-start space-y-4 first:space-y-0 mt-4 w-full"> */}
-          <div className="grid grid-cols-5 place-content-stretch gap-2 mt-3 w-full">
+          {/* <div className="grid grid-flow-col auto-cols-fr gap-2 mt-3 w-full"> */}
+          <div className="grid-container--fill mt-3 w-full">
             {products?.map((product) => (
-              <Link key={product._id} to={`/products/${product._id}`}>
+              <Link key={product._id} to={`/product/${product._id}`}>
                 <CardItem product={product} category={category} />
               </Link>
             ))}

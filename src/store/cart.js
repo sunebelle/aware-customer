@@ -1,9 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   items: [],
-  totalAmount: 0, // reducer
 };
-//newItem = {id, title, price, description}   added: quantity, totalPrice
 const cartSlice = createSlice({
   name: " cart_slice",
   initialState,
@@ -11,7 +9,10 @@ const cartSlice = createSlice({
     add(state, action) {
       const newItem = action.payload;
       const existItemIndex = state.items.findIndex(
-        (item) => item.id === newItem._id
+        (item) =>
+          item._id === newItem._id &&
+          item.color === newItem.color &&
+          item.size === newItem.size
       );
       if (existItemIndex !== -1) {
         const existItem = state.items[existItemIndex];
@@ -19,30 +20,21 @@ const cartSlice = createSlice({
       } else {
         state.items.push(newItem);
       }
-      // state.totalAmount = state.totalAmount + newItem.price*newItem.amount
     },
     remove(state, action) {
-      const itemId = action.payload;
-      // const updatedAmount =
-      //   state.totalAmount - action.item.price * action.item.amount;
-
+      const removeItem = action.payload;
       const itemIndexFound = state.items.findIndex(
-        (item) => item.id === itemId
+        (item) =>
+          item._id === removeItem._id &&
+          item.color === removeItem.color &&
+          item.size === removeItem.size
       );
-      const itemFound = state.basket[itemIndexFound];
-      if (itemFound.amount === action.item.amount) {
-        state.items = state.items.filter(
-          (item) => item.id !== itemId
-        );
-        // updatedItems = [...filtedItems];
+      const itemFound = state.items[itemIndexFound];
+      if (itemFound.amount === removeItem.amount) {
+        state.items.splice(itemIndexFound, 1);
       } else {
-        itemFound.amount -= action.item.amount;
-        // updatedItems = [...state.basket];
+        itemFound.amount -= removeItem.amount;
       }
-      // return {
-      //   basket: updatedItems,
-      //   totalAmount: updatedAmount,
-      // };
     },
     checkout(state) {
       state.items = [];

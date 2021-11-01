@@ -78,7 +78,7 @@ const Filter = (props) => {
               className="bg-[#ff5f6d] filter-color mb-4"
             />
             <div
-              onClick={() => setColor("light-gold")}
+              onClick={() => setColor("lightGold")}
               className="bg-[#ffd543] filter-color mb-4"
             />
             <div
@@ -90,7 +90,7 @@ const Filter = (props) => {
               className="bg-[#ffa15f] filter-color mb-4"
             />
             <div
-              onClick={() => setColor("charcoal-grey")}
+              onClick={() => setColor("charcoalGrey")}
               className="bg-[#3d3d3f] filter-color "
             />
             <div
