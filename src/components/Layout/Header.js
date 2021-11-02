@@ -5,7 +5,10 @@ import { uiActions } from "../../store/ui";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logUserOut } from "../../actions/auth";
-import { getAllCategories } from "../../actions/product";
+import {
+  getAllCategories,
+  getAllProductsBySearch,
+} from "../../actions/product";
 import Baskets from "../Layout/Baskets";
 import { productActions } from "../../store/product";
 
@@ -17,34 +20,38 @@ const Header = () => {
   const { items } = useSelector((state) => state.cart);
   const [openUserSetting, setOpenUserSetting] = useState(false);
   const [openBasket, setOpenBasket] = useState(false);
+  const [search, setSearch] = useState("");
 
-  // console.log(categories);
-  console.log(JSON.parse(localStorage.getItem("profile")));
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter" && search.trim()) {
+      dispatch(getAllProductsBySearch(search));
+      history.push(`/products/search?name=${search}`);
+    }
+  };
+
+  // console.log(JSON.parse(localStorage.getItem("profile")));
   const handleRegister = () => {
     dispatch(uiActions.showRegisteredModal());
-    history.push("/register");
+    // history.push("/register");
   };
   const handleLoggedIn = () => {
     dispatch(uiActions.showLoggedInModal());
-    history.push("/login");
+    // history.push("/login");
   };
   const handleLogout = () => {
     setOpenUserSetting(false);
     dispatch(logUserOut());
-    history.push("/");
+    // history.push("/");
   };
 
   const handleAccountSetting = () => {
     setOpenUserSetting(false);
     history.push("/user/account-setting");
   };
-  useEffect(() => {
-    dispatch(getAllCategories());
-  }, [dispatch]);
 
   const handleCategoryId = (name, categoryId, category) => {
     dispatch(
-      productActions.getCategoryId({
+      productActions.getCategoryInfo({
         categoryId,
         title: `${name} / ${category}`,
         pathname: `/${name}/${category}`,
@@ -52,12 +59,14 @@ const Header = () => {
     );
     history.push(`/${name}/${category}/products`);
   };
-
   return (
     <div>
       <div className="grid relative grid-cols-3 pt-5 px-4 lg:px-10 xl:px-20 pb-2  justify-between items-center">
         <div className="border rounded-full w-56 border-[#b7b7b7] flex h-8 px-2 items-center">
           <input
+            onChange={(e) => setSearch(e.target.value)}
+            value={search}
+            onKeyPress={handleKeyPress}
             className="focus:outline-none pl-2 Montserrat-m font-normal border-none flex-grow placeholder-[#cccccc]"
             type="text"
             placeholder="Search"
@@ -113,6 +122,8 @@ const Header = () => {
         {/* show account setting on click */}
 
         <div
+          onMouseLeave={() => setOpenUserSetting(false)}
+          onMouseEnter={() => setOpenUserSetting(true)}
           className={` ${
             openUserSetting ? "visible" : "invisible"
           } absolute z-10 top-0 right-28 w-44 flex-start shadow-lg bg-[#fbfbfb] border border-[#eaeaea] flex flex-col p-2 space-y-2`}

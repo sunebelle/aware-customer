@@ -77,6 +77,16 @@ export const getAProduct = (id) => async (dispatch) => {
   }
 };
 
+// export const getSimilarProducts = (categoryId) => async (dispatch) => {
+//   try {
+//     const {
+//       data: { data },
+//     } = await api.get(`/categories/${categoryId}/products`);
+//     dispatch(productActions.getProducts(data));
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 export const getSimilarBrandProducts =
   (categoryId, product) => async (dispatch) => {
     try {
@@ -92,3 +102,18 @@ export const getSimilarBrandProducts =
       console.log(error);
     }
   };
+
+export const getAllProductsBySearch = (searchQuery) => async (dispatch) => {
+  dispatch(uiActions.showLoader());
+
+  try {
+    const {
+      data: { data },
+    } = await api.get(`/products/search?searchQuery=${searchQuery}`);
+    // dispatch(productActions.getProductsBySearch(data));
+    dispatch(productActions.getProducts(data));
+    dispatch(uiActions.hideLoader());
+  } catch (error) {
+    console.log(error);
+  }
+};

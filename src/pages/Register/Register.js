@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import api from "../../axios";
 import { authActions } from "../../store/auth";
+import { uiActions } from "../../store/ui";
 
 const Register = ({ closeModalHandler }) => {
   const [error, setError] = useState("");
@@ -51,7 +52,9 @@ const Register = ({ closeModalHandler }) => {
         credentials: "include",
       });
       dispatch(authActions.auth(data));
-      history.push("/");
+      // history.push("/");
+      dispatch(uiActions.hideRegisteredModal());
+      // window.location.reload(false);
     } catch (error) {
       setError(error?.response?.data?.message);
     }
@@ -139,12 +142,14 @@ const Register = ({ closeModalHandler }) => {
       </form>
       <div className="border-t w-full mt-8 items-center flex justify-center border-[#ededed]">
         <p className="Montserrat-m text-[#4d4d4d] font-medium py-4 ">
-          Do you have an account?{" "}
-          <Link to="/login">
-            <span className="text-[#ff7413] font-bold  border-b border-[#ff7413]  ">
-              Log in
-            </span>
-          </Link>
+          Do you have an account? {/* <Link to="/login"> */}
+          <span
+            onClick={() => dispatch(uiActions.showLoggedInModal())}
+            className="text-[#ff7413] font-bold  border-b border-[#ff7413] cursor-pointer "
+          >
+            Log in
+          </span>
+          {/* </Link> */}
         </p>
       </div>
     </div>

@@ -7,13 +7,14 @@ const initialState = {
   products: [],
   product: "",
   similarBrandProducts: [],
+  // productsBySearch: [],
 };
 
 const productSlice = createSlice({
   name: " products",
   initialState,
   reducers: {
-    getCategoryId(state, action) {
+    getCategoryInfo(state, action) {
       state.categoryLocation = {
         categoryId: action.payload.categoryId,
         title: action.payload.title,
@@ -35,6 +36,9 @@ const productSlice = createSlice({
     getBrandProducts(state, action) {
       state.similarBrandProducts = action.payload;
     },
+    // getProductsBySearch(state, action) {
+    //   state.productsBySearch = action.payload;
+    // },
   },
 });
 

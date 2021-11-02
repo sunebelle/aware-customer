@@ -44,7 +44,12 @@ const Dropdown = ({ setSort }) => {
           {listOptions?.map((option, i) => {
             const active = option.title === selected.title;
             return (
-              <div key={i} onClick={() => handleSelect(option)}>
+              <div
+                key={i}
+                onClick={() => handleSelect(option)}
+                onMouseLeave={() => setShowDropdownMenu(false)}
+                onMouseEnter={() => setShowDropdownMenu(true)}
+              >
                 <li
                   className={`${
                     active && "bg-[#FFE699]"

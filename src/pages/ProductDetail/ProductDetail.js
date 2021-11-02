@@ -1,43 +1,61 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useRouteMatch } from "react-router";
+import { useLocation } from "react-router";
 import numeral from "numeral";
 import Review from "./Review";
 import SimilarItem from "./SimilarItem";
 import RatingStar from "../../components/RatingStar/RatingStar";
-import { getAProduct, getSimilarBrandProducts } from "../../actions/product";
+import {
+  getAProduct,
+  getAllProducts,
+  getSimilarBrandProducts,
+} from "../../actions/product";
 import Loader from "../../components/Loader/Loader";
 import { uiActions } from "../../store/ui";
 import { cartActions } from "../../store/cart";
+import colors from "../../utils/color";
+import { Link } from "react-router-dom";
 
 const ProductDetail = () => {
-  const { products } = useSelector((state) => state.product);
+  const { products, product, categories, similarBrandProducts } = useSelector(
+    (state) => state.product
+  );
   const { isLoading } = useSelector((state) => state.ui);
 
   const [showImage, setShowImage] = useState("");
   const [amount, setAmount] = useState(3);
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
-
-  const params = useParams();
-  // const match = useRouteMatch();
+  const [parentName, setParentName] = useState("");
+  const [subName, setSubName] = useState("");
+  const colorArray = Object.keys(colors);
+  const location = useLocation();
   const dispatch = useDispatch();
-  const {
-    categoryLocation: { title, categoryId },
-    product,
-    similarBrandProducts,
-  } = useSelector((state) => state.product);
+  const pathname = location.pathname;
+  const subCategoryName = location?.state?.category; //props from link (Products component)
+  const productId = pathname.substr(pathname.indexOf(".") + 1, pathname.length);
 
   useEffect(() => {
-    dispatch(getAProduct(params.productId));
-  }, [params.productId, dispatch]);
+    dispatch(getAProduct(productId));
+  }, [productId, dispatch]);
 
   useEffect(() => {
-    dispatch(getSimilarBrandProducts(categoryId, product));
-  }, [product, categoryId, dispatch]);
+    if (product) {
+      setSubName(product.category[0].name);
+      const categoryId = product.category[0].parentId;
+      dispatch(getAllProducts(categoryId));
+      dispatch(getSimilarBrandProducts(categoryId, product));
+      const categoryParent = categories?.find((category) =>
+        category.categories.map((item) => item._id === categoryId)
+      );
+      if (categoryParent) {
+        setParentName(categoryParent.name);
+      }
+    }
+  }, [product, dispatch, categories]);
 
   const similarProducts = products?.filter(
-    (product) => product._id !== params.productId
+    (product) => product._id !== productId
   );
 
   const handleMinus = () => {
@@ -46,7 +64,6 @@ const ProductDetail = () => {
     }
   };
   const handleAdd = (quantity) => {
-    // amount < quantity in stock
     if (amount < quantity) {
       setAmount(amount + 1);
     }
@@ -67,7 +84,6 @@ const ProductDetail = () => {
       );
     } else {
       const addedProduct = { ...product, color, size, amount };
-      // console.log(addedProduct);
       dispatch(cartActions.add(addedProduct));
     }
   };
@@ -83,7 +99,9 @@ const ProductDetail = () => {
       ) : (
         <div>
           <h2 className=" pb-8 text-center Montserrat-m font-normal text-[#202124]">
-            {`${title} / ${product.name}`}
+            {`${parentName && `${parentName} / `}  ${
+              subCategoryName ? subCategoryName : subName
+            } / ${product.name}`}
           </h2>
           <div className="flex flex-row space-x-8">
             <div className=" flex flex-row space-x-5">
@@ -134,19 +152,25 @@ const ProductDetail = () => {
                   <div className="flex flex-row space-x-4 ">
                     <div
                       onClick={() => setSize("S")}
-                      className="text-white font-bold filter-size Montserrat-m bg-[#ffa15f] hover:bg-[#ec6c11]"
+                      className={`${
+                        size === "S" && "scale-125 bg-[#ec6c11]"
+                      } text-white font-bold filter-size Montserrat-m bg-[#ffa15f] hover:bg-[#ec6c11]`}
                     >
                       S
                     </div>
                     <div
                       onClick={() => setSize("M")}
-                      className="text-[#202124] font-normal filter-size Montserrat-m border-[#808080] hover:bg-[#808080]"
+                      className={`${
+                        size === "M" && "scale-125 bg-[#808080] "
+                      }text-[#202124] font-normal filter-size Montserrat-m border-[#808080] hover:bg-[#808080]`}
                     >
                       M
                     </div>
                     <div
                       onClick={() => setSize("L")}
-                      className="text-[#4d4d4d] font-bold  filter-size Montserrat-m border-[#d4d3d3] hover:bg-[#d4d3d3]"
+                      className={`${
+                        size === "L" && "scale-125 bg-[#d4d3d3]"
+                      } text-[#4d4d4d] font-bold  filter-size Montserrat-m border-[#d4d3d3] hover:bg-[#d4d3d3]`}
                     >
                       L
                     </div>
@@ -157,7 +181,19 @@ const ProductDetail = () => {
                     Color
                   </p>
                   <div className=" flex flex-nowrap mb-4">
-                    <div
+                    {colorArray?.map((item) => {
+                      const active = item === color;
+                      return (
+                        <div
+                          key={item}
+                          onClick={() => setColor(item)}
+                          className={`filter-color ${active && "scale-150"} ${
+                            colors[item]
+                          } cursor-pointer`}
+                        />
+                      );
+                    })}
+                    {/* <div
                       onClick={() => setColor("red")}
                       className="bg-[#ff5f6d] filter-color "
                     />
@@ -180,7 +216,7 @@ const ProductDetail = () => {
                     <div
                       onClick={() => setColor("white")}
                       className="bg-[#ededed]  filter-color "
-                    />
+                    /> */}
                   </div>
                 </div>
                 <div className="flex flex-row mt-3">
@@ -240,16 +276,28 @@ const ProductDetail = () => {
                 <div className="flex  items-end h-full">
                   <div className="flex flex-col space-y-2 ">
                     {similarBrandProducts.length > 0 &&
-                      similarBrandProducts
-                        .slice(0, 4)
-                        .map((product) => (
+                      similarBrandProducts.slice(0, 4).map((product) => (
+                        <Link
+                          key={product._id}
+                          to={{
+                            pathname: `/product/${product.name.replaceAll(
+                              " ",
+                              "-"
+                            )}.${product._id}`,
+                            state: {
+                              category: subCategoryName
+                                ? subCategoryName
+                                : subName,
+                            },
+                          }}
+                        >
                           <img
-                            key={product._id}
                             className="w-20 h-[114px]"
                             src={product.imageCover}
                             alt={product.name}
                           />
-                        ))}
+                        </Link>
+                      ))}
                   </div>
                 </div>
               </div>
@@ -264,12 +312,17 @@ const ProductDetail = () => {
           <Review product={product} />
 
           {/* you may also like component */}
-          <div className="flex w-full items-center flex-nowrap">
-            <div className=" w-[80px] h-[2px]  border border-[#979797] opacity-50" />
-            <h2 className="px-4"> You may also like </h2>
-            <div className=" flex-grow h-[2px] border border-[#979797] opacity-50" />
-          </div>
-          <SimilarItem similarProducts={similarProducts} />
+          {similarProducts.length > 0 && (
+            <div className="flex w-full items-center flex-nowrap">
+              <div className=" w-[80px] h-[2px]  border border-[#979797] opacity-50" />
+              <h2 className="px-4"> You may also like </h2>
+              <div className=" flex-grow h-[2px] border border-[#979797] opacity-50" />
+            </div>
+          )}
+          <SimilarItem
+            category={subCategoryName ? subCategoryName : subName}
+            similarProducts={similarProducts}
+          />
         </div>
       )}
     </div>

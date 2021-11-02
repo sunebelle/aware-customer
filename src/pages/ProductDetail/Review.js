@@ -15,23 +15,20 @@ const Review = ({ product }) => {
   const [hover, setHover] = useState(null);
   const [title, setTitle] = useState("");
   const [review, setReview] = useState("");
-  const [editReview, setEditReview] = useState(false);
+  // const [editReview, setEditReview] = useState(false);
   const { user } = useSelector((state) => state.auth);
 
   const { reviews } = useSelector((state) => state.review);
   const userReview = reviews.find(
-    (review) =>
-      review.user._id === user?.data?.user?._id ||
-      review.user === user?.data?.user?._id
+    (review) => review.user._id === user?.data?.user?._id
   ); //return value
   const filteredReviews = reviews.filter(
-    (review) =>
-      review.user._id !== user?.data?.user?._id ||
-      review.user !== user?.data?.user?._id
+    (review) => review.user._id !== user?.data?.user?._id
   ); //return array
   const dispatch = useDispatch();
 
   console.log("Review", reviews);
+  console.log("Review - filter", filteredReviews);
 
   useEffect(() => {
     dispatch(getAllReviews(product._id));
@@ -40,7 +37,7 @@ const Review = ({ product }) => {
   const handleReview = (e) => {
     e.preventDefault();
     dispatch(createAReview({ title, rating, review }, product._id));
-    setEditReview(true);
+    // setEditReview(true);
   };
   return (
     <div className="w-full px-24">
@@ -389,4 +386,4 @@ const Review = ({ product }) => {
   );
 };
 
-export default Review;
+export default React.memo(Review);

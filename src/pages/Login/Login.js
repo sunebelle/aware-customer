@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import api from "../../axios";
 import { authActions } from "../../store/auth";
+import { uiActions } from "../../store/ui";
 
 const Login = ({ closeModalHandler }) => {
   //   const [rememberPassword, setRememberPassword] = useState(false);
@@ -44,7 +45,8 @@ const Login = ({ closeModalHandler }) => {
         credentials: "include",
       });
       dispatch(authActions.auth(data));
-      history.push("/");
+      // history.push("/");
+      dispatch(uiActions.hideLoggedInModal());
     } catch (error) {
       setError(error?.response?.data?.message);
     }
@@ -118,23 +120,28 @@ const Login = ({ closeModalHandler }) => {
               Remember password
             </p>
           </div>
-          <Link to="/forgot-password">
-            <p className="Montserrat-m font-semibold text-[#4d4d4d]">
-              Forgot your password?
-            </p>
-          </Link>
+          {/* <Link to="/forgot-password"> */}
+          <p
+            onClick={() => dispatch(uiActions.showForgotPasswordModal())}
+            className="Montserrat-m font-semibold text-[#4d4d4d] cursor-pointer"
+          >
+            Forgot your password?
+          </p>
+          {/* </Link> */}
         </div>
 
         <Button type="submit" label="Log In" btnDisabled={!formIsValid} />
       </form>
       <div className="border-t w-full mt-10 items-center flex justify-center border-[#ededed]">
         <p className="Montserrat-m text-[#4d4d4d] font-medium py-4">
-          Do you have an account?{" "}
-          <Link to="/register">
-            <span className="text-[#ff7413] font-bold border-b border-[#ff7413]  ">
-              Register
-            </span>
-          </Link>
+          Do you have an account? {/* <Link to="/register"> */}
+          <span
+            onClick={() => dispatch(uiActions.showRegisteredModal())}
+            className="text-[#ff7413] font-bold border-b border-[#ff7413] cursor-pointer  "
+          >
+            Register
+          </span>
+          {/* </Link> */}
         </p>
       </div>
     </div>

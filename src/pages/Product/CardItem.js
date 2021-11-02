@@ -1,8 +1,23 @@
 import React from "react";
 import numeral from "numeral";
+import { useDispatch } from "react-redux";
+import { cartActions } from "../../store/cart";
+import { Link } from "react-router-dom";
 
 const CardItem = ({ product, category }) => {
+  const dispatch = useDispatch();
   // console.log(product);
+
+  const handleAddProductToCart = () => {
+    const addedProduct = {
+      ...product,
+      amount: 1,
+      color: product.color[0],
+      size: product.size[0],
+    };
+    // console.log(addedProduct);
+    dispatch(cartActions.add(addedProduct));
+  };
   return (
     // <div className="flex flex-col w-[180px] ">
 
@@ -14,7 +29,10 @@ const CardItem = ({ product, category }) => {
           alt={product.name}
         />
         {product.quantity >= 1 && (
-          <div className=" quick-shop cursor-pointer bg-[#ffa15f] h-[54px] absolute bottom-0 w-full">
+          <div
+            onClick={handleAddProductToCart}
+            className=" quick-shop cursor-pointer bg-[#ffa15f] h-[54px] absolute bottom-0 w-full"
+          >
             <span className="Montserrat-m font-medium text-white py-4 flex justify-center items-center">
               + Quick shop
             </span>
@@ -26,15 +44,24 @@ const CardItem = ({ product, category }) => {
           </p>
         )}
       </div>
-      <h2 className="Montserrat font-medium text-sm leading-[1.43rem] text-[#202124]">
-        {product.name}
-      </h2>
-      <h2 className="Montserrat font-medium text-sm leading-[1.43rem] text-[#202124]">
-        {category ? category : product.category[0].name}
-      </h2>
-      <p className="Montserrat-s font-normal text-[#4d4d4d]">
-        {numeral(product.price).format("$0,0.00")}
-      </p>
+      <Link
+        to={{
+          pathname: `/product/${product.name.replaceAll(" ", "-")}.${
+            product._id
+          }`,
+          state: { category },
+        }}
+      >
+        <h2 className="Montserrat font-medium text-sm leading-[1.43rem] text-[#202124]">
+          {product.name}
+        </h2>
+        <h2 className="Montserrat font-medium text-sm leading-[1.43rem] text-[#202124]">
+          {category ? category : product.category[0].name}
+        </h2>
+        <p className="Montserrat-s font-normal text-[#4d4d4d]">
+          {numeral(product.price).format("$0,0.00")}
+        </p>
+      </Link>
     </div>
   );
 };

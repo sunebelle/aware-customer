@@ -1,18 +1,21 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-const Category = ({ setCategory, category, setSubCategoryId }) => {
-  // const [category, setCategory] = useState("");
+const Category = ({
+  subCategoryName,
+  setSubCategoryId,
+  setSubCategoryName,
+}) => {
   const { subCategories } = useSelector((state) => state.product);
 
   const handleCategory = (id, name) => {
-    setCategory(name);
+    setSubCategoryName(name);
     setSubCategoryId(id);
   };
 
   const handleAllCategory = () => {
-    setCategory("");
     setSubCategoryId("");
+    setSubCategoryName("");
   };
 
   return (
@@ -23,20 +26,21 @@ const Category = ({ setCategory, category, setSubCategoryId }) => {
           <li
             onClick={handleAllCategory}
             className={`${
-              category === "" ? "text-[#ff6900]" : "text-[#4d4d4d]"
+              subCategoryName === "" ? "text-[#ff6900]" : "text-[#4d4d4d]"
             } Montserrat-m font-normal  py-2 cursor-pointer`}
           >
             All dresses
           </li>
-          <hr
+          <hr className=" text-[#979797] w-5" />
+          {/* <hr
             className={`${
               category === "" ? "opacity-100" : "opacity-0"
             } text-[#979797] w-5`}
-          />
+          /> */}
         </div>
 
         {subCategories?.map((item) => {
-          const active = category === item.name;
+          const active = subCategoryName === item.name;
           return (
             <div key={item._id}>
               <li
@@ -48,11 +52,7 @@ const Category = ({ setCategory, category, setSubCategoryId }) => {
               >
                 {item.name}
               </li>
-              <hr
-                className={`${
-                  active ? "opacity-100" : "opacity-0"
-                } text-[#979797] w-5`}
-              />
+
               {/* border-b border-[#979797] w-4 */}
             </div>
           );

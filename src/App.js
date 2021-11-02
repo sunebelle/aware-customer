@@ -1,41 +1,48 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "./components/Layout/Layout";
 import { Switch, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
-import { useDispatch, useSelector } from "react-redux";
-import { uiActions } from "./store/ui";
-import Modal from "./components/UI/Modal";
-import Register from "./pages/Register/Register";
-import Login from "./pages/Login/Login";
-import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+// import { useDispatch, useSelector } from "react-redux";
+// import { uiActions } from "./store/ui";
+// import Modal from "./components/UI/Modal";
+// import Register from "./pages/Register/Register";
+// import Login from "./pages/Login/Login";
+// import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import Error from "./pages/NotFound/Error";
 import Profile from "./pages/Profile/Profile";
 import Product from "./pages/Product/Product";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import Cart from "./pages/ShoppingCart/Cart";
 import SearchProduct from "./pages/SearchProduct/SearchProduct";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllCategories } from "./actions/product";
 
 const App = () => {
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const { isRegistered, isLoggedIn, isForgotPassword } = useSelector(
-    (state) => state.ui
-  );
-  const closeRegisteredModal = () => {
-    dispatch(uiActions.hideRegisteredModal());
-  };
-  const closeLoggedInModal = () => {
-    dispatch(uiActions.hideLoggedInModal());
-  };
-  const closeForgotPasswordModal = () => {
-    dispatch(uiActions.hideForgotPasswordModal());
-  };
+  useEffect(() => {
+    dispatch(getAllCategories());
+  }, [dispatch]);
+  // const dispatch = useDispatch();
+  // const { isRegistered, isLoggedIn, isForgotPassword } = useSelector(
+  //   (state) => state.ui
+  // );
+  // const closeRegisteredModal = () => {
+  //   dispatch(uiActions.hideRegisteredModal());
+  // };
+  // const closeLoggedInModal = () => {
+  //   dispatch(uiActions.hideLoggedInModal());
+  // };
+  // const closeForgotPasswordModal = () => {
+  //   dispatch(uiActions.hideForgotPasswordModal());
+  // };
   return (
     <Layout>
       <Switch>
         <Route path="/" exact>
           <Home />
         </Route>
-        <Route path="/register">
+        {/* <Route path="/register">
           {isRegistered && (
             <Modal closeModalHandler={closeRegisteredModal}>
               <Register closeModalHandler={closeRegisteredModal} />
@@ -58,10 +65,10 @@ const App = () => {
             </Modal>
           )}
           <Home />
-        </Route>
+        </Route> */}
 
         <Route path="/user/account-setting">
-          <Profile />
+          {user ? <Profile /> : <Home />}
         </Route>
         <Route path="/Ladies/*" exact>
           <Product />

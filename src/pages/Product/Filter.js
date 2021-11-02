@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import FilterCheckbox from "../../components/Checkbox/FilterCheckbox";
 import RangeSlider from "../../components/RangeSlider.js/RangeSlider";
+import colors from "../../utils/color";
 
 const Filter = (props) => {
   const {
     price,
     setPrice,
+    size,
     setSize,
+    color,
     setColor,
     brand,
     setBrand,
@@ -18,6 +21,7 @@ const Filter = (props) => {
   const [brandState, setBrandState] = useState(false);
   const [priceState, setPriceState] = useState(false);
   const [availableState, setAvailableState] = useState(false);
+  const colorArray = Object.keys(colors);
 
   return (
     <div>
@@ -39,19 +43,25 @@ const Filter = (props) => {
           <div className="filter-border-dashed space-x-4 flex-row text-center">
             <div
               onClick={() => setSize("S")}
-              className="text-white font-bold filter-size Montserrat-m bg-[#ffa15f] hover:bg-[#ec6c11]"
+              className={`${
+                size === "S" && "scale-125 bg-[#ec6c11]"
+              } text-white font-bold filter-size Montserrat-m bg-[#ffa15f] hover:bg-[#ec6c11]`}
             >
               S
             </div>
             <div
               onClick={() => setSize("M")}
-              className="text-[#202124] font-normal filter-size Montserrat-m border-[#808080] hover:bg-[#808080]"
+              className={`${
+                size === "M" && "scale-125 bg-[#808080] "
+              }text-[#202124] font-normal filter-size Montserrat-m border-[#808080] hover:bg-[#808080]`}
             >
               M
             </div>
             <div
               onClick={() => setSize("L")}
-              className="text-[#4d4d4d] font-bold  filter-size Montserrat-m border-[#d4d3d3] hover:bg-[#d4d3d3]"
+              className={`${
+                size === "L" && "scale-125 bg-[#d4d3d3]"
+              } text-[#4d4d4d] font-bold  filter-size Montserrat-m border-[#d4d3d3] hover:bg-[#d4d3d3]`}
             >
               L
             </div>
@@ -72,8 +82,20 @@ const Filter = (props) => {
           />
         </div>
         {colorState && (
-          <div className="filter-border-dashed flex-wrap flex-row">
-            <div
+          <div className="flex  pt-3  border-t border-dashed border-[#cccccc] border-opacity-50 flex-wrap flex-row">
+            {colorArray?.map((item) => {
+              const active = item === color;
+              return (
+                <div
+                  key={item}
+                  onClick={() => setColor(item)}
+                  className={`filter-color ${active && "scale-150"} ${
+                    colors[item]
+                  } cursor-pointer mb-4`}
+                />
+              );
+            })}
+            {/* <div
               onClick={() => setColor("red")}
               className="bg-[#ff5f6d] filter-color mb-4"
             />
@@ -96,7 +118,7 @@ const Filter = (props) => {
             <div
               onClick={() => setColor("white")}
               className="bg-[#ededed]  filter-color"
-            />
+            /> */}
           </div>
         )}
         <hr className="bg-[#979797]" />

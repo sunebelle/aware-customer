@@ -7,18 +7,18 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 
-const Items = ({ setSort, page, setPage, category }) => {
+const Items = ({ setSort, page, setPage, subCategoryName }) => {
   const { products } = useSelector((state) => state.product);
   const { isLoading } = useSelector((state) => state.ui);
 
-  // console.log(products);
+  console.log("items", products);
 
   return (
     <div className="w-full">
       <div className="flex justify-between">
         <Dropdown setSort={setSort} />
-        {products?.length === 20 && (
-          <Pagination page={page} setPage={setPage} />
+        {(products?.length === 20 || page >= 2) && (
+          <Pagination setPage={setPage} />
         )}
 
         {/* <Pagination page={page} setPage={setPage} /> */}
@@ -35,15 +35,17 @@ const Items = ({ setSort, page, setPage, category }) => {
           {/* <div className="grid grid-flow-col auto-cols-fr gap-2 mt-3 w-full"> */}
           <div className="grid-container--fill mt-3 w-full">
             {products?.map((product) => (
-              <Link key={product._id} to={`/product/${product._id}`}>
-                <CardItem product={product} category={category} />
-              </Link>
+              <CardItem
+                key={product._id}
+                product={product}
+                category={subCategoryName}
+              />
             ))}
           </div>
           <div className="flex justify-end mt-4">
             {/* <Pagination page={page} setPage={setPage} /> */}
-            {products?.length === 20 && (
-              <Pagination page={page} setPage={setPage} />
+            {(products?.length === 20 || page >= 2) && (
+              <Pagination setPage={setPage} />
             )}
           </div>
         </>
@@ -59,3 +61,15 @@ const Items = ({ setSort, page, setPage, category }) => {
 };
 
 export default Items;
+
+{
+  /* <Link
+  key={product._id}
+  to={{
+    pathname: `/product/${product.name.replaceAll(" ", "-")}.${product._id}`,
+    state: { category: subCategoryName },
+  }}
+>
+  <CardItem product={product} category={subCategoryName} />
+</Link>; */
+}
