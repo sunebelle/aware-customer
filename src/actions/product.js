@@ -14,11 +14,14 @@ export const getAllSubCategories = (categoryId) => async (dispatch) => {
 };
 
 export const getAllCategories = () => async (dispatch) => {
+  dispatch(uiActions.showLoader());
+
   try {
     const {
       data: { data },
     } = await api.get("/categories");
     dispatch(productActions.getCategories(data));
+    dispatch(uiActions.hideLoader());
   } catch (error) {
     console.log(error);
     // dispatch(

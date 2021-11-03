@@ -50,11 +50,14 @@ const Header = () => {
   };
 
   const handleCategoryId = (name, categoryId, category) => {
+    // history.push(`/categories/${category}.${categoryId}/products`);
     dispatch(
       productActions.getCategoryInfo({
         categoryId,
         title: `${name} / ${category}`,
         pathname: `/${name}/${category}`,
+        // pathname: `/categories/${category}.${categoryId}`,
+        // pathname: `${category}.${categoryId}`,
       })
     );
     history.push(`/${name}/${category}/products`);
@@ -177,3 +180,20 @@ const Header = () => {
 };
 
 export default Header;
+
+{
+  /* <Link
+                    key={category._id}
+                    to={`/categories/${category.name}.${category._id}/products`}
+                  >
+                    <span
+                      // key={category._id}
+                      // onClick={() =>
+                      //   handleCategoryId(item.name, category._id, category.name)
+                      // }
+                      className="Montserrat-m font-normal text-[#202124] cursor-pointer"
+                    >
+                      {category.name}
+                    </span>
+                  </Link> */
+}

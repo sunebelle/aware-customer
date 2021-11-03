@@ -110,20 +110,21 @@ const Product = () => {
     }${page && `page=${page}&`}${sort && `sort=${sort}`} `;
 
     history.push(url);
-
-    dispatch(
-      getAllProducts(
-        categoryId,
-        subCategoryId,
-        size,
-        color,
-        brand,
-        price,
-        available,
-        page,
-        sort
-      )
-    );
+    if (categoryId) {
+      dispatch(
+        getAllProducts(
+          categoryId,
+          subCategoryId,
+          size,
+          color,
+          brand,
+          price,
+          available,
+          page,
+          sort
+        )
+      );
+    }
   }, [
     dispatch,
     pathname,
