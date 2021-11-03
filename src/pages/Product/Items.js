@@ -4,14 +4,11 @@ import Pagination from "../../components/Pagination/Pagination";
 import CardItem from "./CardItem";
 // import { products } from "./dummyData";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 
 const Items = ({ setSort, page, setPage, subCategoryName }) => {
   const { products } = useSelector((state) => state.product);
   const { isLoading } = useSelector((state) => state.ui);
-
-  console.log("items", products);
 
   return (
     <div className="w-full">
@@ -62,14 +59,3 @@ const Items = ({ setSort, page, setPage, subCategoryName }) => {
 
 export default Items;
 
-{
-  /* <Link
-  key={product._id}
-  to={{
-    pathname: `/product/${product.name.replaceAll(" ", "-")}.${product._id}`,
-    state: { category: subCategoryName },
-  }}
->
-  <CardItem product={product} category={subCategoryName} />
-</Link>; */
-}

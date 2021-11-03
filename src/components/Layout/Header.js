@@ -135,23 +135,24 @@ const Header = () => {
               <img src="/img/arrow.svg" alt="arrow" />
             </div>
 
-            <div className="categories  ">
-              <div className=" category-content space-x-8 ">
-                {item?.categories?.map((category) => (
-                  <Link
-                    key={category._id}
-                    to={`/${item.name}/${category.name}.${category._id}/products`}
-                  >
+            {item?.categories?.map((category) => (
+              <Link
+                key={category._id}
+                to={`/${item.name}/${category.name}/products`}
+                // to={`/${item.name}/${category.name}.${category._id}/products`}
+              >
+                <div className="categories  ">
+                  <div className=" category-content space-x-8 ">
                     <span
                       key={category._id}
                       className="Montserrat-m font-normal text-[#202124] cursor-pointer"
                     >
                       {category.name}
                     </span>
-                  </Link>
-                ))}
-              </div>
-            </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         ))}
       </div>

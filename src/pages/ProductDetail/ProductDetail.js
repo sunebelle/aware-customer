@@ -7,7 +7,6 @@ import SimilarItem from "./SimilarItem";
 import RatingStar from "../../components/RatingStar/RatingStar";
 import {
   getAProduct,
-  getAllProducts,
   getSimilarBrandProducts,
   getAllSimilarProducts,
 } from "../../actions/product";
@@ -91,6 +90,12 @@ const ProductDetail = () => {
     } else {
       const addedProduct = { ...product, color, size, amount };
       dispatch(cartActions.add(addedProduct));
+      dispatch(
+        uiActions.showNotification({
+          status: "success",
+          message: "Successfully added to cart",
+        })
+      );
     }
   };
 
@@ -199,30 +204,6 @@ const ProductDetail = () => {
                         />
                       );
                     })}
-                    {/* <div
-                      onClick={() => setColor("red")}
-                      className="bg-[#ff5f6d] filter-color "
-                    />
-                    <div
-                      onClick={() => setColor("lightGold")}
-                      className="bg-[#ffd543] filter-color"
-                    />
-                    <div
-                      onClick={() => setColor("cornflower")}
-                      className="bg-[#5f6dff]  filter-color "
-                    />
-                    <div
-                      onClick={() => setColor("orange")}
-                      className="bg-[#ffa15f] filter-color "
-                    />
-                    <div
-                      onClick={() => setColor("charcoalGrey")}
-                      className="bg-[#3d3d3f] filter-color "
-                    />
-                    <div
-                      onClick={() => setColor("white")}
-                      className="bg-[#ededed]  filter-color "
-                    /> */}
                   </div>
                 </div>
                 <div className="flex flex-row mt-3">

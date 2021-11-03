@@ -1,18 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
 import useInput from "../../hooks/useInput";
 import { isNotEmpty, isEmail, isPassword } from "../../utils/formValidation";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
 import api from "../../axios";
 import { authActions } from "../../store/auth";
 import { uiActions } from "../../store/ui";
 
 const Register = ({ closeModalHandler }) => {
   const [error, setError] = useState("");
-  const history = useHistory();
   const dispatch = useDispatch();
 
   const {
@@ -52,9 +49,7 @@ const Register = ({ closeModalHandler }) => {
         credentials: "include",
       });
       dispatch(authActions.auth(data));
-      // history.push("/");
       dispatch(uiActions.hideRegisteredModal());
-      // window.location.reload(false);
     } catch (error) {
       setError(error?.response?.data?.message);
     }
@@ -142,14 +137,13 @@ const Register = ({ closeModalHandler }) => {
       </form>
       <div className="border-t w-full mt-8 items-center flex justify-center border-[#ededed]">
         <p className="Montserrat-m text-[#4d4d4d] font-medium py-4 ">
-          Do you have an account? {/* <Link to="/login"> */}
+          Do you have an account? 
           <span
             onClick={() => dispatch(uiActions.showLoggedInModal())}
             className="text-[#ff7413] font-bold  border-b border-[#ff7413] cursor-pointer "
           >
             Log in
           </span>
-          {/* </Link> */}
         </p>
       </div>
     </div>

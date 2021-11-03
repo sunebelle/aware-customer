@@ -10,7 +10,6 @@ export const createAReview = (review, productId) => async (dispatch) => {
       credentials: "include",
     });
     dispatch(reviewActions.createReview(data));
-    console.log(" action createReview", data);
   } catch (error) {
     console.log(error);
   }
@@ -45,7 +44,7 @@ export const updateAReview = (review, reviewId) => async (dispatch) => {
       withCredentials: true,
       credentials: "include",
     });
-    dispatch(reviewActions.deleteReview(reviewId));
+    dispatch(reviewActions.updateReview(data));
   } catch (error) {
     console.log(error);
   }

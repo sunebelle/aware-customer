@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router";
@@ -16,7 +17,7 @@ const Product = () => {
   const [available, setAvailable] = useState(""); //In-store
   const [page, setPage] = useState(""); //1
   const [sort, setSort] = useState(""); //popularity
-  const { subCategories } = useSelector((state) => state.product);
+  const {categories, subCategories } = useSelector((state) => state.product);
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
@@ -24,16 +25,14 @@ const Product = () => {
   const pathname = location?.pathname;
   const search = location?.search.replace("?", "");
   const titleURL = pathname.replace("/products", "");
-  const titleString = titleURL
-    .substr(0, titleURL.indexOf("."))
-    .replace("/", "");
+  const titleString = titleURL.replace("/", "");
   const titleArray = titleString.split("/");
   const title = titleArray.join(" / ");
-
-  const categoryId = titleURL.substr(
-    titleURL.indexOf(".") + 1,
-    titleURL.length
+  const parentCategory = categories.find((item) => item.name === titleArray[0]); //Level 1
+  const category = parentCategory.categories.find(
+    (item) => item.name === titleArray[1]
   );
+  const categoryId = category._id;
 
   useEffect(() => {
     setSubCategoryName("");
@@ -49,7 +48,6 @@ const Product = () => {
 
   useEffect(() => {
     if (search.trim()) {
-      console.log("search change re-render");
       const searchArray = search.split("&");
       searchArray.forEach((query) => {
         const strLength = query.length;
@@ -112,8 +110,6 @@ const Product = () => {
 
     history.push(url);
     if (categoryId) {
-      console.log(categoryId, subCategoryId);
-
       dispatch(
         getAllProducts(
           categoryId,

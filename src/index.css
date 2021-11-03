@@ -137,10 +137,16 @@ font-family: 'Montserrat', sans-serif; */
 
 /* show categories on hover */
 .categories {
-  display: none;
+  /* display: none; */
+  display: flex;
+  visibility: hidden;
+  /* display: block; */
   top: 30px;
   position: absolute;
   padding-top: 16px;
+  /* top: 50%; */
+  /* left: 50%;
+  transform: translate(-50%, -50%); */
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -159,10 +165,12 @@ font-family: 'Montserrat', sans-serif; */
 }
 /* Show the ladies menu on hover */
 .category-container:hover + .categories {
-  display: flex;
+  /* display: flex; */
+  visibility: visible;
 }
 .categories:hover {
-  display: flex;
+  /* display: flex; */
+  visibility: visible;
 }
 
 /*  Show quick shop on hover the product */

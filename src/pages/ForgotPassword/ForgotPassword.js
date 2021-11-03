@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
 import useInput from "../../hooks/useInput";
@@ -64,14 +63,12 @@ const ForgotPassword = ({ closeModalHandler }) => {
       <div className="border-t w-full mt-10 items-center flex justify-center border-[#ededed]">
         <p className="Montserrat-m text-[#4d4d4d] font-medium py-4">
           I remember my password now. {""}
-          {/* <Link to="/login"> */}
           <span
             onClick={() => dispatch(uiActions.showLoggedInModal())}
             className="text-[#ff7413] font-bold border-b border-[#ff7413] cursor-pointer "
           >
             Log in
           </span>
-          {/* </Link> */}
         </p>
       </div>
     </div>

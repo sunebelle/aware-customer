@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 
 const Pagination = ({ setPage }) => {
   const [pageState, setPageState] = useState(1);
@@ -7,7 +6,6 @@ const Pagination = ({ setPage }) => {
   //   products: { numberOfPages },
   // } = useSelector((state) => state.product);
   let numberOfPages = 2;
-  // const [page, setPage] = useState(1);
   const nextPage = () => {
     if (pageState < numberOfPages) {
       setPage(pageState + 1);

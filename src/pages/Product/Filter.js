@@ -95,30 +95,6 @@ const Filter = (props) => {
                 />
               );
             })}
-            {/* <div
-              onClick={() => setColor("red")}
-              className="bg-[#ff5f6d] filter-color mb-4"
-            />
-            <div
-              onClick={() => setColor("lightGold")}
-              className="bg-[#ffd543] filter-color mb-4"
-            />
-            <div
-              onClick={() => setColor("cornflower")}
-              className="bg-[#5f6dff]  filter-color mb-4"
-            />
-            <div
-              onClick={() => setColor("orange")}
-              className="bg-[#ffa15f] filter-color mb-4"
-            />
-            <div
-              onClick={() => setColor("charcoalGrey")}
-              className="bg-[#3d3d3f] filter-color "
-            />
-            <div
-              onClick={() => setColor("white")}
-              className="bg-[#ededed]  filter-color"
-            /> */}
           </div>
         )}
         <hr className="bg-[#979797]" />
