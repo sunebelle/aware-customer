@@ -1,26 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  categoryLocation: null,
   subCategories: [],
   categories: [],
   products: [],
   product: "",
   similarBrandProducts: [],
   // productsBySearch: [],
+  similarProducts: [],
 };
 
 const productSlice = createSlice({
   name: " products",
   initialState,
   reducers: {
-    getCategoryInfo(state, action) {
-      state.categoryLocation = {
-        categoryId: action.payload.categoryId,
-        title: action.payload.title,
-        pathname: action.payload.pathname,
-      };
-    },
     getSubCategories(state, action) {
       state.subCategories = action.payload;
     },
@@ -35,6 +28,9 @@ const productSlice = createSlice({
     },
     getBrandProducts(state, action) {
       state.similarBrandProducts = action.payload;
+    },
+    getSimilarProducts(state, action) {
+      state.similarProducts = action.payload;
     },
     // getProductsBySearch(state, action) {
     //   state.productsBySearch = action.payload;

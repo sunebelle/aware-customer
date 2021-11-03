@@ -9,6 +9,7 @@ import {
   getAProduct,
   getAllProducts,
   getSimilarBrandProducts,
+  getAllSimilarProducts,
 } from "../../actions/product";
 import Loader from "../../components/Loader/Loader";
 import { uiActions } from "../../store/ui";
@@ -17,9 +18,13 @@ import colors from "../../utils/color";
 import { Link } from "react-router-dom";
 
 const ProductDetail = () => {
-  const { products, product, categories, similarBrandProducts } = useSelector(
-    (state) => state.product
-  );
+  const {
+    // products,
+    product,
+    categories,
+    similarBrandProducts,
+    similarProducts,
+  } = useSelector((state) => state.product);
   const { isLoading } = useSelector((state) => state.ui);
 
   const [showImage, setShowImage] = useState("");
@@ -43,7 +48,8 @@ const ProductDetail = () => {
     if (product) {
       setSubName(product.category[0].name);
       const categoryId = product.category[0].parentId;
-      dispatch(getAllProducts(categoryId));
+      // dispatch(getAllProducts(categoryId));
+      dispatch(getAllSimilarProducts(categoryId));
       dispatch(getSimilarBrandProducts(categoryId, product));
       const categoryParent = categories?.find((category) =>
         category.categories.map((item) => item._id === categoryId)
@@ -54,7 +60,7 @@ const ProductDetail = () => {
     }
   }, [product, dispatch, categories]);
 
-  const similarProducts = products?.filter(
+  const similarProductsArray = similarProducts?.filter(
     (product) => product._id !== productId
   );
 
@@ -312,7 +318,7 @@ const ProductDetail = () => {
           <Review product={product} />
 
           {/* you may also like component */}
-          {similarProducts.length > 0 && (
+          {similarProductsArray.length > 0 && (
             <div className="flex w-full items-center flex-nowrap">
               <div className=" w-[80px] h-[2px]  border border-[#979797] opacity-50" />
               <h2 className="px-4"> You may also like </h2>
@@ -321,7 +327,7 @@ const ProductDetail = () => {
           )}
           <SimilarItem
             category={subCategoryName ? subCategoryName : subName}
-            similarProducts={similarProducts}
+            similarProducts={similarProductsArray}
           />
         </div>
       )}

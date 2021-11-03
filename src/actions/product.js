@@ -14,14 +14,13 @@ export const getAllSubCategories = (categoryId) => async (dispatch) => {
 };
 
 export const getAllCategories = () => async (dispatch) => {
-  dispatch(uiActions.showLoader());
-
+  dispatch(uiActions.showAppLoader());
   try {
     const {
       data: { data },
     } = await api.get("/categories");
     dispatch(productActions.getCategories(data));
-    dispatch(uiActions.hideLoader());
+    dispatch(uiActions.hideAppLoader());
   } catch (error) {
     console.log(error);
     // dispatch(
@@ -80,16 +79,17 @@ export const getAProduct = (id) => async (dispatch) => {
   }
 };
 
-// export const getSimilarProducts = (categoryId) => async (dispatch) => {
-//   try {
-//     const {
-//       data: { data },
-//     } = await api.get(`/categories/${categoryId}/products`);
-//     dispatch(productActions.getProducts(data));
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+export const getAllSimilarProducts = (categoryId) => async (dispatch) => {
+  try {
+    const {
+      data: { data },
+    } = await api.get(`/categories/${categoryId}/products`);
+    // dispatch(productActions.getProducts(data));
+    dispatch(productActions.getSimilarProducts(data));
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const getSimilarBrandProducts =
   (categoryId, product) => async (dispatch) => {
     try {

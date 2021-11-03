@@ -52,15 +52,17 @@ const CardItem = ({ product, category }) => {
           state: { category },
         }}
       >
-        <h2 className="Montserrat font-medium text-sm leading-[1.43rem] text-[#202124]">
-          {product.name}
-        </h2>
-        <h2 className="Montserrat font-medium text-sm leading-[1.43rem] text-[#202124]">
-          {category ? category : product.category[0].name}
-        </h2>
-        <p className="Montserrat-s font-normal text-[#4d4d4d]">
-          {numeral(product.price).format("$0,0.00")}
-        </p>
+        <div>
+          <h2 className="Montserrat font-medium text-sm leading-[1.43rem] text-[#202124]">
+            {product.name}
+          </h2>
+          <h2 className="Montserrat font-medium text-sm leading-[1.43rem] text-[#202124]">
+            {category ? category : product.category[0].name}
+          </h2>
+          <p className="Montserrat-s font-normal text-[#4d4d4d]">
+            {numeral(product.price).format("$0,0.00")}
+          </p>
+        </div>
       </Link>
     </div>
   );

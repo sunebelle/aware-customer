@@ -1,16 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { uiActions } from "../../store/ui";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { logUserOut } from "../../actions/auth";
-import {
-  getAllCategories,
-  getAllProductsBySearch,
-} from "../../actions/product";
 import Baskets from "../Layout/Baskets";
-import { productActions } from "../../store/product";
 
 const Header = () => {
   const history = useHistory();
@@ -24,24 +19,20 @@ const Header = () => {
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter" && search.trim()) {
-      dispatch(getAllProductsBySearch(search));
       history.push(`/products/search?name=${search}`);
+      // dispatch(getAllProductsBySearch(search));
     }
   };
 
-  // console.log(JSON.parse(localStorage.getItem("profile")));
   const handleRegister = () => {
     dispatch(uiActions.showRegisteredModal());
-    // history.push("/register");
   };
   const handleLoggedIn = () => {
     dispatch(uiActions.showLoggedInModal());
-    // history.push("/login");
   };
   const handleLogout = () => {
     setOpenUserSetting(false);
     dispatch(logUserOut());
-    // history.push("/");
   };
 
   const handleAccountSetting = () => {
@@ -49,19 +40,6 @@ const Header = () => {
     history.push("/user/account-setting");
   };
 
-  const handleCategoryId = (name, categoryId, category) => {
-    // history.push(`/categories/${category}.${categoryId}/products`);
-    dispatch(
-      productActions.getCategoryInfo({
-        categoryId,
-        title: `${name} / ${category}`,
-        pathname: `/${name}/${category}`,
-        // pathname: `/categories/${category}.${categoryId}`,
-        // pathname: `${category}.${categoryId}`,
-      })
-    );
-    history.push(`/${name}/${category}/products`);
-  };
   return (
     <div>
       <div className="grid relative grid-cols-3 pt-5 px-4 lg:px-10 xl:px-20 pb-2  justify-between items-center">
@@ -160,15 +138,17 @@ const Header = () => {
             <div className="categories  ">
               <div className=" category-content space-x-8 ">
                 {item?.categories?.map((category) => (
-                  <span
+                  <Link
                     key={category._id}
-                    onClick={() =>
-                      handleCategoryId(item.name, category._id, category.name)
-                    }
-                    className="Montserrat-m font-normal text-[#202124] cursor-pointer"
+                    to={`/${item.name}/${category.name}.${category._id}/products`}
                   >
-                    {category.name}
-                  </span>
+                    <span
+                      key={category._id}
+                      className="Montserrat-m font-normal text-[#202124] cursor-pointer"
+                    >
+                      {category.name}
+                    </span>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -180,20 +160,3 @@ const Header = () => {
 };
 
 export default Header;
-
-{
-  /* <Link
-                    key={category._id}
-                    to={`/categories/${category.name}.${category._id}/products`}
-                  >
-                    <span
-                      // key={category._id}
-                      // onClick={() =>
-                      //   handleCategoryId(item.name, category._id, category.name)
-                      // }
-                      className="Montserrat-m font-normal text-[#202124] cursor-pointer"
-                    >
-                      {category.name}
-                    </span>
-                  </Link> */
-}

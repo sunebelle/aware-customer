@@ -1,5 +1,3 @@
-/* eslint-disable */
-import { colors } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router";
@@ -9,9 +7,6 @@ import Filter from "./Filter";
 import Items from "./Items";
 
 const Product = () => {
-  const [categoryId, setCategoryId] = useState("");
-  // const [title, setTitle] = useState("");
-  // const [pathname, setPathname] = useState("");
   const [subCategoryName, setSubCategoryName] = useState(""); //all
   const [subCategoryId, setSubCategoryId] = useState("");
   const [size, setSize] = useState("");
@@ -21,35 +16,58 @@ const Product = () => {
   const [available, setAvailable] = useState(""); //In-store
   const [page, setPage] = useState(""); //1
   const [sort, setSort] = useState(""); //popularity
-  const { categories, subCategories } = useSelector((state) => state.product);
+  const { subCategories } = useSelector((state) => state.product);
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
 
-  // const {
-  //   categoryLocation: { categoryId, pathname, title },
-  // } = useSelector((state) => state.product);
-
   const pathname = location?.pathname;
-  const search = location?.search;
+  const search = location?.search.replace("?", "");
   const titleURL = pathname.replace("/products", "");
-  const titleString = titleURL.replace("/", "");
+  const titleString = titleURL
+    .substr(0, titleURL.indexOf("."))
+    .replace("/", "");
   const titleArray = titleString.split("/");
   const title = titleArray.join(" / ");
-  const category = categories.find((item) => item.name === titleArray[0]); //Level 1
+
+  const categoryId = titleURL.substr(
+    titleURL.indexOf(".") + 1,
+    titleURL.length
+  );
 
   useEffect(() => {
-    if (search) {
-      const searchURL = search.replace("?", "");
-      const searchArray = searchURL.split("&");
+    setSubCategoryName("");
+    setSubCategoryId("");
+    setSize("");
+    setColor("");
+    setBrand("");
+    setPrice("");
+    setAvailable("");
+    setSort("");
+    setPage("");
+  }, [pathname]);
+
+  useEffect(() => {
+    if (search.trim()) {
+      console.log("search change re-render");
+      const searchArray = search.split("&");
       searchArray.forEach((query) => {
         const strLength = query.length;
         const index = query.indexOf("=");
         const searchKey = query.substr(0, index);
         const searchValue = query.substr(index + 1, strLength);
         // console.log(searchKey, searchValue);
-        if (searchKey && searchValue) {
-          if (searchKey === "category") {
+        switch (searchKey) {
+          case "brand":
+            setBrand(searchValue);
+            break;
+          case "size":
+            setSize(searchValue);
+            break;
+          case "color":
+            setColor(searchValue);
+            break;
+          case "category":
             setSubCategoryName(searchValue);
             const subCategory = subCategories?.find(
               (item) => item.name === searchValue
@@ -57,48 +75,31 @@ const Product = () => {
             if (subCategory) {
               setSubCategoryId(subCategory._id);
             }
-          } else if (searchKey === "brand") {
-            setBrand(searchValue);
-          } else if (searchKey === "size") {
-            setSize(searchValue);
-          } else if (searchKey === "color") {
-            setColor(searchValue);
-          } else if (searchKey === "price") {
-            setPrice(searchValue);
-          } else if (searchKey === "sort") {
+            break;
+          case "available":
+            setAvailable(searchValue);
+            break;
+          case "sort":
             setSort(searchValue);
-          } else if (searchKey === "page") {
-            setPage(searchKey);
-          } else if (searchKey === "available") {
-            setAvailable(searchKey);
-          }
-          // }
-        } else {
-          setSubCategoryName("");
-          setSubCategoryId("");
-          setSize("");
-          setColor("");
-          setBrand("");
-          setPrice("");
-          setAvailable("");
-          setSort("");
-          setPage("");
+            break;
+          case "page":
+            setPage(searchValue);
+            break;
+          case "price":
+            setPrice(searchValue);
+            break;
+          default:
+            break;
         }
       });
     }
   }, []);
 
   useEffect(() => {
-    if (category) {
-      const subCategory = category?.categories.find(
-        (item) => item.name === titleArray[1]
-      );
-      setCategoryId(subCategory._id);
-      dispatch(getAllSubCategories(subCategory._id));
+    if (categoryId) {
+      dispatch(getAllSubCategories(categoryId));
     }
-  }, [dispatch, category]);
-
-  console.log(categoryId);
+  }, [categoryId, dispatch]);
 
   useEffect(() => {
     const url = `${pathname}?${
@@ -111,6 +112,8 @@ const Product = () => {
 
     history.push(url);
     if (categoryId) {
+      console.log(categoryId, subCategoryId);
+
       dispatch(
         getAllProducts(
           categoryId,

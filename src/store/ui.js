@@ -6,6 +6,7 @@ const initialState = {
   isForgotPassword: false,
   notification: null,
   isLoading: false,
+  isAppLoading: false,
 };
 
 const uiSlice = createSlice({
@@ -48,6 +49,12 @@ const uiSlice = createSlice({
     },
     hideLoader(state) {
       state.isLoading = false;
+    },
+    showAppLoader(state) {
+      state.isAppLoading = true;
+    },
+    hideAppLoader(state) {
+      state.isAppLoading = false;
     },
   },
 });

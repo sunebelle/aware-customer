@@ -14,12 +14,13 @@ import Loader from "./components/Loader/Loader";
 
 const App = () => {
   const { user } = useSelector((state) => state.auth);
-  const { isLoading } = useSelector((state) => state.ui);
+  const { isAppLoading } = useSelector((state) => state.ui);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllCategories());
   }, [dispatch]);
-  if (isLoading) {
+
+  if (isAppLoading) {
     return (
       <div className="w-screen h-screen grid place-items-center">
         <Loader />
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/" exact>
           <Home />
         </Route>
+
         <Route path="/user/account-setting">
           {user ? <Profile /> : <Home />}
         </Route>
@@ -47,9 +49,9 @@ const App = () => {
         <Route path="/Boys/*" exact>
           <Product />
         </Route>
-        <Route path="/categories">
+        {/* <Route path="/category/:categoryId">
           <Product />
-        </Route>
+        </Route> */}
         <Route path="/cart" exact>
           <Cart />
         </Route>
@@ -70,12 +72,4 @@ const App = () => {
   );
 };
 
-// {/* <Route path="/reset-password/:token">
-//   {isForgotPassword && (
-//     <Modal closeModalHandler={closeForgotPasswordModal}>
-//       <ForgotPassword closeModalHandler={closeForgotPasswordModal} />
-//     </Modal>
-//   )}
-//   <Home />
-// </Route>; */}
 export default App;

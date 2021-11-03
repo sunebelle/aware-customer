@@ -15,7 +15,7 @@ const SearchProduct = () => {
   useEffect(() => {
     const searchQuery = location?.search.replaceAll("?name=", "");
     dispatch(getAllProductsBySearch(searchQuery));
-  }, []);
+  }, [location?.search, dispatch]);
 
   return (
     <>
