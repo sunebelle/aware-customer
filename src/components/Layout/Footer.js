@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="border-t border-[#ececec] px-4 lg:px-10 xl:px-20">
+    <div className="border-t border-[#ececec] px-4 lg:px-10 xl:px-20 2xl:px-30">
       <div className="flex justify-between items-center py-8">
         <img src="/img/logo.svg" alt="logo" />
         <div className="flex flex-row text-[#b7b7b7] Montserrat-m font-normal space-x-4">

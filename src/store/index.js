@@ -12,5 +12,6 @@ const store = configureStore({
     auth: authReducer,
     product: productReducer,
   },
+  // middleware: [],
 });
 export default store;

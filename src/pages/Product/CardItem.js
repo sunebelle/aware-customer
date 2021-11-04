@@ -20,9 +20,9 @@ const CardItem = ({ product, category }) => {
     dispatch(cartActions.add(addedProduct));
   };
   return (
-    // <div className="flex flex-col w-[180px] ">
+    // <div className="flex flex-col w-[180px] ">  || mb-3
 
-    <div className="w-[180px] mb-3 cursor-pointer hover:scale-105">
+    <div className="w-[180px] cursor-pointer hover:scale-105">
       <div className="relative h-[269px] w-full quick-shop-container cursor-pointer mb-2 ">
         <img
           className=" w-full h-full object-fill "

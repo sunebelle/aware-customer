@@ -29,7 +29,8 @@ const SearchProduct = () => {
           </p>
         </div>
       ) : (
-        <div className="grid-container--fill w-full">
+        <div className="inline-flex flex-wrap gap-5 w-full">
+          {/* <div className="grid-container--fill w-full"> || justify-start space-x-5 mb-4*/}
           {products?.map((product) => (
             <CardItem key={product._id} product={product} />
           ))}

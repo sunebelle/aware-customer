@@ -43,7 +43,7 @@ const Header = () => {
 
   return (
     <div>
-      <div className="grid relative grid-cols-3 pt-5 px-4 lg:px-10 xl:px-20 pb-3  justify-between items-center">
+      <div className="grid relative grid-cols-3 pt-5 px-4 lg:px-10 xl:px-20 2xl:px-30 pb-3  justify-between items-center">
         <div className="border rounded-full w-56 border-[#b7b7b7] flex h-8 px-2 items-center">
           <input
             onChange={(e) => setSearch(e.target.value)}
@@ -111,7 +111,7 @@ const Header = () => {
           onMouseEnter={() => setOpenUserSetting(true)}
           className={` ${
             openUserSetting ? "visible" : "invisible"
-          } absolute z-10 top-0 right-28 w-44 flex-start shadow-lg bg-[#fbfbfb] border border-[#eaeaea] flex flex-col p-2 space-y-2`}
+          } absolute z-10 top-0 right-[122px] w-44 flex-start shadow-lg bg-[#fbfbfb] border border-[#eaeaea] flex flex-col p-2 space-y-2`}
         >
           <p
             onClick={handleAccountSetting}

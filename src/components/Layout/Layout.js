@@ -53,7 +53,8 @@ const Layout = ({ children }) => {
       )}
       <Header />
       {notification && <ToastContainer autoClose={3000} position="top-right" />}
-      <main className="px-4 lg:px-10 xl:px-20 py-8">{children}</main>
+      <main className="px-4 lg:px-10 xl:px-20 2xl:px-30 py-8">{children}</main>
+      {/* <main className="px-4 lg:px-10 xl:px-20 py-8">{children}</main> */}
       <Footer />
     </>
   );

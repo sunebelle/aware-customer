@@ -30,7 +30,8 @@ const Items = ({ setSort, page, setPage, subCategoryName }) => {
           {/* Many items display here */}
           {/* <div className="flex flex-row flex-wrap justify-start space-y-4 first:space-y-0 mt-4 w-full"> */}
           {/* <div className="grid grid-flow-col auto-cols-fr gap-2 mt-3 w-full"> */}
-          <div className="grid-container--fill mt-3 w-full">
+          <div className="inline-flex flex-wrap gap-5 w-full mt-4">
+            {/* <div className="grid-container--fill mt-3 w-full"> */}
             {products?.map((product) => (
               <CardItem
                 key={product._id}
@@ -58,4 +59,3 @@ const Items = ({ setSort, page, setPage, subCategoryName }) => {
 };
 
 export default Items;
-
