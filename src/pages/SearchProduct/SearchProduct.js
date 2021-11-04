@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import CardItem from "../Product/CardItem";
 import Loader from "../../components/Loader/Loader";
@@ -32,14 +31,7 @@ const SearchProduct = () => {
       ) : (
         <div className="grid-container--fill w-full">
           {products?.map((product) => (
-            <Link
-              key={product._id}
-              to={`/product/${product.name.replaceAll(" ", "-")}.${
-                product._id
-              }`}
-            >
-              <CardItem product={product} />
-            </Link>
+            <CardItem key={product._id} product={product} />
           ))}
         </div>
       )}

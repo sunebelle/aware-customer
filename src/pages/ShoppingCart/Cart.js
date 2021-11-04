@@ -29,7 +29,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="text-[#202124]">
+    <div className="text-[#202124] mb-2">
       <h1 className=" mb-8 Montserrat font-medium text-2xl leading-5  ">
         My Bag
       </h1>

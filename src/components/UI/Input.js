@@ -30,11 +30,13 @@ const Input = ({
             ? "border-[#f63f45] border bg-[#f63f45] bg-opacity-5 "
             : bgColor
             ? "bg-[#ffffff] border-none"
+            : isValid
+            ? "bg-[#f6f6f6]  border-[#b7b7b7] border "
             : "bg-[#f6f6f6] border-none"
-        } w-full my-1 px-4 py-2 Montserrat-m text-[#4d4d4d] font-medium focus:outline-[#b7b7b7]`}
+        } w-full my-1 px-5 py-2.5 Montserrat-m text-[#4d4d4d] font-medium  focus:outline-none `}
         placeholder={placeholder}
       />
-      {/* bg-[rgba(246, 63, 69, 0.04)]: https://simplecss.eu/rgbatohex.html */}
+      {/* bg-[rgba(246, 63, 69, 0.04)]: https://simplecss.eu/rgbatohex.html focus:outline-[#b7b7b7] */}
 
       {type !== "password" && (
         <p

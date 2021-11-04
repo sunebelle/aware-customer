@@ -6,7 +6,7 @@ const RatingStar = ({ rating, setRating, hover, setHover }) => {
   //   const [hover, setHover] = useState(null);
   //   console.log(rating);
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row ">
       {[...Array(5)].map((_, i) => {
         const ratingValue = i + 1;
         return (

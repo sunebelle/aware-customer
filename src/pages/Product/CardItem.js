@@ -14,6 +14,7 @@ const CardItem = ({ product, category }) => {
       amount: 1,
       color: product.color[0],
       size: product.size[0],
+      category: category ? category : product.category[0].name,
     };
     // console.log(addedProduct);
     dispatch(cartActions.add(addedProduct));
@@ -29,9 +30,9 @@ const CardItem = ({ product, category }) => {
           alt={product.name}
         />
         {product.quantity >= 1 && (
-          <div
+          <div //h-[54px]
             onClick={handleAddProductToCart}
-            className=" quick-shop cursor-pointer bg-[#ffa15f] h-[54px] absolute bottom-0 w-full"
+            className=" quick-shop cursor-pointer bg-[#ffa15f] absolute bottom-0 w-full"
           >
             <span className="Montserrat-m font-medium text-white py-4 flex justify-center items-center">
               + Quick shop
@@ -53,10 +54,10 @@ const CardItem = ({ product, category }) => {
         }}
       >
         <div>
-          <h2 className="Montserrat font-medium text-sm leading-[1.43rem] text-[#202124]">
+          <h2 className="Montserrat font-medium line-clamp-2 text-sm leading-[1.43rem] text-[#202124]">
             {product.name}
           </h2>
-          <h2 className="Montserrat font-medium text-sm leading-[1.43rem] text-[#202124]">
+          <h2 className="Montserrat font-medium line-clamp-1 text-sm leading-[1.43rem] text-[#202124]">
             {category ? category : product.category[0].name}
           </h2>
           <p className="Montserrat-s font-normal text-[#4d4d4d]">

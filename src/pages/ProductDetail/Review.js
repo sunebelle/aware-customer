@@ -37,7 +37,7 @@ const Review = ({ product }) => {
     // setEditReview(true);
   };
   return (
-    <div className="w-full px-24">
+    <div className="w-full px-24 pt-4  pb-14">
       {!user ? (
         reviews?.length > 0 ? (
           <>
@@ -56,33 +56,40 @@ const Review = ({ product }) => {
                     month[new Date(review.createdAt).getMonth()]
                   }`}</p>
                 </div>
-                <div className=" flex col-span-5 flex-col bg-[#f9f9f9] py-4 px-4">
-                  <h2 className="text-[#202124] Montserrat-b ">
-                    {review.title}
-                  </h2>
-                  <RatingStar
-                    rating={review.rating}
-                    setRating={() => {}}
-                    setHover={() => {}}
-                  />
-                  {review.review && (
-                    <p className="Montserrat-m text-[#4d4d4d] font-normal pt-5">
-                      {review.review}
-                    </p>
-                  )}
+                {/* <div className=" flex col-span-5 flex-col bg-[#f9f9f9] py-4 px-4"> */}
+                <div className=" col-span-5  ">
+                  <div className="bg-[#f9f9f9] py-4 px-4 flex flex-col">
+                    <h2 className="text-[#202124] Montserrat-b ">
+                      {review.title}
+                    </h2>
+                    <div className="pb-1">
+                      <RatingStar
+                        rating={review.rating}
+                        setRating={() => {}}
+                        setHover={() => {}}
+                      />
+                    </div>
+                    {review.review && (
+                      <p className="Montserrat-m text-[#4d4d4d] font-normal pt-4">
+                        {review.review}
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
           </>
         ) : (
-          <div className="Montserrat-m font-normal text-[#b7b7b7] text-center py-20">
+          <div className="Montserrat-m font-normal text-[#b7b7b7] text-center pt-16 pb-6">
+            {/* <div className="Montserrat-m font-normal text-[#b7b7b7] text-center py-20"> */}
             No reviews
           </div>
         )
       ) : userReview ? (
         <>
           {/* edit and filterReview */}
-          <div className="grid grid-cols-6 py-4 border-b border-solid border-[#cccccc] border-opacity-50 ">
+          <div className="grid grid-cols-6  ">
+            {/* <div className="grid grid-cols-6 py-4  border-b border-solid border-[#cccccc] border-opacity-50 "> */}
             <div className="col-span-1 py-4 ">
               <h2 className="text-[#202124] Montserrat-m font-bold">You</h2>
               <p className="Montserrat-s font-normal text-[#202124] ">
@@ -96,22 +103,29 @@ const Review = ({ product }) => {
               </p>
               {/* <p className="Montserrat-s font-normal text-[#202124] ">Edit | Delete</p> */}
             </div>
-            <div className=" flex col-span-5 flex-col bg-[#f9f9f9] py-4 px-4">
-              <h2 className="text-[#202124] Montserrat-m font-bold">
-                {userReview.title}
-              </h2>
-              <RatingStar
-                rating={userReview.rating}
-                setRating={() => {}}
-                setHover={() => {}}
-              />
-              {userReview.review && (
-                <p className="Montserrat-m text-[#4d4d4d] font-normal pt-5">
-                  {userReview.review}
-                </p>
-              )}
+            <div className="  col-span-5 ">
+              <div className="bg-[#f9f9f9] py-4 px-4 flex flex-col">
+                <h2 className="text-[#202124] Montserrat-m font-bold">
+                  {userReview.title}
+                </h2>
+                <div className="pb-1">
+                  <RatingStar
+                    rating={userReview.rating}
+                    setRating={() => {}}
+                    setHover={() => {}}
+                  />
+                </div>
+                {userReview.review && (
+                  <p className="Montserrat-m text-[#4d4d4d] font-normal pt-4">
+                    {userReview.review}
+                  </p>
+                )}
+              </div>
             </div>
           </div>
+          {filteredReviews.length > 0 && (
+            <div className="border-b border-solid border-[#cccccc] border-opacity-50 mt-4 " />
+          )}
           {filteredReviews?.map((review) => (
             <div
               key={review._id}
@@ -127,18 +141,24 @@ const Review = ({ product }) => {
                   month[new Date(review.createdAt).getMonth()]
                 }`}</p>
               </div>
-              <div className=" flex col-span-5 flex-col bg-[#f9f9f9] py-4 px-4">
-                <h2 className="text-[#202124] Montserrat-b ">{review.title}</h2>
-                <RatingStar
-                  rating={review.rating}
-                  setRating={() => {}}
-                  setHover={() => {}}
-                />
-                {review.review && (
-                  <p className="Montserrat-m text-[#4d4d4d] font-normal pt-5">
-                    {review.review}
-                  </p>
-                )}
+              <div className="  col-span-5 ">
+                <div className="bg-[#f9f9f9] py-4 px-4 flex flex-col">
+                  <h2 className="text-[#202124] Montserrat-b ">
+                    {review.title}
+                  </h2>
+                  <div className="pb-1">
+                    <RatingStar
+                      rating={review.rating}
+                      setRating={() => {}}
+                      setHover={() => {}}
+                    />
+                  </div>
+                  {review.review && (
+                    <p className="Montserrat-m text-[#4d4d4d] font-normal pt-4">
+                      {review.review}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
           ))}
@@ -148,7 +168,8 @@ const Review = ({ product }) => {
           {/* form and reviews */}
           <form
             onSubmit={handleReview}
-            className="grid grid-cols-6 py-4 border-b border-solid border-[#cccccc] border-opacity-50 "
+            className="grid grid-cols-6  "
+            // className="grid grid-cols-6  border-b border-solid border-[#cccccc] border-opacity-50 "
           >
             <div className="col-span-1 py-4">
               <h2 className="text-[#202124] Montserrat-m font-bold">You</h2>
@@ -191,6 +212,9 @@ const Review = ({ product }) => {
               </div>
             </div>
           </form>
+          {reviews.length > 0 && (
+            <div className="border-b border-solid border-[#cccccc] border-opacity-50 mt-4 " />
+          )}
           {reviews.map((review) => (
             <div
               key={review._id}
@@ -206,18 +230,24 @@ const Review = ({ product }) => {
                   month[new Date(review.createdAt).getMonth()]
                 }`}</p>
               </div>
-              <div className=" flex col-span-5 flex-col bg-[#f9f9f9] py-4 px-4">
-                <h2 className="text-[#202124] Montserrat-b ">{review.title}</h2>
-                <RatingStar
-                  rating={review.rating}
-                  setRating={() => {}}
-                  setHover={() => {}}
-                />
-                {review.review && (
-                  <p className="Montserrat-m text-[#4d4d4d] font-normal pt-5">
-                    {review.review}
-                  </p>
-                )}
+              <div className="  col-span-5 ">
+                <div className="bg-[#f9f9f9] py-4 px-4 flex flex-col">
+                  <h2 className="text-[#202124] Montserrat-b ">
+                    {review.title}
+                  </h2>
+                  <div className="pb-1">
+                    <RatingStar
+                      rating={review.rating}
+                      setRating={() => {}}
+                      setHover={() => {}}
+                    />
+                  </div>
+                  {review.review && (
+                    <p className="Montserrat-m text-[#4d4d4d] font-normal pt-4">
+                      {review.review}
+                    </p>
+                  )}
+                </div>
               </div>
             </div>
           ))}

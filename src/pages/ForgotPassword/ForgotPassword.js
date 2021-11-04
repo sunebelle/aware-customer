@@ -40,10 +40,10 @@ const ForgotPassword = ({ closeModalHandler }) => {
         alt="cross"
       />
       <form onSubmit={handleRegister} className="px-20 py-4 w-full">
-        <h2 className=" text-center Montserrat font-bold text-3xl leading-5 pt-8 pb-3 text-[#202124]">
+        <h2 className=" text-center Montserrat font-bold text-3xl leading-5 pt-8 pb-4 text-[#202124]">
           Forgot Password
         </h2>
-        <p className="Montserrat-s mb-4 font-medium text-center text-[#808080]">
+        <p className="Montserrat-s mb-6 font-medium text-center text-[#808080]">
           Enter your e-mail address below and we’ll get you back on track.
         </p>
         <Input
@@ -58,10 +58,15 @@ const ForgotPassword = ({ closeModalHandler }) => {
           errorMessage={userEmailHasError && "Please enter a valid e-mail!"}
         />
 
-        <Button type="submit" label="Submit" btnDisabled={!formIsValid} />
+        <Button
+          addCSS="mt-2"
+          type="submit"
+          label="Submit"
+          btnDisabled={!formIsValid}
+        />
       </form>
-      <div className="border-t w-full mt-10 items-center flex justify-center border-[#ededed]">
-        <p className="Montserrat-m text-[#4d4d4d] font-medium py-4">
+      <div className="border-t w-full mt-12 items-center flex justify-center border-[#ededed]">
+        <p className="Montserrat-m text-[#4d4d4d] font-medium py-5">
           I remember my password now. {""}
           <span
             onClick={() => dispatch(uiActions.showLoggedInModal())}

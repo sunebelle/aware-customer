@@ -61,7 +61,7 @@ const Filter = (props) => {
               onClick={() => setSize("L")}
               className={`${
                 size === "L" && "scale-125 bg-[#d4d3d3]"
-              } text-[#4d4d4d] font-bold  filter-size Montserrat-m border-[#d4d3d3] hover:bg-[#d4d3d3]`}
+              } text-[#4d4d4d] font-bold text-opacity-30 filter-size Montserrat-m border-[#d4d3d3] hover:bg-[#d4d3d3]`}
             >
               L
             </div>

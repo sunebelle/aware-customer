@@ -48,16 +48,18 @@ const Item = ({ product }) => {
           <div className="py-2 text-left  flex flex-row ">
             <img
               className="w-[80px] h-[113px]"
-              src="https://tse4.mm.bing.net/th?id=OIP.51RNGQ5rSUtPzF0EQdOkDwHaJ4&pid=Api&P=0&w=300&h=300"
-              alt="product"
+              src={product.imageCover}
+              alt={product.name}
             />
             <div className="flex flex-col justify-between pl-4">
-              <h2 className="Montserrat font-medium text-sm leading-5 ">
-                {product.name}
-              </h2>
-              <h2 className="Montserrat font-medium text-sm leading-5 ">
-                Minidress
-              </h2>
+              <div className="w-2/3">
+                <h2 className="Montserrat line-clamp-2 font-medium text-sm leading-5 ">
+                  {product.name}
+                </h2>
+                <h2 className="Montserrat  line-clamp-1 font-medium text-sm leading-5 ">
+                  {product.category}
+                </h2>
+              </div>
               <div className="Montserrat-s font-normal  flex flex-row">
                 <button className="cursor-pointer">Change</button>
                 <span className="px-1"> | </span>

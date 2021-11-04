@@ -20,6 +20,7 @@ const Header = () => {
   const handleKeyPress = (event) => {
     if (event.key === "Enter" && search.trim()) {
       history.push(`/products/search?name=${search}`);
+      setSearch("");
       // dispatch(getAllProductsBySearch(search));
     }
   };
@@ -42,7 +43,7 @@ const Header = () => {
 
   return (
     <div>
-      <div className="grid relative grid-cols-3 pt-5 px-4 lg:px-10 xl:px-20 pb-2  justify-between items-center">
+      <div className="grid relative grid-cols-3 pt-5 px-4 lg:px-10 xl:px-20 pb-3  justify-between items-center">
         <div className="border rounded-full w-56 border-[#b7b7b7] flex h-8 px-2 items-center">
           <input
             onChange={(e) => setSearch(e.target.value)}
@@ -59,7 +60,7 @@ const Header = () => {
             <img src="/img/logo.svg" alt="logo" />
           </div>
         </Link>
-        <div className="flex flex-row items-center justify-end Montserrat-m font-normal space-x-4">
+        <div className="flex flex-row items-center justify-end Montserrat-m font-normal space-x-5">
           {!user && (
             <button onClick={handleRegister} className=" text-[#4d4d4d]">
               Register
@@ -82,13 +83,17 @@ const Header = () => {
           )}
           <div
             onClick={() => setOpenBasket((state) => !state)}
-            className="relative cursor-pointer"
+            className="relative cursor-pointer flex mt-1"
           >
             <img className="w-full h-full" src="/img/cart.svg" alt="cart" />
             {items.length > 0 && (
-              <span className="absolute right-0 top-0 w-4 h-4 Montserrat-s text-center text-white font-medium  rounded-full bg-[#ffa15f]">
-                {items?.length}
-              </span>
+              <div className="absolute -right-1 -top-1.5  Montserrat-s text-white font-medium text-center w-[18px] h-[18px] rounded-full bg-[#ffa15f] ">
+                <span className="pb-2 ">{items?.length}</span>
+              </div>
+
+              /* <div className="absolute right-0 top-0 w-[18px] h-[18px] Montserrat-s text-center items-center text-white font-medium  rounded-full bg-[#ffa15f]">
+                <span className="text-center pb-1">{items?.length}</span>
+              </div> */
             )}
           </div>
         </div>
@@ -99,9 +104,8 @@ const Header = () => {
         )}
       </div>
 
-      <div className="relative  border-t border-b border-[#ececec] flex space-x-3 justify-center items-center">
+      <div className="relative  border-t border-b border-[#ececec] flex space-x-3 flex-nowrap justify-center items-center ">
         {/* show account setting on click */}
-
         <div
           onMouseLeave={() => setOpenUserSetting(false)}
           onMouseEnter={() => setOpenUserSetting(true)}
@@ -124,36 +128,36 @@ const Header = () => {
         </div>
 
         {categories?.map((item) => (
-          <div
-            key={item._id}
-            className=" relative flex justify-center items-center"
-          >
-            <div className=" category-container py-2 flex z-10 cursor-pointer ">
+          <React.Fragment key={item._id}>
+            <div
+              key={item._id}
+              className=" category-container py-2 flex z-10 cursor-pointer "
+            >
               <span className="Montserrat-m font-medium text-[#202124]">
                 {item.name}
               </span>
               <img src="/img/arrow.svg" alt="arrow" />
             </div>
 
-            {item?.categories?.map((category) => (
-              <Link
-                key={category._id}
-                to={`/${item.name}/${category.name}/products`}
-                // to={`/${item.name}/${category.name}.${category._id}/products`}
-              >
-                <div className="categories  ">
-                  <div className=" category-content space-x-8 ">
+            <div className="categories w-full">
+              <div className=" category-content space-x-8 ">
+                {item?.categories?.map((category) => (
+                  <Link
+                    key={category._id}
+                    to={`/${item.name}/${category.name}/products`}
+                    // to={`/${item.name}/${category.name}.${category._id}/products`}
+                  >
                     <span
                       key={category._id}
                       className="Montserrat-m font-normal text-[#202124] cursor-pointer"
                     >
                       {category.name}
                     </span>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </React.Fragment>
         ))}
       </div>
     </div>

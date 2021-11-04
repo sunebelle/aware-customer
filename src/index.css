@@ -100,7 +100,8 @@ font-family: 'Montserrat', sans-serif; */
 .checkmark {
   position: absolute;
   /* top: 0px; */
-  top: -10px;
+  /* top: -10px; */
+  top: -6px;
   left: 0;
   height: 16px;
   width: 16px;
@@ -123,8 +124,9 @@ font-family: 'Montserrat', sans-serif; */
 
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
-  top: -5px;
-  left: 1px;
+  /* top: -3px; */
+  top: -7px;
+  left: 1.5px;
   content: url(assets/checked.svg);
   position: absolute;
   display: none;
@@ -136,17 +138,12 @@ font-family: 'Montserrat', sans-serif; */
 }
 
 /* show categories on hover */
+
 .categories {
-  /* display: none; */
-  display: flex;
-  visibility: hidden;
-  /* display: block; */
+  display: none;
   top: 30px;
   position: absolute;
   padding-top: 16px;
-  /* top: 50%; */
-  /* left: 50%;
-  transform: translate(-50%, -50%); */
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -158,30 +155,31 @@ font-family: 'Montserrat', sans-serif; */
   display: flex;
   flex-wrap: nowrap;
   padding: 16px;
-  /* align-items: center;
-  justify-content: center; */
+  align-items: center;
+  justify-content: center;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
   border: solid 0.5px #eaeaea;
 }
 /* Show the ladies menu on hover */
 .category-container:hover + .categories {
-  /* display: flex; */
-  visibility: visible;
+  display: flex;
 }
 .categories:hover {
-  /* display: flex; */
-  visibility: visible;
+  display: flex;
 }
 
 /*  Show quick shop on hover the product */
 .quick-shop {
-  transform: rotateX(90deg);
-  /* transform: translateY(180deg); */
-  transition: transform 0.3s ease-in;
+  /* transform: rotateX(90deg); */
+  max-height: 0px;
+  visibility: hidden;
+  transition: max-height 0.3s ease-in;
 }
 .quick-shop-container:hover .quick-shop {
-  transform: rotateX(0);
-  /* transform: translateY(0); */
+  /* transform: rotateX(0); */
+  max-height: 54px;
+  visibility: visible;
+  animation-direction: alternate;
 }
 
 /* Styling range slider input */
@@ -196,7 +194,7 @@ font-family: 'Montserrat', sans-serif; */
 }
 
 .scrollbar-w-1::-webkit-scrollbar {
-  height: 6px;
+  height: 4px;
 }
 
 .grid-container--fill {

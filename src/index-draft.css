@@ -1,0 +1,33 @@
+/* show categories on hover */
+.categories {
+    /* display: none; */
+    display: block;
+    top: 30px;
+    position: absolute;
+    padding-top: 16px;
+    /* top: 50%; */
+    /* left: 50%;
+    transform: translate(-50%, -50%); */
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+  .category-content {
+    background-color: #fbfbfb;
+    z-index: 100;
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 16px;
+    /* align-items: center;
+    justify-content: center; */
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+    border: solid 0.5px #eaeaea;
+  }
+  /* Show the ladies menu on hover */
+  .category-container:hover + .categories {
+    display: flex;
+  }
+  .categories:hover {
+    display: flex;
+  }

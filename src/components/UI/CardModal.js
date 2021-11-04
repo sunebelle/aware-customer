@@ -9,9 +9,18 @@ const CardModal = ({ closeModalHandler, removeAProduct }) => {
       </h5>
 
       <div className="flex items-center justify-between mt-2">
-        <Button label="Cancel" type="button" handleChange={closeModalHandler} />
-        <p  onClick={removeAProduct} className="flex-grow text-center border border-green-600 px-4 py-2">
-            Remove
+        <div className="w-1/2">
+          <Button
+            label="Cancel"
+            type="button"
+            handleChange={closeModalHandler}
+          />
+        </div>
+        <p
+          onClick={removeAProduct}
+          className="flex-grow text-center box-border border border-opacity-80 cursor-pointer px-4 py-2"
+        >
+          Remove
         </p>
       </div>
     </div>

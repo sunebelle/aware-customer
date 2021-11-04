@@ -88,7 +88,13 @@ const ProductDetail = () => {
         })
       );
     } else {
-      const addedProduct = { ...product, color, size, amount };
+      const addedProduct = {
+        ...product,
+        color,
+        size,
+        amount,
+        category: subCategoryName ? subCategoryName : subName,
+      };
       dispatch(cartActions.add(addedProduct));
       dispatch(
         uiActions.showNotification({
@@ -140,19 +146,19 @@ const ProductDetail = () => {
                 <h1 className="Montserrat font-medium text-[#202124] text-2xl leading-6">
                   {product.name}
                 </h1>
-                <p className="Montserrat text-[#202124] text-2xl leading-6 font-light ">
+                <p className="Montserrat text-[#202124] mt-[6px] text-2xl leading-6 font-light ">
                   {numeral(product.price).format("$0,0.00")}
                 </p>
-                <div className="pt-3 py-3 flex items-center">
+                <div className="pt-2 pb-3 flex items-center text-center">
                   <RatingStar
                     rating={product?.ratingsAverage}
                     setRating={() => {}}
                     setHover={() => {}}
                   />
-
+                  {/* <div className="pb-1"></div> */}
                   <span className="text-[#979797] px-2">|</span>
                   {/* <div className=" px-2 opacity-50 w-[2px] h-[18px] border border-[#979797]" /> */}
-                  <span className="Montserrat-s font-normal text-[#202124]">
+                  <span className="Montserrat-s font-normal pt-2 text-[#202124]">
                     {product?.ratingsQuantity} Review
                   </span>
                 </div>
@@ -181,7 +187,7 @@ const ProductDetail = () => {
                       onClick={() => setSize("L")}
                       className={`${
                         size === "L" && "scale-125 bg-[#d4d3d3]"
-                      } text-[#4d4d4d] font-bold  filter-size Montserrat-m border-[#d4d3d3] hover:bg-[#d4d3d3]`}
+                      } text-[#4d4d4d] font-bold text-opacity-30 filter-size Montserrat-m border-[#d4d3d3] hover:bg-[#d4d3d3]`}
                     >
                       L
                     </div>

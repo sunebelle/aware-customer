@@ -24,7 +24,7 @@ const Button = ({
       type={type}
       onClick={handleChange}
       disabled={btnDisabled}
-      className={`${isActive} ${fontWeight} ${addCSS} w-full px-4 py-2 Montserrat-m  text-white`}
+      className={`${isActive} ${fontWeight} ${addCSS} w-full px-4 py-3 Montserrat-m  text-white`}
     >
       {label}
     </button>

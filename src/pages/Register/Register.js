@@ -136,8 +136,8 @@ const Register = ({ closeModalHandler }) => {
         <Button type="submit" label="Register" btnDisabled={!formIsValid} />
       </form>
       <div className="border-t w-full mt-8 items-center flex justify-center border-[#ededed]">
-        <p className="Montserrat-m text-[#4d4d4d] font-medium py-4 ">
-          Do you have an account? 
+        <p className="Montserrat-m text-[#4d4d4d] font-medium py-5 ">
+          Do you have an account? {""}
           <span
             onClick={() => dispatch(uiActions.showLoggedInModal())}
             className="text-[#ff7413] font-bold  border-b border-[#ff7413] cursor-pointer "

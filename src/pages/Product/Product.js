@@ -17,11 +17,11 @@ const Product = () => {
   const [available, setAvailable] = useState(""); //In-store
   const [page, setPage] = useState(""); //1
   const [sort, setSort] = useState(""); //popularity
-  const {categories, subCategories } = useSelector((state) => state.product);
+  const { categories, subCategories } = useSelector((state) => state.product);
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
-
+  let categoryId = "";
   const pathname = location?.pathname;
   const search = location?.search.replace("?", "");
   const titleURL = pathname.replace("/products", "");
@@ -29,10 +29,12 @@ const Product = () => {
   const titleArray = titleString.split("/");
   const title = titleArray.join(" / ");
   const parentCategory = categories.find((item) => item.name === titleArray[0]); //Level 1
-  const category = parentCategory.categories.find(
-    (item) => item.name === titleArray[1]
-  );
-  const categoryId = category._id;
+  if (parentCategory) {
+    const category = parentCategory.categories.find(
+      (item) => item.name === titleArray[1]
+    );
+    categoryId = category._id;
+  }
 
   useEffect(() => {
     setSubCategoryName("");

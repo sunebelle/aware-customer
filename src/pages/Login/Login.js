@@ -101,7 +101,7 @@ const Login = ({ closeModalHandler }) => {
             "Your passwords must be more than 6 characters!"
           }
         />
-        <div className="flex justify-between items-center mb-9">
+        <div className="flex justify-between items-center mb-10">
           <div className="inline-flex items-center space-x-2 ">
             <label className="checkbox-container pl-4">
               <input
@@ -126,9 +126,9 @@ const Login = ({ closeModalHandler }) => {
 
         <Button type="submit" label="Log In" btnDisabled={!formIsValid} />
       </form>
-      <div className="border-t w-full mt-10 items-center flex justify-center border-[#ededed]">
-        <p className="Montserrat-m text-[#4d4d4d] font-medium py-4">
-          Do you have an account?
+      <div className="border-t w-full mt-12 items-center flex justify-center border-[#ededed]">
+        <p className="Montserrat-m text-[#4d4d4d] font-medium py-5">
+          Do you have an account? {""}
           <span
             onClick={() => dispatch(uiActions.showRegisteredModal())}
             className="text-[#ff7413] font-bold border-b border-[#ff7413] cursor-pointer  "

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const SimilarItem = ({ similarProducts, category }) => {
   return (
-    <div className="flex flex-row justify-between w-full mt-4 mb-7  overflow-x-auto scrollbar-thumb-rounded-lg scrollbar-w-1 scrollbar-thumb-gray-200  space-x-5">
+    <div className="flex flex-row justify-between w-full mt-5 mb-7  overflow-x-auto scrollbar-thumb-rounded-lg scrollbar-w-1 scrollbar-thumb-gray-200  space-x-5">
       {/* Single product */}
       {similarProducts.length > 0 &&
         similarProducts.map((product) => (
@@ -24,8 +24,11 @@ const SimilarItem = ({ similarProducts, category }) => {
                   alt="product cover"
                 />
               </div>
-              <p className="Montserrat font-medium text-xs leading-5 text-[#4d4d4d] pt-1 ">
+              <p className="Montserrat line-clamp-1 font-medium text-xs leading-snug text-[#4d4d4d] pt-1 ">
                 {product.name}
+              </p>
+              <p className="Montserrat line-clamp-1 pb-1 leading-snug font-medium text-xs text-[#4d4d4d] ">
+                {category}
               </p>
             </div>
           </Link>
