@@ -20,17 +20,17 @@ const CardItem = ({ product, category }) => {
     dispatch(cartActions.add(addedProduct));
   };
   return (
-    // <div className="flex flex-col w-[180px] ">  || mb-3
+    // <div className="flex flex-col w-[180px] ">  || mb-3  || overflow-hidden
 
-    <div className="w-[180px] cursor-pointer hover:scale-105">
-      <div className="relative h-[269px] w-full quick-shop-container cursor-pointer mb-2 ">
+    <div className="w-[180px] cursor-pointer hover:scale-105 transition-all duration-500 ease-in-out">
+      <div className="relative h-[269px] w-full quick-shop-container  cursor-pointer mb-2 ">
         <img
           className=" w-full h-full object-fill "
           src={product.imageCover}
           alt={product.name}
         />
         {product.quantity >= 1 && (
-          <div //h-[54px]
+          <div //h-[54px]  transition-all duration-500 ease-in-out
             onClick={handleAddProductToCart}
             className=" quick-shop cursor-pointer bg-[#ffa15f] absolute bottom-0 w-full"
           >
@@ -40,7 +40,7 @@ const CardItem = ({ product, category }) => {
           </div>
         )}
         {product.quantity < 1 && (
-          <p className="absolute bottom-2 -left-1 Montserrat text-xs text-white px-1 bg-[#808080] font-bold leading-6">
+          <p className="absolute  bottom-2 -left-1 Montserrat text-xs text-white px-1 bg-[#808080] font-bold leading-6">
             Sold out
           </p>
         )}

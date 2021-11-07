@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "./Button";
 
 const CardModal = ({ closeModalHandler, removeAProduct }) => {
   return (
@@ -8,20 +7,20 @@ const CardModal = ({ closeModalHandler, removeAProduct }) => {
         Are you sure, you want to delete this product?
       </h5>
 
-      <div className="flex items-center justify-between mt-2">
-        <div className="w-1/2">
-          <Button
-            label="Cancel"
-            type="button"
-            handleChange={closeModalHandler}
-          />
-        </div>
-        <p
+      <div className="flex items-center justify-center mt-4 space-x-4 Montserrat-m">
+        <button
+          onClick={closeModalHandler}
+          className=" w-1/4 text-center box-border border border-opacity-80 cursor-pointer px-4 py-2  transition-opacity duration-500 ease-in opacity-80 hover:opacity-100"
+        >
+          Cancel
+        </button>
+
+        <button
           onClick={removeAProduct}
-          className="flex-grow text-center box-border border border-opacity-80 cursor-pointer px-4 py-2"
+          className="text-white w-1/4 text-center bg-[#ff5f6d]  cursor-pointer px-4 py-2 transition-opacity duration-500 ease-in opacity-80 hover:opacity-100 "
         >
           Remove
-        </p>
+        </button>
       </div>
     </div>
   );

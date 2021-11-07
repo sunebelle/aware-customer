@@ -34,6 +34,7 @@ const Review = ({ product }) => {
   const handleReview = (e) => {
     e.preventDefault();
     dispatch(createAReview({ title, rating, review }, product._id));
+    setRating("");
     // setEditReview(true);
   };
   return (

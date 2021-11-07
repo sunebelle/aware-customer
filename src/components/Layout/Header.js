@@ -71,7 +71,7 @@ const Header = () => {
               onClick={() => setOpenUserSetting((state) => !state)}
               className="h-7 w-7 rounded-full cursor-pointer"
               alt="avatar"
-              src="https://tse1.mm.bing.net/th?id=OIP.v6pO-sfFocVZMFaKp64EGwHaEo&pid=Api&P=0&w=289&h=181"
+              src="https://tse3.mm.bing.net/th?id=OIP.7Di12Twz-DxGVwkxvs7snQHaHa&pid=Api&P=0&w=300&h=300"
             />
           ) : (
             <button

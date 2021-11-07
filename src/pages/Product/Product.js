@@ -165,7 +165,7 @@ const Product = () => {
             setPrice={setPrice}
             available={available}
             setAvailable={setAvailable}
-            price={price}
+            // price={price}
           />
         </div>
         <div className="col-span-5">

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const SimilarItem = ({ similarProducts, category }) => {
   return (
-    <div className="flex flex-row justify-between w-full mt-5 mb-7  overflow-x-auto scrollbar-thumb-rounded-lg scrollbar-w-1 scrollbar-thumb-gray-200  space-x-5">
+    <div className="inline-flex flex-nowrap w-full mt-5 mb-7  overflow-x-auto scrollbar-thumb-rounded-lg scrollbar-w-1 scrollbar-thumb-gray-200  space-x-5">
       {/* Single product */}
       {similarProducts.length > 0 &&
         similarProducts.map((product) => (

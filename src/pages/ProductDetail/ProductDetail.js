@@ -28,8 +28,8 @@ const ProductDetail = () => {
 
   const [showImage, setShowImage] = useState("");
   const [amount, setAmount] = useState(3);
-  const [color, setColor] = useState("");
-  const [size, setSize] = useState("");
+  const [color, setColor] = useState("cornflower");
+  const [size, setSize] = useState("S");
   const [parentName, setParentName] = useState("");
   const [subName, setSubName] = useState("");
   const colorArray = Object.keys(colors);
@@ -41,6 +41,9 @@ const ProductDetail = () => {
 
   useEffect(() => {
     dispatch(getAProduct(productId));
+    setShowImage("");
+    setColor("cornflower");
+    setSize("S");
   }, [productId, dispatch]);
 
   useEffect(() => {
@@ -50,8 +53,9 @@ const ProductDetail = () => {
       // dispatch(getAllProducts(categoryId));
       dispatch(getAllSimilarProducts(categoryId));
       dispatch(getSimilarBrandProducts(categoryId, product));
+
       const categoryParent = categories?.find((category) =>
-        category.categories.map((item) => item._id === categoryId)
+        category.categories.find((item) => item._id === categoryId)
       );
       if (categoryParent) {
         setParentName(categoryParent.name);
@@ -170,24 +174,24 @@ const ProductDetail = () => {
                     <div
                       onClick={() => setSize("S")}
                       className={`${
-                        size === "S" && "scale-125 bg-[#ec6c11]"
-                      } text-white font-bold filter-size Montserrat-m bg-[#ffa15f] hover:bg-[#ec6c11]`}
+                        size === "S" && " bg-[#ec6c11]"
+                      } text-white transition-all duration-500 ease-in-out font-bold filter-size Montserrat-m bg-[#ffa15f] hover:bg-[#ec6c11]`}
                     >
                       S
                     </div>
                     <div
                       onClick={() => setSize("M")}
                       className={`${
-                        size === "M" && "scale-125 bg-[#808080] "
-                      }text-[#202124] font-normal filter-size Montserrat-m border-[#808080] hover:bg-[#808080]`}
+                        size === "M" ? "bg-[#ec6c11] " : "opacity-60"
+                      } text-[#202124] transition-all duration-500 ease-in-out font-normal filter-size Montserrat-m border-[#808080] hover:bg-[#ec6c11]`}
                     >
                       M
                     </div>
                     <div
                       onClick={() => setSize("L")}
                       className={`${
-                        size === "L" && "scale-125 bg-[#d4d3d3]"
-                      } text-[#4d4d4d] font-bold text-opacity-30 filter-size Montserrat-m border-[#d4d3d3] hover:bg-[#d4d3d3]`}
+                        size === "L" ? "bg-[#ec6c11]" : "text-opacity-30"
+                      } text-[#4d4d4d]  transition-all duration-500 ease-in-out font-bold  filter-size Montserrat-m border-[#d4d3d3] hover:bg-[#ec6c11]`}
                     >
                       L
                     </div>
@@ -206,7 +210,7 @@ const ProductDetail = () => {
                           onClick={() => setColor(item)}
                           className={`filter-color ${active && "scale-150"} ${
                             colors[item]
-                          } cursor-pointer`}
+                          } cursor-pointer transition-scale duration-500 ease-in-out`}
                         />
                       );
                     })}

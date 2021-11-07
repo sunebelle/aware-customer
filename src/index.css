@@ -173,14 +173,29 @@ font-family: 'Montserrat', sans-serif; */
   /* transform: rotateX(90deg); */
   max-height: 0px;
   visibility: hidden;
-  transition: max-height 0.3s ease-in;
+  /* transition: max-height 0.3s ease-in; */
 }
 .quick-shop-container:hover .quick-shop {
   /* transform: rotateX(0); */
   max-height: 54px;
   visibility: visible;
-  animation-direction: alternate;
+  /* animation-direction: alternate; */
 }
+
+/* @keyframes max-height {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0;
+  }
+  75% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+} */
 
 /* Styling range slider input */
 /* .MuiSlider-root .css-14pt78w-MuiSlider-rail {

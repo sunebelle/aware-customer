@@ -10,7 +10,16 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      transitionProperty: [
+        "hover",
+        "focus",
+        "height",
+        "opacity",
+        "colors",
+        "scale",
+      ],
+    },
   },
   plugins: [
     require("tailwindcss-scrollbar"),

@@ -53,7 +53,7 @@ const Item = ({ product }) => {
             />
             <div className="flex flex-col justify-between pl-4">
               <div className="w-2/3">
-                <h2 className="Montserrat line-clamp-2 font-medium text-sm leading-5 ">
+                <h2 className="Montserrat line-clamp-2 font-medium text-sm 5 ">
                   {product.name}
                 </h2>
                 <h2 className="Montserrat  line-clamp-1 font-medium text-sm leading-5 ">

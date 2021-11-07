@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Slider from "@mui/material/Slider";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+// import _ from "lodash";
 
 const theme = createTheme({
   components: {
@@ -16,7 +17,7 @@ const theme = createTheme({
     },
   },
 });
-const App = ({ price, setPrice, min, max }) => {
+const RangeSlider = ({ setPrice, min, max }) => {
   const [value, setValue] = useState([0, 300]);
   const handleChangeValue = (event, newValue) => {
     setPrice(newValue);
@@ -41,4 +42,4 @@ const App = ({ price, setPrice, min, max }) => {
   );
 };
 
-export default App;
+export default RangeSlider;
