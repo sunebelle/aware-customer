@@ -2,9 +2,6 @@ import React from "react";
 import StarRateIcon from "@mui/icons-material/StarRate";
 
 const RatingStar = ({ rating, setRating, hover, setHover }) => {
-  //   const [rating, setRating] = useState(null);
-  //   const [hover, setHover] = useState(null);
-  //   console.log(rating);
   return (
     <div className="flex flex-row ">
       {[...Array(5)].map((_, i) => {

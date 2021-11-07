@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-// import { useHistory } from "react-router";
 import Button from "../../components/UI/Button";
 import Input from "../../components/UI/Input";
 import useInput from "../../hooks/useInput";
@@ -9,7 +8,6 @@ import { updatePassword } from "../../actions/user";
 
 const ChangePassword = () => {
   const dispatch = useDispatch();
-  // const history = useHistory();
   const {
     value: currentPassword,
     isValid: currentPasswordIsValid,

@@ -3,9 +3,6 @@ import React, { useState } from "react";
 const Dropdown = ({ setSort }) => {
   const [showDropdownMenu, setShowDropdownMenu] = useState(false);
   const [selected, setSelected] = useState({ title: "Popularity" });
-  // const [sort, setSort] = useState("popularity");
-
-  // console.log(sort);
 
   const listOptions = [
     { title: "Popularity", sort: "popularity" },

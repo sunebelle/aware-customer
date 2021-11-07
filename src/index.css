@@ -2,8 +2,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* font-family: 'Domine', serif;
-font-family: 'Montserrat', sans-serif; */
 
 @layer components {
   .btn-shop-small {
@@ -28,16 +26,12 @@ font-family: 'Montserrat', sans-serif; */
 .Montserrat-s {
   font-family: "Montserrat", sans-serif;
   font-size: 12px;
-  /* font-weight: 500; */
   font-stretch: normal;
   font-style: normal;
   line-height: 1.83;
   letter-spacing: normal;
 }
 .Montserrat-m {
-  /* font-family: Montserrat; */
-  /* font-weight: 500; */
-  /* color: var(--dark-grey); */
   font-family: "Montserrat", sans-serif;
   font-size: 14px;
   font-stretch: normal;
@@ -54,19 +48,8 @@ font-family: 'Montserrat', sans-serif; */
   line-height: 1.5;
   letter-spacing: normal;
 }
-/* .Montserrat-bb {
-  font-family: "Montserrat", sans-serif;
-  font-size: 32px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.31;
-  letter-spacing: normal;
-} */
+
 .Domine-b {
-  /* font-family: Domine; */
-  /* font-size: 48px; */
-  /* line-height: 0.94; */
   font-family: "Domine", serif;
   font-weight: bold;
   font-stretch: normal;
@@ -99,8 +82,6 @@ font-family: 'Montserrat', sans-serif; */
 /* Create a custom checkbox */
 .checkmark {
   position: absolute;
-  /* top: 0px; */
-  /* top: -10px; */
   top: -6px;
   left: 0;
   height: 16px;
@@ -116,7 +97,6 @@ font-family: 'Montserrat', sans-serif; */
   background-color: #ffa15f;
   box-sizing: border-box;
   border-radius: 2px;
-  /* border: 1.5px solid #ff7413; */
   border: 1.5px solid #ffa15f;
   height: 16px;
   width: 16px;
@@ -124,7 +104,6 @@ font-family: 'Montserrat', sans-serif; */
 
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
-  /* top: -3px; */
   top: -7px;
   left: 1.5px;
   content: url(assets/checked.svg);
@@ -170,13 +149,11 @@ font-family: 'Montserrat', sans-serif; */
 
 /*  Show quick shop on hover the product */
 .quick-shop {
-  /* transform: rotateX(90deg); */
   max-height: 0px;
   visibility: hidden;
   /* transition: max-height 0.3s ease-in; */
 }
 .quick-shop-container:hover .quick-shop {
-  /* transform: rotateX(0); */
   max-height: 54px;
   visibility: visible;
   /* animation-direction: alternate; */
@@ -197,11 +174,6 @@ font-family: 'Montserrat', sans-serif; */
   }
 } */
 
-/* Styling range slider input */
-/* .MuiSlider-root .css-14pt78w-MuiSlider-rail {
-  background-color: #eaeaea !important;
-} */
-
 /* Review */
 
 .border-review:not(:last-child) {
@@ -217,13 +189,4 @@ font-family: 'Montserrat', sans-serif; */
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   grid-column-gap: 4px;
   grid-row-gap: 8px;
-  /* grid-gap: grid-row-gap grid-column-gap; */
-  /* display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 8px; */
 }
-/* .grid-container--fit {
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  display: grid;
-  gap: 8px;
-} */

@@ -32,11 +32,6 @@ const Category = ({
             All dresses
           </li>
           <hr className=" text-[#979797] w-5" />
-          {/* <hr
-            className={`${
-              category === "" ? "opacity-100" : "opacity-0"
-            } text-[#979797] w-5`}
-          /> */}
         </div>
 
         {subCategories?.map((item) => {
@@ -52,8 +47,6 @@ const Category = ({
               >
                 {item.name}
               </li>
-
-              {/* border-b border-[#979797] w-4 */}
             </div>
           );
         })}

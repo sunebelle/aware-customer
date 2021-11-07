@@ -57,7 +57,6 @@ const Review = ({ product }) => {
                     month[new Date(review.createdAt).getMonth()]
                   }`}</p>
                 </div>
-                {/* <div className=" flex col-span-5 flex-col bg-[#f9f9f9] py-4 px-4"> */}
                 <div className=" col-span-5  ">
                   <div className="bg-[#f9f9f9] py-4 px-4 flex flex-col">
                     <h2 className="text-[#202124] Montserrat-b ">
@@ -82,7 +81,6 @@ const Review = ({ product }) => {
           </>
         ) : (
           <div className="Montserrat-m font-normal text-[#b7b7b7] text-center pt-16 pb-6">
-            {/* <div className="Montserrat-m font-normal text-[#b7b7b7] text-center py-20"> */}
             No reviews
           </div>
         )
@@ -90,7 +88,6 @@ const Review = ({ product }) => {
         <>
           {/* edit and filterReview */}
           <div className="grid grid-cols-6  ">
-            {/* <div className="grid grid-cols-6 py-4  border-b border-solid border-[#cccccc] border-opacity-50 "> */}
             <div className="col-span-1 py-4 ">
               <h2 className="text-[#202124] Montserrat-m font-bold">You</h2>
               <p className="Montserrat-s font-normal text-[#202124] ">
@@ -102,7 +99,6 @@ const Review = ({ product }) => {
                   Delete
                 </span>
               </p>
-              {/* <p className="Montserrat-s font-normal text-[#202124] ">Edit | Delete</p> */}
             </div>
             <div className="  col-span-5 ">
               <div className="bg-[#f9f9f9] py-4 px-4 flex flex-col">
@@ -167,11 +163,7 @@ const Review = ({ product }) => {
       ) : (
         <>
           {/* form and reviews */}
-          <form
-            onSubmit={handleReview}
-            className="grid grid-cols-6  "
-            // className="grid grid-cols-6  border-b border-solid border-[#cccccc] border-opacity-50 "
-          >
+          <form onSubmit={handleReview} className="grid grid-cols-6  ">
             <div className="col-span-1 py-4">
               <h2 className="text-[#202124] Montserrat-m font-bold">You</h2>
             </div>

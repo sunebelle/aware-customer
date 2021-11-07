@@ -187,8 +187,6 @@ const Filter = (props) => {
         </div>
         {availableState && (
           <div className="filter-border-dashed flex-col space-y-1">
-            {/* <FilterCheckbox title="In-store" defaultChecked />
-            <FilterCheckbox title="Out of stock" /> */}
             <FilterCheckbox
               available={available}
               setAvailable={setAvailable}

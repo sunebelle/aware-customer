@@ -33,7 +33,6 @@ const App = () => {
         <Route path="/" exact>
           <Home />
         </Route>
-
         <Route path="/user/account-setting">
           {user ? <Profile /> : <Home />}
         </Route>
@@ -49,18 +48,12 @@ const App = () => {
         <Route path="/Boys/*" exact>
           <Product />
         </Route>
-        {/* <Route path="/category/:categoryId">
-          <Product />
-        </Route> */}
         <Route path="/cart" exact>
           <Cart />
         </Route>
         <Route path="/products/search">
           <SearchProduct />
         </Route>
-        {/* <Route path="/product/:productId">
-          <ProductDetail />
-        </Route> */}
         <Route path="/product">
           <ProductDetail />
         </Route>

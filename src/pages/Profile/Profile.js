@@ -12,8 +12,6 @@ const Profile = () => {
   const history = useHistory();
   const location = useLocation();
 
-  // console.log(location);
-
   const accSettingURL = "/user/account-setting";
   const changePasswordURL = "/user/account-setting/change-password";
   const editUserInfoURL = "/user/account-setting/edit";
@@ -73,7 +71,7 @@ const Profile = () => {
           ) : isEdited ? (
             <EditUserInfo setIsEdited={setIsEdited} />
           ) : (
-            <UserInfo  />
+            <UserInfo />
           )}
         </div>
       </div>

@@ -44,8 +44,6 @@ export const logUserOut = () => async (dispatch) => {
       })
     );
   } catch (error) {
-    // console.log(error);
-    // dispatch(authActions.showError(error.response.data));
     uiActions.showNotification({
       status: "error",
       message: error?.response?.data?.message,

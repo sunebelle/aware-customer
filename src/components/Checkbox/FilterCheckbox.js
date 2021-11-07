@@ -9,8 +9,6 @@ const FilterCheckbox = ({
   name,
   title,
 }) => {
-  //https://www.pluralsight.com/guides/how-to-use-radio-buttons-in-reactjs
-
   const handleCheck = (event) => {
     if (name === "brand") {
       setBrand(event.target.value);
@@ -45,6 +43,5 @@ const FilterCheckbox = ({
     </div>
   );
 };
-// {/*Checked font-semibold text-[#ffa15f] */}
 
 export default FilterCheckbox;

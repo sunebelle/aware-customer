@@ -17,13 +17,8 @@ import colors from "../../utils/color";
 import { Link } from "react-router-dom";
 
 const ProductDetail = () => {
-  const {
-    // products,
-    product,
-    categories,
-    similarBrandProducts,
-    similarProducts,
-  } = useSelector((state) => state.product);
+  const { product, categories, similarBrandProducts, similarProducts } =
+    useSelector((state) => state.product);
   const { isLoading } = useSelector((state) => state.ui);
 
   const [showImage, setShowImage] = useState("");
@@ -159,9 +154,7 @@ const ProductDetail = () => {
                     setRating={() => {}}
                     setHover={() => {}}
                   />
-                  {/* <div className="pb-1"></div> */}
                   <span className="text-[#979797] px-2">|</span>
-                  {/* <div className=" px-2 opacity-50 w-[2px] h-[18px] border border-[#979797]" /> */}
                   <span className="Montserrat-s font-normal pt-2 text-[#202124]">
                     {product?.ratingsQuantity} Review
                   </span>
@@ -242,7 +235,6 @@ const ProductDetail = () => {
                 <div>
                   <button
                     onClick={handleAddProductToCart}
-                    // className="my-7 w-[429px] h-[50px] bg-[#5f6dff] shadow-sm text-white Montserrat-b"
                     className={`my-7 w-[429px] h-[50px] bg-[#5f6dff] shadow-sm text-white Montserrat-b ${
                       !isProductValid && "opacity-50"
                     }`}
@@ -325,6 +317,5 @@ const ProductDetail = () => {
     </div>
   );
 };
-// };
 
 export default ProductDetail;

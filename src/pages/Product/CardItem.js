@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 const CardItem = ({ product, category }) => {
   const dispatch = useDispatch();
-  // console.log(product);
 
   const handleAddProductToCart = () => {
     const addedProduct = {
@@ -20,8 +19,7 @@ const CardItem = ({ product, category }) => {
     dispatch(cartActions.add(addedProduct));
   };
   return (
-    // <div className="flex flex-col w-[180px] ">  || mb-3  || overflow-hidden
-
+    //  overflow-hidden
     <div className="w-[180px] cursor-pointer hover:scale-105 transition-all duration-500 ease-in-out">
       <div className="relative h-[269px] w-full quick-shop-container  cursor-pointer mb-2 ">
         <img
@@ -30,7 +28,7 @@ const CardItem = ({ product, category }) => {
           alt={product.name}
         />
         {product.quantity >= 1 && (
-          <div //h-[54px]  transition-all duration-500 ease-in-out
+          <div // transition-all duration-500 ease-in-out
             onClick={handleAddProductToCart}
             className=" quick-shop cursor-pointer bg-[#ffa15f] absolute bottom-0 w-full"
           >
@@ -68,6 +66,5 @@ const CardItem = ({ product, category }) => {
     </div>
   );
 };
-// object-contain
 
 export default CardItem;

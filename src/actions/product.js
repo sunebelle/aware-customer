@@ -23,12 +23,6 @@ export const getAllCategories = () => async (dispatch) => {
     dispatch(uiActions.hideAppLoader());
   } catch (error) {
     console.log(error);
-    // dispatch(
-    //   uiActions.showNotification({
-    //     status: "error",
-    //     message: error?.response?.data?.message,
-    //   })
-    // );
   }
 };
 export const getAllProducts =
@@ -53,8 +47,6 @@ export const getAllProducts =
       }${price && `price=${price[0]}-${price[1]}&`}${
         available && `available=${available}&`
       }${page && `page=${page}&`}${sort && `sort=${sort}`} `;
-
-      // console.log("product action", url);
 
       const {
         data: { data },

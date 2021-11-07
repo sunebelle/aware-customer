@@ -77,7 +77,6 @@ const Item = ({ product }) => {
                 colors[product.color]
               } cursor-pointer`}
             />
-            {/* <div className="w-[30px] h-[30px] rounded-full bg-[#a4624c] cursor-pointer" /> */}
           </div>
         </td>
         <td className="text-center ">

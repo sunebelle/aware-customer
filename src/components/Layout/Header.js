@@ -90,10 +90,6 @@ const Header = () => {
               <div className="absolute -right-1 -top-1.5  Montserrat-s text-white font-medium text-center w-[18px] h-[18px] rounded-full bg-[#ffa15f] ">
                 <span className="pb-2 ">{items?.length}</span>
               </div>
-
-              /* <div className="absolute right-0 top-0 w-[18px] h-[18px] Montserrat-s text-center items-center text-white font-medium  rounded-full bg-[#ffa15f]">
-                <span className="text-center pb-1">{items?.length}</span>
-              </div> */
             )}
           </div>
         </div>
@@ -145,7 +141,6 @@ const Header = () => {
                   <Link
                     key={category._id}
                     to={`/${item.name}/${category.name}/products`}
-                    // to={`/${item.name}/${category.name}.${category._id}/products`}
                   >
                     <span
                       key={category._id}

@@ -18,7 +18,6 @@ const cartSlice = createSlice({
       if (existItemIndex !== -1) {
         const existItem = state.items[existItemIndex];
         existItem.amount += newItem.amount;
-        // localStorage.setItem("cart", JSON.stringify({ ...action?.payload }));
       } else {
         state.items.push(newItem);
       }
